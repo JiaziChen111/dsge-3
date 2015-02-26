@@ -8,7 +8,7 @@
 var // detrended variable (cf: Y = Y_trend/Z_t)
     Y, C, N, R, W, Rk, K, dZtr, dP, G 
     // variables required for price stickiness 
-    MC, Pstar, X1, X2, SS, ERE
+    MC, Phstar, X1, X2, SS, q
     // variables for open economy
     F, Rf, S, Pxf, Px, Pm, X, PPx, PPm, Rw, Xh, Xf, dPx
     // variables for Financial Accelerator
@@ -16,10 +16,10 @@ var // detrended variable (cf: Y = Y_trend/Z_t)
     // Wage determination
     Wstar, X1w, X1ww,X2w,X2ww,
     // variables for composite goods
-    Ch, Cf, P, Pfstar, dPh, dPcf, Pcf, Pif, X1f, X2f, Ih, If, Pi
-    Pifstar, dPih, dPif, X1if, X2if, M
+    Ch, Cf, P, Pcfstar, dPh, dPcf, Pcf, Pif, X1f, X2f, Ih, If, Pi
+    Pifstar, dPi, dPif, X1if, X2if, M
     // foreign VAR
-    Ystar, Rstar, Pistar
+    Ystar, Rstar, PIstar
     // shock process 
     Za,  Zi, Zc,  Zpi, Znw, Zpif, Zx, Zg, Zw, Zcp, Zmc,
     // Observation variables
@@ -28,7 +28,7 @@ var // detrended variable (cf: Y = Y_trend/Z_t)
     // variables for RBC block (for gap estimation)
     GAPeff, Y_e, Ce, Ne, LAMe, We, R_e,Ke, Inve,  Rke, Qe
 
-    Ystar_or;
+    dY;
 
 varexo er, 
        ea, 
@@ -141,14 +141,20 @@ a33 =  0.5523;
 /////////////////////////////////////////////
 
 model;
-///////////////////////////// 소비결정식 //////////////////////////////////
-exp(dZtr(+1))* exp(Zc)*1/(exp(C)-CHIc*exp(C(-1))/exp(dZtr)) = 
+///////////////////////////// Euler //////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+exp(dZtr(+1))*exp(Zc)*1/(exp(C)-CHIc*exp(C(-1))/exp(dZtr)) = 
     BETA*exp(Zc(+1))*1/(exp(C(+1))-CHIc*exp(C)/exp(dZtr(+1))) *exp(R)/exp(dP(+1));   
 
 
+/*  Euler_f: C_f, R_f, dP_f
+exp(dZtr(+1))*exp(Zc)/(exp(C_f)-CHIc*exp(C_f(-1))/exp(dZtr))
+= BETA*exp(Zc(+1))/(exp(C(+1))-CHIc*exp(C)/exp(dZtr(+1)))*exp(R_f)/exp(dP_f(+1));
+*/
 
 
-/////////////  임금경직성 관련 균형식 /////////////////  
+////////////////////////////  W ////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
 exp(X1w) = exp(Wstar)^(-PSIw*(ETA+1))*exp(X1ww);
 exp(X1ww) = exp(W)^(PSIw*(ETA+1))*exp(N)^(ETA+1) 
             + BETA*THETAw*exp(dZtr(+1))^(PSIw*(ETA+1))*exp(X1ww(+1));
@@ -156,81 +162,83 @@ exp(X2w) = exp(Wstar)^(-PSIw)*exp(X2ww);
 exp(X2ww) = 1/(exp(C)-CHIc*exp(C(-1))/exp(dZtr))*exp(W)^PSIw*exp(N) 
             + BETA*THETAw*exp(dZtr(+1))^(PSIw-1)*exp(X2ww(+1));
 exp(Wstar)= PSIw/(PSIw-1)*exp(Zw)*exp(X1w) / exp(X2w);
-exp(W)   = (THETAw*exp(W(-1)/exp(dZtr))^(1-PSIw) 
-            + (1-THETAw)*exp(Wstar)^(1-PSIw))^(1/(1-PSIw));
+exp(W) = (THETAw*exp(W(-1)/exp(dZtr))^(1-PSIw) + (1-THETAw)*exp(Wstar)^(1-PSIw))^(1/(1-PSIw));
 
 
-
-
-
+/*  W_f : W_f, C_f
+exp(W_f) = PSIw/(PSIw-1)/(exp(C_f)-CHIc*exp(C_f(-1))/exp(dZtr));
+*/
                                                      
 
-/////////////////////////// 소비복합재 관련 조건식 /////////////////////////
+/////////////////////// C and P /////////////////////////////////
+/////////////////////////////////////////////////////////////////
 exp(Ch) = ALPHAc*exp(P)^XIc*exp(C);                        
 exp(Cf) = ((1-ALPHAc)*(exp(P)/exp(Pcf))^XIc*exp(C));                
 exp(P) = (ALPHAc + (1-ALPHAc)*(exp(Pcf))^(1-XIc))^(1/(1-XIc));   
-exp(dP)*exp(Zpi) = (exp(P)/exp(P(-1))*exp(dPh));                
+exp(dP)*exp(Zpi) = (exp(P)/exp(P(-1))*exp(dPh));             
 
 
+/*  Consumption Composite_f : Ch_f, P_f, C_f, Cf_f, Pcf_f, dP_f, dPh_f
+exp(Ch_f) = ALPHAc*exp(P_f)^XIc*exp(C_f);
+exp(Cf_f) = ((1-ALPHAc)*(exp(P_f)/exp(Pcf_f))^XIc*exp(C_f));
+exp(P_f) = (ALPHAc + (1-ALPHAc)*(exp(Pcf_f))^(1-XIc))^(1/(1-XIc));
+exp(dP_f)*exp(Zpi) = (exp(P_f)/exp(P_f(-1))*exp(dPh_f));
+*/
 
 
-
-///////////////////////////// 가격 경직성 조건식 (국내 생산 소비재) ///////
-exp(X1) = exp(Y)*exp(MC) +
-          THETAh*BETA*((exp(C)-CHIc*exp(C(-1))/exp(dZtr))/(exp(C(+1))-CHIc*exp(C)/exp(dZtr(+1)))) //?? dZtr
+////////////////// Ph ////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+exp(X1) = exp(Y)*exp(MC) 
+          + THETAh*BETA*((exp(C)-CHIc*exp(C(-1))/exp(dZtr))/(exp(C(+1))-CHIc*exp(C)/exp(dZtr(+1)))) //?? dZtr
             /exp(dP(+1))*exp(dPh(+1))^(Zmc+1)*exp(dPh)^((IOTA)*(-Zmc))
             *IT^((-Zmc)*(1-IOTA))*exp(X1(+1));
-exp(X2) = exp(Y) +
-          THETAh*BETA*((exp(C)-CHIc*exp(C(-1))/exp(dZtr))/(exp(C(+1))-CHIc*exp(C)/exp(dZtr(+1)))) //?? dZtr
+exp(X2) = exp(Y)
+          + THETAh*BETA*((exp(C)-CHIc*exp(C(-1))/exp(dZtr))/(exp(C(+1))-CHIc*exp(C)/exp(dZtr(+1)))) //?? dZtr
             /exp(dP(+1))*exp(dPh(+1))^(Zmc)*exp(dPh)^((IOTA)*(1-Zmc))*IT^((1-Zmc)
             *(1-IOTA))*exp(X2(+1));
-exp(Pstar) = Zmc/(Zmc-1)* exp(X1)/exp(X2);
-1 = exp(dPh(-1))^(IOTA*(1-Zmc))*IT^((1-IOTA)*(1-Zmc))*THETAh*exp(dPh)^(Zmc-1) +
-    (1-THETAh)*exp(Pstar)^(1-Zmc);
-exp(SS) = (exp(dPh(-1))^IOTA*IT^(1-IOTA))^(-PSIh)*THETAh*exp(dPh)^(PSIh)*exp(SS(-1)) +
-          (1-THETAh)*exp(Pstar)^(-PSIh);
+exp(Phstar) = Zmc/(Zmc-1)*exp(X1)/exp(X2);
+1 = exp(dPh(-1))^(IOTA*(1-Zmc))*IT^((1-IOTA)*(1-Zmc))*THETAh*exp(dPh)^(Zmc-1)
+    + (1-THETAh)*exp(Phstar)^(1-Zmc);
+exp(SS) = (exp(dPh(-1))^IOTA*IT^(1-IOTA))^(-PSIh)*THETAh*exp(dPh)^(PSIh)*exp(SS(-1))
+          + (1-THETAh)*exp(Phstar)^(-PSIh);
 
 
+/*  Ph_f    : Ph_f, MC_f, dPh_f
+exp(Ph_f) = exp(MC_f);
+exp(dPh_f) = exp(Ph_f)/exp(Ph_f(-1));
+*/
 
 
-
-
-
-
-
-///////////////////////////// 가격 경직성 조건식 (수입 소비재) ////////////
-exp(X1f) = exp(Cf)*exp(ERE)*exp(P)*(1+v*(exp(R)-1)) //?? *exp(Pistar)
+////////////////////// Pcf ////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+exp(X1f) = exp(Cf)*exp(q)*exp(P)*(1+v*(exp(R)-1)) //?? *exp(PIstar)
            + THETAf*BETA*((exp(C)-CHIc*exp(C(-1))/exp(dZtr))/(exp(C(+1))-CHIc*exp(C)/exp(dZtr(+1)))) //?? dZtr
              /exp(dP(+1))*(exp(dPcf(+1)))^(PSIf)*(exp(dPcf))^((IOTA)*(-PSIf))
              *IT^(-PSIf*(1-IOTA))*exp(dPh(+1))*exp(X1f(+1));
-exp(X2f) = exp(Cf) + 
-           THETAf*BETA*((exp(C)-CHIc*exp(C(-1))/exp(dZtr))/(exp(C(+1))-CHIc*exp(C)/exp(dZtr(+1)))) //?? dZtr
-            /exp(dP(+1))*(exp(dPcf(+1)))^(PSIf)*(exp(dPcf))^((IOTA)*(1-PSIf))
-            *IT^((1-PSIf)*(1-IOTA))*exp(X2f(+1));
-exp(Pfstar) = PSIf/(PSIf-1)* exp(X1f)/ exp(X2f);
-1 = exp(dPcf(-1))^(IOTA*(1-PSIf))*IT^((1-IOTA)*(1-PSIf))* THETAf*exp(dPcf)^(PSIf-1) + 
-    (1-THETAf)*(exp(Pfstar)/exp(Pcf))^(1-PSIf);
+exp(X2f) = exp(Cf)
+           + THETAf*BETA*((exp(C)-CHIc*exp(C(-1))/exp(dZtr))/(exp(C(+1))-CHIc*exp(C)/exp(dZtr(+1)))) //?? dZtr
+             /exp(dP(+1))*(exp(dPcf(+1)))^(PSIf)*(exp(dPcf))^((IOTA)*(1-PSIf))
+             *IT^((1-PSIf)*(1-IOTA))*exp(X2f(+1));
+exp(Pcfstar) = PSIf/(PSIf-1)* exp(X1f)/ exp(X2f);
+1 = exp(dPcf(-1))^(IOTA*(1-PSIf))*IT^((1-IOTA)*(1-PSIf))* THETAf*exp(dPcf)^(PSIf-1)
+    + (1-THETAf)*(exp(Pcfstar)/exp(Pcf))^(1-PSIf);
 exp(dPcf)*exp(Zpif) = exp(Pcf)/exp(Pcf(-1))*exp(dPh);
 
 
-
-
-
-
-
-
-
-
-
+/*Pcf_f   : Pcf_f, dPcf_f, q_f, P_f, R_f
+exp(Pcf_f) = exp(q_f)*exp(P_f)*(1+v*(exp(R_f)-1));
+exp(dPcf_f) = exp(Pcf_f)/exp(Pcf_f(-1));
+*/
 
  
-/////////////////////////// 투자복합재 관련 조건식 ////////////////////////
+/////////////////////////// I and Pi ////////////////////////
+///////////////////////////////////////////////////////////////////////////
 exp(Ih) = ALPHAi*exp(Pi)^XIi*exp(I);
 exp(If) = (1-ALPHAi)*(exp(Pi)/exp(Pif))^XIi*exp(I);
 exp(Pi) = (ALPHAi + (1-ALPHAi)*(exp(Pif))^(1-XIi))^(1/(1-XIi));
-exp(dPih) = exp(Pi)/exp(Pi(-1))*exp(dPh);
+exp(dPi) = exp(Pi)/exp(Pi(-1))*exp(dPh);
 
-exp(X1if) = exp(If)*exp(ERE)*exp(P)*(1+v*(exp(R)-1)) //?? *exp(Pistar)
+exp(X1if) = exp(If)*exp(q)*exp(P)*(1+v*(exp(R)-1)) //?? *exp(PIstar)
             + THETAf*BETA*((exp(C)-CHIc*exp(C(-1))/exp(dZtr))/(exp(C(+1))-CHIc*exp(C)/exp(dZtr(+1)))) ///// dZtr
               /exp(dP(+1))*(exp(dPif(+1)))^(PSIf)*(exp(dPif))^((IOTA)*(-PSIf))
               *IT^(-PSIf*(1-IOTA))*exp(dPh(+1))*exp(X1if(+1));
@@ -244,18 +252,20 @@ exp(Pifstar) = PSIf/(PSIf-1)* exp(X1if)/ exp(X2if);
 exp(dPif)*exp(Zpif) = exp(Pif)/exp(Pif(-1))*exp(dPh);
 
 
+/*  I_f and Pi_f     : Ih_f, If_f, Pi_f, dPi_f, I_f, Pif_f, dPi_f, 
+exp(Ih_f) = ALPHAi*exp(Pi_f)^XIi*exp(I_f);
+exp(If_f) = (1-ALPHAi)*(exp(Pi_f)/exp(Pif_f))^XIi*exp(I_f);
+exp(Pi_f) = (ALPHAi + (1-ALPHAi)*(exp(Pif_f))^(1-XIi))^(1/(1-XIi));
+exp(dPi_f) = exp(Pi_f)/exp(Pi_f(-1))*exp(dPh_f);
+
+exp(Pif_f) = exp(q_f)*exp(P_f)*(1+v*(exp(R_f)-1))
+exp(dPif_f) = exp(Pif_f)/exp(Pif_f(-1));
+*/
 
 
 
-
-
-
-
-
-
-
-
-///////////////// 금융가속기 (Financial Accelerator) ///////////////////////
+///////////////// Financial Accelerator //////////////////////
+//////////////////////////////////////////////////////////////
 exp(Re) = (exp(Q)*(1-DELTA)+ exp(Rk)*exp(ut)-1/exp(Zi)*(GAMMA1*(exp(ut)-1)+GAMMA2/2*(exp(ut)-1)^2))
             *exp(dPh)/exp(Q(-1));
 exp(NW) = exp(Znw)*SP*(exp(Re)*exp(Q(-1))*exp(K(-1))/exp(dZtr)-
@@ -263,107 +273,168 @@ exp(NW) = exp(Znw)*SP*(exp(Re)*exp(Q(-1))*exp(K(-1))/exp(dZtr)-
                            *(exp(Q(-1))*exp(K(-1))/exp(dZtr)-exp(NW(-1))/exp(dZtr)));
 exp(Re(+1)) = (exp(NW)/(exp(K)*exp(Q)))^(-KAPPArp)*exp(R)/exp(dP(+1));
 
-%% 투자 동태식 
+// Law of Motion for Captial
 exp(K)-(1-DELTA)*exp(K(-1))/exp(dZtr) = exp(Zi)*exp(I)
                                       *(1-KAPPAi/2*(exp(I)*exp(dZtr)/exp(I(-1))-exp(GAMMAtr))^2);
 
-%% 자본 가동률에 대한 일계조건식 Rk = A(ut)'
+// Rk = A(ut)'
 exp(Rk) = (GAMMA1+GAMMA2*(exp(ut)-1))/exp(Zi);
 
-%% 투자에 대한 일계조건식 (자본재 가격 결정식)                                                                                              
-1 = exp(Q)*exp(Zi)*(1 - 
-                      KAPPAi/2*(exp(I)*exp(dZtr)/exp(I(-1)) -exp(GAMMAtr))^2 -
-                      KAPPAi*(exp(I)*exp(dZtr)/exp(I(-1))-exp(GAMMAtr))
-                        *exp(I)*exp(dZtr)/exp(I(-1))) + 
-    BETA*exp(Q(+1))*exp(Zi(+1))
+// FOC for Investment, Q
+1 = exp(Q)*exp(Zi)*(1 - KAPPAi/2*(exp(I)*exp(dZtr)/exp(I(-1)) - exp(GAMMAtr))^2
+                    - KAPPAi*(exp(I)*exp(dZtr)/exp(I(-1))-exp(GAMMAtr))
+                      *exp(I)*exp(dZtr)/exp(I(-1)))
+    + BETA*exp(Q(+1))*exp(Zi(+1))
       *(1/exp(dZtr(+1))*(exp(C)-CHIc*exp(C(-1))/exp(dZtr))/(exp(C(+1))-CHIc*exp(C)/exp(dZtr(+1))))
-        *KAPPAi*(exp(I(+1))*exp(dZtr(+1))/exp(I)-exp(GAMMAtr))
-          *(exp(I(+1))*exp(dZtr(+1))/exp(I))^2;
+      *KAPPAi*(exp(I(+1))*exp(dZtr(+1))/exp(I)-exp(GAMMAtr))
+      *(exp(I(+1))*exp(dZtr(+1))/exp(I))^2;
+
+
+/* Financial Accelerator_f: Re_f, Q_f, Rk_f, ut_f, dPh_f, NW_f, K_f, R_f, dP_f, I_f
+exp(Re_f) = (exp(Q_f)*(1-DELTA) + exp(Rk_f)*exp(ut_f)
+             - 1/exp(Zi)*(GAMMA1*(exp(ut_f)-1)+GAMMA2/2*(exp(ut_f)-1)^2))
+            *exp(dPh_f)/exp(Q_f(-1));
+exp(NW_f) = exp(Znw)*SP*(exp(Re_f)*exp(Q_f(-1))*exp(K_f(-1))/exp(dZtr)
+                         - (exp(NW_f(-1))/(exp(K_f(-1))*exp(Q_f(-1))))^(-KAPPArp)*exp(R_f(-1))
+                           /exp(dP_f)*(exp(Q_f(-1))*exp(K_f(-1))/exp(dZtr)-exp(NW_f(-1))/exp(dZtr)));
+exp(Re_f(+1)) = (exp(NW_f)/(exp(K_f)*exp(Q_f)))^(-KAPPArp)*exp(R_f)/exp(dP_f(+1));
+
+exp(K_f)-(1-DELTA)*exp(K_f(-1))/exp(dZtr)
+= exp(Zi)*exp(I_f)*(1-KAPPAi/2*(exp(I_f)*exp(dZtr)/exp(I_f(-1))-exp(GAMMAtr))^2);
+
+exp(Rk_f) = (GAMMA1+GAMMA2*(exp(ut_f)-1))/exp(Zi);
+
+1 = exp(Q_f)*exp(Zi)*(1 - KAPPAi/2*(exp(I_f)*exp(dZtr)/exp(I_f(-1)) - exp(GAMMAtr))^2
+                      - KAPPAi*(exp(I_f)*exp(dZtr)/exp(I_f(-1))-exp(GAMMAtr))
+                        *exp(I_f)*exp(dZtr)/exp(I_f(-1)))
+    + BETA*exp(Q_f(+1))*exp(Zi(+1))
+      *(1/exp(dZtr(+1))*(exp(C_f)-CHIc*exp(C_f(-1))/exp(dZtr))
+        /(exp(C_f(+1))-CHIc*exp(C_f)/exp(dZtr(+1))))
+      *KAPPAi*(exp(I_f(+1))*exp(dZtr(+1))/exp(I_f)-exp(GAMMAtr))
+      *(exp(I_f(+1))*exp(dZtr(+1))/exp(I_f))^2;
+*/
 
 
 
-
-
-
-
-
-
-////////////////////////////////// 생산부문 ///////////////////////////////
-// 자본 노동의 생산투입요소 비율
+//////////////////////////////// Production ///////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+// MPK = MPL
 exp(W)*(1+v*(exp(R)-1))/exp(Rk) = (1-ALPHAk)/ALPHAk*exp(K(-1))*exp(ut)/exp(N)*1/exp(dZtr);
 
-// 마크업 정의식
+// MC
 exp(MC) = 1/exp(Za)*(exp(W)*(1+v*(exp(R)-1)))^(1-ALPHAk)*exp(Rk)^ALPHAk
-            *(1-ALPHAk)^(ALPHAk-1)*ALPHAk^(-ALPHAk);
-
-//exp(W)*(1+v*(exp(R)-1)) = exp(Za)*exp(MC)*(1-ALPHAk)*(exp(K(-1))*exp(ut))^(ALPHAk)
-//                            *exp(N)^(-ALPHAk)*exp(dZtr)^(-ALPHAk)/exp(SS);
-//exp(Rk) = exp(Za)*exp(MC)*ALPHAk*(exp(K(-1))*exp(ut))^(ALPHAk-1)
-//            *exp(N)^(1-ALPHAk)*exp(dZtr)^(1-ALPHAk)/exp(SS);
+          *(1-ALPHAk)^(ALPHAk-1)*ALPHAk^(-ALPHAk);
 
 exp(Y) = exp(Za)*(exp(K(-1))*exp(ut))^ALPHAk*exp(N)^(1-ALPHAk)*exp(dZtr)^(-ALPHAk)/exp(SS);
-exp(Y) = exp(Ch) + exp(Ih) + exp(Xh) + exp(G) +
-         KAPPAi/2*(exp(I)*exp(dZtr)/exp(I(-1))-exp(GAMMAtr))^2*exp(I) + 
-         1/exp(Zi)*(GAMMA1*(exp(ut)-1)+GAMMA2*(exp(ut)-1)^2)*exp(ut)*exp(K(-1));
+exp(Y) = exp(Ch) + exp(Ih) + exp(Xh) + exp(G)
+         + KAPPAi/2*(exp(I)*exp(dZtr)/exp(I(-1))-exp(GAMMAtr))^2*exp(I)
+         + 1/exp(Zi)*(GAMMA1*(exp(ut)-1)+GAMMA2*(exp(ut)-1)^2)*exp(ut)*exp(K(-1));
+
 exp(G) = Gss*exp((Y))*exp(Zg)*(exp(Y)/exp(steady_state(Y)))^(-PHIg);
 
 
+/*  Production: W_f, R_f, Rk_f, K_f, ut_f, N_f, MC_f, Y_f
+// MPK = MPL
+exp(W_f)*(1+v*(exp(R_f)-1))/exp(Rk_f) = (1-ALPHAk)/ALPHAk*exp(K_f(-1))*exp(ut_f)/exp(N_f)/exp(dZtr);
 
+// MC
+exp(MC_f) = 1/exp(Za)*(exp(W_f)*(1+v*(exp(R_f)-1)))^(1-ALPHAk)*exp(Rk_f)^ALPHAk
+            *(1-ALPHAk)^(ALPHAk-1)*ALPHAk^(-ALPHAk);
 
+exp(Y_f) = exp(Za)*(exp(K_f(-1))*exp(ut_f))^ALPHAk*exp(N_f)^(1-ALPHAk)*exp(dZtr)^(-ALPHAk);
+exp(Y_f) = exp(Ch_f) + exp(Ih_f) + exp(Xh_f) + exp(G_f)
+         + KAPPAi/2*(exp(I_f)*exp(dZtr)/exp(I_f(-1))-exp(GAMMAtr))^2*exp(I_f)
+         + 1/exp(Zi)*(GAMMA1*(exp(ut_f)-1)+GAMMA2*(exp(ut_f)-1)^2)*exp(ut_f)*exp(K_f(-1));
 
-
-
-
-
-
+exp(G_f) = Gss*exp((Y_f))*exp(Zg)*(exp(Y_f)/exp(steady_state(Y_f)))^(-PHIg);
+*/
 
 
 /////////////////////////// Export function & BOP  ////////////////////////
-// 수출함수
+///////////////////////////////////////////////////////////////////////////
 //exp(X) = exp(Zx)*(exp(X(-1))/exp(dZtr))^PHIx
 //                  *(((1+v*(exp(R)-1))*exp(Px)/exp(S))^(-XIh)*(exp(Ystar)))^(1-PHIx); //?? why no foreign price?
 exp(X) = exp(Zx)*(exp(X(-1))/exp(dZtr))^PHIx
-                  *(((1+v*(exp(R)-1))*exp(Px)/exp(S)/exp(Pistar))^(-XIh)*(exp(Ystar)))^(1-PHIx); //?? why no foreign price?
+                  *(((1+v*(exp(R)-1))*exp(Px)/exp(S)/exp(PIstar))^(-XIh)*(exp(Ystar)))^(1-PHIx); //?? why no foreign price?
 exp(Xh) = ALPHAx*exp(Px)^XIx*exp(X);
-exp(Xf) = (1-ALPHAx)*(exp(Px)/(exp(ERE)*exp(P)))^XIx*exp(X);
-exp(Px) = (ALPHAx+(1-ALPHAx)*(exp(ERE)*exp(P))^(1-XIx))^(1/(1-XIx));
+exp(Xf) = (1-ALPHAx)*(exp(Px)/(exp(q)*exp(P)))^XIx*exp(X);
+exp(Px) = (ALPHAx+(1-ALPHAx)*(exp(q)*exp(P))^(1-XIx))^(1/(1-XIx));
 exp(dPx)*exp(epx) = exp(Px)/exp(Px(-1))*exp(dPh);
 
-exp(Px)*exp(X) //?? exp(ERE)*exp(Pxf)*exp(P)*exp(X)  // this modification chages SS values
+exp(Px)*exp(X) //?? exp(q)*exp(Pxf)*exp(P)*exp(X)  // this modification chages SS values
 + exp(S)*exp(Rf(-1))*exp(F(-1))*exp(P)/exp(dZtr)/exp(dP) 
 = exp(S)*exp(F)*exp(P)
-  + exp(ERE)*exp(P)*(1+v*(exp(R)-1))*(exp(Cf) + exp(If) + exp(Xf));
+  + exp(q)*exp(P)*(1+v*(exp(R)-1))*(exp(Cf) + exp(If) + exp(Xf));
 
 
+/*  Export function & BOP   :X_f, R_f, Px_f, S_f, Xh_f, Xf_f, q_f, P_f, dPx_f, dPh_f
+//exp(X) = exp(Zx)*(exp(X(-1))/exp(dZtr))^PHIx
+//         *(((1+v*(exp(R)-1))*exp(Px)/exp(S))^(-XIh)*(exp(Ystar)))^(1-PHIx); //?? no foreign price?
+exp(X_f) = exp(Zx)*(exp(X_f(-1))/exp(dZtr))^PHIx
+         *(((1+v*(exp(R_f)-1))*exp(Px_f)/exp(S_f)/exp(PIstar))^(-XIh)*(exp(Ystar)))^(1-PHIx);
+exp(Xh_f) = ALPHAx*exp(Px_f)^XIx*exp(X_f);
+exp(Xf_f) = (1-ALPHAx)*(exp(Px_f)/(exp(q_f)*exp(P_f)))^XIx*exp(X_f);
+exp(Px_f) = (ALPHAx+(1-ALPHAx)*(exp(q_f)*exp(P_f))^(1-XIx))^(1/(1-XIx));
+exp(dPx_f)*exp(epx) = exp(Px_f)/exp(Px_f(-1))*exp(dPh_f);
 
-
-
-
-
-
+exp(Px_f)*exp(X_f) //?? exp(q)*exp(Pxf)*exp(P)*exp(X)  // this modification chages SS values
++ exp(S_f)*exp(Rf_f(-1))*exp(F_f(-1))*exp(P_f)/exp(dZtr)/exp(dP_f)
+= exp(S_f)*exp(F_f)*exp(P_f)
+  + exp(q_f)*exp(P_f)*(1+v*(exp(R_f)-1))*(exp(Cf_f) + exp(If_f) + exp(Xf_f));
+*/
 
 
 
 //////////////////////////////  UIP condition /////////////////////////////
-// UIP condition
+///////////////////////////////////////////////////////////////////////////
 exp(R) = exp(Rf)*exp(S(+1))/(exp(S));
-exp(Rf) = exp(-UIPf*(exp(S)*exp(F)- (exp(steady_state(Y))*UIPy)) - 
-              UIPr*(exp(Rf)-exp(steady_state(Rf))- (exp(R)-exp(steady_state(R)))))
-            *exp(Zcp)*exp(Rw)*(exp(Rstar));
+exp(Rf) = exp(- UIPf*(exp(S)*exp(F)-(exp(steady_state(Y))*UIPy))
+              - UIPr*(exp(Rf)-exp(steady_state(Rf))-(exp(R)-exp(steady_state(R)))))
+          *exp(Zcp)*exp(Rw)*(exp(Rstar));
 
 exp(Rw) = (1+GAMMAtr)/BETA;
 exp(Pxf)  = exp(PPx);//*exp(S));                                         
-exp(Pm)  = exp(PPm)*(exp(Pistar))*exp(S);    // 수입재 가격
-//exp(Pm)  = exp(Pm(-1))*(exp(Pistar));    // 수입재 가격
-//exp(ERE) = exp(PPm)*(exp(Pistar))*exp(S)/exp(P);                          //?? 실질환율
-//exp(ERE) = exp(ERE(-1))*(exp(Pistar))*exp(S)/exp(S(-1))*exp(P(-1))/exp(P);    // 실질환율
-//exp(ERE) = exp(Rf)*exp(ERE(+1))*exp(dP(+1))/exp(Pistar(+1))/exp(R);             // 실질환율
-exp(ERE) = exp(S)*exp(Pistar)/exp(P);
+exp(Pm)  = exp(PPm)*(exp(PIstar))*exp(S);  //??
+//exp(Pm)  = exp(Pm(-1))*(exp(PIstar));    //??
+//exp(q) = exp(PPm)*(exp(PIstar))*exp(S)/exp(P);                          //??
+//exp(q) = exp(q(-1))*(exp(PIstar))*exp(S)/exp(S(-1))*exp(P(-1))/exp(P);    //
+//exp(q) = exp(Rf)*exp(q(+1))*exp(dP(+1))/exp(PIstar(+1))/exp(R);           //
+exp(q) = exp(S)*exp(PIstar)/exp(P);
 exp(PPx) = 1;
 exp(PPm) = 1;
 exp(M) = exp(Cf) + exp(If) + exp(Xf);
 
 
+/*  UIP condition   : R_f, Rf_f, S_f, F_f, Y_f, q_f, M_f
+exp(R_f) = exp(Rf_f)*exp(S_f(+1))/(exp(S_f));
+exp(Rf_f) = exp(- UIPf*(exp(S_f)*exp(F_f)-(exp(steady_state(Y_f))*UIPy))
+                - UIPr*(exp(Rf_f)-exp(steady_state(Rf_f))-(exp(R_f)-exp(steady_state(R_f)))))
+          *exp(Zcp)*exp(Rw)*(exp(Rstar));
+
+exp(Rw) = (1+GAMMAtr)/BETA;                   
+//exp(q) = exp(PPm)*(exp(PIstar))*exp(S)/exp(P);                          //??
+//exp(q) = exp(q(-1))*(exp(PIstar))*exp(S)/exp(S(-1))*exp(P(-1))/exp(P);    //
+//exp(q) = exp(Rf)*exp(q(+1))*exp(dP(+1))/exp(PIstar(+1))/exp(R);           //
+exp(q_f) = exp(S_f)*exp(PIstar)/exp(P_f);
+exp(M_f) = exp(Cf_f) + exp(If_f) + exp(Xf_f);
+*/
+
+
+
+///////////////////////////  Taylor rule ////////////////////////
+/////////////////////////////////////////////////////////////////
+log(exp(R)) = TAYLORr*log(exp(R(-1)))
+              + (1-TAYLORr)*(log(steady_state(exp(R)))+(1+TAYLORpi)*log(exp(dP))
+                             + TAYLORy*log(exp(Y)/steady_state(exp(Y))))
+              + er;
+
+
+/*  Taylor rule :
+log(exp(R)) = TAYLORr*log(exp(R(-1)))
+              + (1-TAYLORr)*(log(steady_state(exp(R)))+(1+TAYLORpi)*log(exp(dP))
+                             + TAYLORy*log(exp(Y)/steady_state(exp(Y))))
+              + er;
+*/
 
 
 
@@ -372,41 +443,33 @@ exp(M) = exp(Cf) + exp(If) + exp(Xf);
 
 
 
+/////////////////////////////////// shock processes //////////////////////
+// permanent tech. shock: ln(A_t) = ln(A_t-1) + GAMMAtr*exp(Zg) + ea //
+dZtr    = RHOtr *dZtr(-1)   + (1-RHOtr)*GAMMAtr + etr;                                                
+Za      = RHOa  *Za(-1)     + ea;
+Zi      = RHOi  *Zi(-1)     + ei;
+Zc      = RHOc  *Zc(-1)     + ec;
+Zpi     = RHOpi *Zpi(-1)    + epi;
+Znw     = RHOnw *Znw(-1)    + enw;
+Zpif    = RHOpif*Zpif(-1)   + epif;
+Zx      = RHOx  *Zx(-1)     + ex;
+Zg      = RHOg  *Zg(-1)     + eg;
+Zw      = RHOw  *Zw(-1)     + ew;
+Zcp     = RHOcp *Zcp(-1)    + ecp;
+Zmc     = (1-RHOmc)*PSIh    + RHOmc   *Zmc(-1)   + emc;
 
-
-/////////////////////////////////// 경제충격 프로세스 //////////////////////
-// 영구적 기술충격 ln(A_t) = ln(A_t-1) + GAMMAtr*exp(Zg) + ea //
-dZtr         = RHOtr*dZtr(-1) + (1-RHOtr)*GAMMAtr + etr;                                                
-Za         = RHOa    *Za(-1)      + ea;
-Zi       = RHOi  *Zi(-1)    + ei;
-Zc         = RHOc    *Zc(-1)      + ec;
-Zpi       = RHOpi  *Zpi(-1)    + epi;
-Znw         = RHOnw    *Znw(-1)      + enw;
-Zpif      = RHOpif *Zpif(-1)   + epif;
-Zx         = RHOx    *Zx(-1)      + ex;
-Zg         = RHOg    *Zg(-1)      + eg;
-Zw         = RHOw    *Zw(-1)      + ew;
-Zcp        = RHOcp   *Zcp(-1)     + ecp;
-Zmc        = (1-RHOmc)*PSIh + RHOmc   *Zmc(-1)   + emc;
-
-
-/////////////////////////// 통화준칙 (Taylor rule) ////////////////////////
-log(exp(R)) = TAYLORr*log(exp(R(-1))) + 
-              (1-TAYLORr)*(log(steady_state(exp(R)))+(1+TAYLORpi)*log(exp(dP)) +
-                        TAYLORy*log(exp(Y)/steady_state(exp(Y)))) + 
-              er;
 
 
 ////////////////////////////// Foreign VAR/////////////////////////////////
-Ystar   = a11*Ystar(-1)  + a12*Rstar(-1) + a13*Pistar(-1) + eystar;
-Rstar   = a21*Ystar(-1)  + a22*Rstar(-1) + a23*Pistar(-1) + erstar;
-Pistar  = a31*Ystar(-1)  + a32*Rstar(-1) + a33*Pistar(-1) + epistar;
+Ystar   = a11*Ystar(-1)  + a12*Rstar(-1) + a13*PIstar(-1) + eystar;
+Rstar   = a21*Ystar(-1)  + a22*Rstar(-1) + a23*PIstar(-1) + erstar;
+PIstar  = a31*Ystar(-1)  + a32*Rstar(-1) + a33*PIstar(-1) + epistar;
 
  
 
   
 
-/////////// Efficient Gap 추정을 위한 RBC block /////////////////////////
+/////////// RBC block /////////////////////////
 // RBC (1)
 exp(LAMe) = 1/(exp(Ce));
 
@@ -445,30 +508,29 @@ GAPeff = (exp(Y)-exp(steady_state(Y)))/exp(steady_state(Y)) -
 ///////////////////////////////////////////////////////////////////////////
 
 
-///////////////////////// 관측방정식(Measurement Equations) ////////////////
+///////////////////////// Measurement Equations ////////////////
 Y_obs       =   100*(Y-Y(-1) + dZtr) - 100*GAMMAtr;
 R_obs       =   400*(R - steady_state(R));                      
 C_obs       =   100*(C-C(-1) + dZtr) - 100*GAMMAtr;
 dP_obs      =   100*(dP - steady_state(dP)); 
-I_obs     =   100*(I-I(-1) + dZtr) - 100*GAMMAtr;
+I_obs       =   100*(I-I(-1) + dZtr) - 100*GAMMAtr;
 G_obs       =   100*(G-G(-1) + dZtr) - 100*GAMMAtr;
 NW_obs      =   100*(NW-NW(-1));  
-dPcf_obs     =   100*(dPcf) + 0.94;                 
+dPcf_obs    =   100*(dPcf) + 0.94;                 
 dPx_obs     =   100*(dPx) - 0.258;                         
 X_obs       =   100*(X-X(-1) + dZtr) - 100*GAMMAtr;
-S_obs       =   100*(ERE-ERE(-1)); 
-dPi_obs   =   400*(dPih-steady_state(dPih));
+S_obs       =   100*(q-q(-1)); 
+dPi_obs     =   400*(dPi-steady_state(dPi));
 SP_obs      =   400*(Re-R - (steady_state(Re) - steady_state(R)))                           ;  
 Ystar_obs   =   100*(Ystar-Ystar(-1));
 Rstar_obs   =   400*(Rstar); // steady state value or Rstar_obs  = 2.88, based on data
-Pistar_obs  =   400*(Pistar); // steady state value or Rstar_obs  = 2.17. based on data
+Pistar_obs  =   400*(PIstar); // steady state value or Rstar_obs  = 2.17. based on data
 W_obs       =   100*(W-W(-1) + dZtr) - 100*GAMMAtr;
 /////////////////////////////////////////////////////////////////////
-
-Ystar_or = (Y-Y(-4))*100;
-
+dY = (Y-Y(-4))*100;
 
 end;
+
 
 observation_trends;
 Y_obs (GAMMAtr);
@@ -493,11 +555,11 @@ dZtr        =	 GAMMAtr;
 dP         	=	 0;
 G          	=	-1.03672;
 MC         	=	-0.182322;
-Pstar       =	 0;
+Phstar      =	 0;
 X1         	=	 1.74009;
 X2         	=	 1.92241;
 SS         	=	 0;
-ERE        	=	-0.286734;
+q        	=	-0.286734;
 F          	=	-0.227666;
 Rf         	=	 0.0125045;
 S          	=	-0.286735;
@@ -514,7 +576,7 @@ NW         	=	 1.89572;
 Ch         	=	-0.24304;
 Cf         	=	-1.16408;
 P         	=	-0.0351037;
-Pfstar      =	-0.155084;
+Pcfstar      =	-0.155084;
 dPh        	=	  0;
 dPcf        =	-0.0990233;
 X1f        	=	-0.97575;
@@ -523,7 +585,7 @@ Ih       	=	-2.65812;
 If       	=	-1.5351;
 Pi       	=	-0.06606;
 Pifstar     =	-0.0919085;
-dPih      	=	 0;
+dPi      	=	 0;
 dPif    	=	-0.0432459;
 X1if    	=	-0.0223043;
 X2if    	=	-0.0223043;
@@ -572,7 +634,7 @@ stoch_simul(order=1, irf=30) Y, C, I, dP, R, X, S, F;
 //    (2001. 1/4~ 2012. 3/4)           //
 /////////////////////////////////////////  
 
-varobs Y_obs, R_obs, dP_obs, C_obs, I_obs, NW_obs, X_obs,S_obs, W_obs, Ystar_obs, 
+varobs Y_obs, R_obs, dP_obs, C_obs, I_obs, NW_obs, X_obs, S_obs, W_obs, Ystar_obs, 
 Rstar_obs, Pistar_obs, G_obs, dPx_obs;
 //, dPcf_obs;//,  G_obs;//;// dPcf_obs;//, W_obs ;//dPcf_obs,  dPi_obs ;
 //,  Ystar_obs, Rstar_obs, Pistar_obs G_obs, W_obs, dPd_obs;//, N_obs;//, SP_obs;
@@ -652,7 +714,7 @@ estimated_params;
 end;
 
 /*
-//estimation(
+estimation(
 datafile     = data_201414, //data_201344_sa_soe_dmean.xls, //,
 first_obs    = 1, 
 mh_replic    = 50000,
