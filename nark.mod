@@ -50,8 +50,8 @@ varexo er,
        epx; 
 
 ////////////// define parameters //////////////
-parameters  BETA, DELTA, CHIn, ALPHAk,  CHIc, PSIh, PSIf, THETAh, THETAf, TAYLORpi, TAYLORy, 
-            TAYLORr, UIPy, UIPf, PHIx, XIh, KAPPAi, GAMMAtr, SP, KAPPArp, 
+parameters  BETA, DELTA, CHIn, ALPHAk,  CHIc, PSIh, PSIf, THETAh, THETAf, TAYLORpi, 
+            TAYLORy, TAYLORr, UIPy, UIPf, PHIx, XIh, KAPPAi, GAMMAtr, SP, KAPPArp, 
             ALPHAc, XIc, ALPHAi, XIi, ETA, IOTA, IT, THETAw, 
             PSIw, v, GAMMA1, GAMMA2, UIPr, ALPHAx, XIx, RHOtr, RHOa, RHOi, 
             RHOc,  RHOpi, RHOnw, RHOpif, RHOx, RHOpii, Gss, RHOg,
@@ -162,7 +162,8 @@ exp(X2w) = exp(Wstar)^(-PSIw)*exp(X2ww);
 exp(X2ww) = 1/(exp(C)-CHIc*exp(C(-1))/exp(dZtr))*exp(W)^PSIw*exp(N) 
             + BETA*THETAw*exp(dZtr(+1))^(PSIw-1)*exp(X2ww(+1));
 exp(Wstar)= PSIw/(PSIw-1)*exp(Zw)*exp(X1w) / exp(X2w);
-exp(W) = (THETAw*exp(W(-1)/exp(dZtr))^(1-PSIw) + (1-THETAw)*exp(Wstar)^(1-PSIw))^(1/(1-PSIw));
+exp(W) = (THETAw*exp(W(-1)/exp(dZtr))^(1-PSIw)
+         + (1-THETAw)*exp(Wstar)^(1-PSIw))^(1/(1-PSIw));
 
 
 /*  W_f : W_f, C_f
@@ -189,11 +190,13 @@ exp(dP_f)*exp(Zpi) = (exp(P_f)/exp(P_f(-1))*exp(dPh_f));
 ////////////////// Ph ////////////////////////////
 ///////////////////////////////////////////////////////////////////////////
 exp(X1) = exp(Y)*exp(MC) 
-          + THETAh*BETA*((exp(C)-CHIc*exp(C(-1))/exp(dZtr))/(exp(C(+1))-CHIc*exp(C)/exp(dZtr(+1)))) //?? dZtr
+          + THETAh*BETA*((exp(C)-CHIc*exp(C(-1))/exp(dZtr))
+                         /(exp(C(+1))-CHIc*exp(C)/exp(dZtr(+1)))) //?? dZtr
             /exp(dP(+1))*exp(dPh(+1))^(Zmc+1)*exp(dPh)^((IOTA)*(-Zmc))
             *IT^((-Zmc)*(1-IOTA))*exp(X1(+1));
 exp(X2) = exp(Y)
-          + THETAh*BETA*((exp(C)-CHIc*exp(C(-1))/exp(dZtr))/(exp(C(+1))-CHIc*exp(C)/exp(dZtr(+1)))) //?? dZtr
+          + THETAh*BETA*((exp(C)-CHIc*exp(C(-1))/exp(dZtr))
+                         /(exp(C(+1))-CHIc*exp(C)/exp(dZtr(+1)))) //?? dZtr
             /exp(dP(+1))*exp(dPh(+1))^(Zmc)*exp(dPh)^((IOTA)*(1-Zmc))*IT^((1-Zmc)
             *(1-IOTA))*exp(X2(+1));
 exp(Phstar) = Zmc/(Zmc-1)*exp(X1)/exp(X2);
@@ -212,11 +215,13 @@ exp(dPh_f) = exp(Ph_f)/exp(Ph_f(-1));
 ////////////////////// Pcf ////////////////////////////
 ///////////////////////////////////////////////////////////////////////////
 exp(X1f) = exp(Cf)*exp(q)*exp(P)*(1+v*(exp(R)-1)) //?? *exp(PIstar)
-           + THETAf*BETA*((exp(C)-CHIc*exp(C(-1))/exp(dZtr))/(exp(C(+1))-CHIc*exp(C)/exp(dZtr(+1)))) //?? dZtr
+           + THETAf*BETA*((exp(C)-CHIc*exp(C(-1))/exp(dZtr))
+                          /(exp(C(+1))-CHIc*exp(C)/exp(dZtr(+1)))) //?? dZtr
              /exp(dP(+1))*(exp(dPcf(+1)))^(PSIf)*(exp(dPcf))^((IOTA)*(-PSIf))
              *IT^(-PSIf*(1-IOTA))*exp(dPh(+1))*exp(X1f(+1));
 exp(X2f) = exp(Cf)
-           + THETAf*BETA*((exp(C)-CHIc*exp(C(-1))/exp(dZtr))/(exp(C(+1))-CHIc*exp(C)/exp(dZtr(+1)))) //?? dZtr
+           + THETAf*BETA*((exp(C)-CHIc*exp(C(-1))/exp(dZtr))
+                          /(exp(C(+1))-CHIc*exp(C)/exp(dZtr(+1)))) //?? dZtr
              /exp(dP(+1))*(exp(dPcf(+1)))^(PSIf)*(exp(dPcf))^((IOTA)*(1-PSIf))
              *IT^((1-PSIf)*(1-IOTA))*exp(X2f(+1));
 exp(Pcfstar) = PSIf/(PSIf-1)* exp(X1f)/ exp(X2f);
@@ -239,16 +244,18 @@ exp(Pi) = (ALPHAi + (1-ALPHAi)*(exp(Pif))^(1-XIi))^(1/(1-XIi));
 exp(dPi) = exp(Pi)/exp(Pi(-1))*exp(dPh);
 
 exp(X1if) = exp(If)*exp(q)*exp(P)*(1+v*(exp(R)-1)) //?? *exp(PIstar)
-            + THETAf*BETA*((exp(C)-CHIc*exp(C(-1))/exp(dZtr))/(exp(C(+1))-CHIc*exp(C)/exp(dZtr(+1)))) ///// dZtr
+            + THETAf*BETA*((exp(C)-CHIc*exp(C(-1))/exp(dZtr))
+                           /(exp(C(+1))-CHIc*exp(C)/exp(dZtr(+1)))) ///// dZtr
               /exp(dP(+1))*(exp(dPif(+1)))^(PSIf)*(exp(dPif))^((IOTA)*(-PSIf))
               *IT^(-PSIf*(1-IOTA))*exp(dPh(+1))*exp(X1if(+1));
 exp(X2if) = exp(If)
-            + THETAf*BETA*((exp(C)-CHIc*exp(C(-1))/exp(dZtr))/(exp(C(+1))-CHIc*exp(C)/exp(dZtr(+1)))) ///// dZtr
+            + THETAf*BETA*((exp(C)-CHIc*exp(C(-1))/exp(dZtr))
+                           /(exp(C(+1))-CHIc*exp(C)/exp(dZtr(+1)))) ///// dZtr
               /exp(dP(+1))*(exp(dPif(+1)))^(PSIf)*(exp(dPif))^((IOTA)*(1-PSIf))
               *IT^((1-PSIf)*(1-IOTA))*exp(X2if(+1));
 exp(Pifstar) = PSIf/(PSIf-1)* exp(X1if)/ exp(X2if);
-1 = exp(dPif(-1))^(IOTA*(1-PSIf))*IT^((1-IOTA)*(1-PSIf))*THETAf*(exp(dPif))^(PSIf-1) + 
-    (1-THETAf)*(exp(Pifstar)/exp(Pif))^(1-PSIf);
+1 = exp(dPif(-1))^(IOTA*(1-PSIf))*IT^((1-IOTA)*(1-PSIf))*THETAf*(exp(dPif))^(PSIf-1)
+    + (1-THETAf)*(exp(Pifstar)/exp(Pif))^(1-PSIf);
 exp(dPif)*exp(Zpif) = exp(Pif)/exp(Pif(-1))*exp(dPh);
 
 
@@ -266,16 +273,18 @@ exp(dPif_f) = exp(Pif_f)/exp(Pif_f(-1));
 
 ///////////////// Financial Accelerator //////////////////////
 //////////////////////////////////////////////////////////////
-exp(Re) = (exp(Q)*(1-DELTA)+ exp(Rk)*exp(ut)-1/exp(Zi)*(GAMMA1*(exp(ut)-1)+GAMMA2/2*(exp(ut)-1)^2))
-            *exp(dPh)/exp(Q(-1));
-exp(NW) = exp(Znw)*SP*(exp(Re)*exp(Q(-1))*exp(K(-1))/exp(dZtr)-
-                         (exp(NW(-1))/(exp(K(-1))*exp(Q(-1))))^(-KAPPArp)*exp(R(-1))/exp(dP)
-                           *(exp(Q(-1))*exp(K(-1))/exp(dZtr)-exp(NW(-1))/exp(dZtr)));
+exp(Re) = (exp(Q)*(1-DELTA) + exp(Rk)*exp(ut)
+           - 1/exp(Zi)*(GAMMA1*(exp(ut)-1)+GAMMA2/2*(exp(ut)-1)^2))
+          *exp(dPh)/exp(Q(-1));
+exp(NW) = exp(Znw)*SP
+          *(exp(Re)*exp(Q(-1))*exp(K(-1))/exp(dZtr)
+            - (exp(NW(-1))/(exp(K(-1))*exp(Q(-1))))^(-KAPPArp)*exp(R(-1))/exp(dP)
+              *(exp(Q(-1))*exp(K(-1))/exp(dZtr)-exp(NW(-1))/exp(dZtr)));
 exp(Re(+1)) = (exp(NW)/(exp(K)*exp(Q)))^(-KAPPArp)*exp(R)/exp(dP(+1));
 
 // Law of Motion for Captial
-exp(K)-(1-DELTA)*exp(K(-1))/exp(dZtr) = exp(Zi)*exp(I)
-                                      *(1-KAPPAi/2*(exp(I)*exp(dZtr)/exp(I(-1))-exp(GAMMAtr))^2);
+exp(K)-(1-DELTA)*exp(K(-1))/exp(dZtr)
+= exp(Zi)*exp(I)*(1-KAPPAi/2*(exp(I)*exp(dZtr)/exp(I(-1))-exp(GAMMAtr))^2);
 
 // Rk = A(ut)'
 exp(Rk) = (GAMMA1+GAMMA2*(exp(ut)-1))/exp(Zi);
@@ -285,7 +294,8 @@ exp(Rk) = (GAMMA1+GAMMA2*(exp(ut)-1))/exp(Zi);
                     - KAPPAi*(exp(I)*exp(dZtr)/exp(I(-1))-exp(GAMMAtr))
                       *exp(I)*exp(dZtr)/exp(I(-1)))
     + BETA*exp(Q(+1))*exp(Zi(+1))
-      *(1/exp(dZtr(+1))*(exp(C)-CHIc*exp(C(-1))/exp(dZtr))/(exp(C(+1))-CHIc*exp(C)/exp(dZtr(+1))))
+      *(1/exp(dZtr(+1))*(exp(C)-CHIc*exp(C(-1))/exp(dZtr))
+        /(exp(C(+1))-CHIc*exp(C)/exp(dZtr(+1))))
       *KAPPAi*(exp(I(+1))*exp(dZtr(+1))/exp(I)-exp(GAMMAtr))
       *(exp(I(+1))*exp(dZtr(+1))/exp(I))^2;
 
@@ -294,9 +304,11 @@ exp(Rk) = (GAMMA1+GAMMA2*(exp(ut)-1))/exp(Zi);
 exp(Re_f) = (exp(Q_f)*(1-DELTA) + exp(Rk_f)*exp(ut_f)
              - 1/exp(Zi)*(GAMMA1*(exp(ut_f)-1)+GAMMA2/2*(exp(ut_f)-1)^2))
             *exp(dPh_f)/exp(Q_f(-1));
-exp(NW_f) = exp(Znw)*SP*(exp(Re_f)*exp(Q_f(-1))*exp(K_f(-1))/exp(dZtr)
-                         - (exp(NW_f(-1))/(exp(K_f(-1))*exp(Q_f(-1))))^(-KAPPArp)*exp(R_f(-1))
-                           /exp(dP_f)*(exp(Q_f(-1))*exp(K_f(-1))/exp(dZtr)-exp(NW_f(-1))/exp(dZtr)));
+exp(NW_f) = exp(Znw)*SP
+            *(exp(Re_f)*exp(Q_f(-1))*exp(K_f(-1))/exp(dZtr)
+              - (exp(NW_f(-1))/(exp(K_f(-1))*exp(Q_f(-1))))^(-KAPPArp)*exp(R_f(-1))
+                /exp(dP_f)*(exp(Q_f(-1))*exp(K_f(-1))/exp(dZtr)
+                            - exp(NW_f(-1))/exp(dZtr)));
 exp(Re_f(+1)) = (exp(NW_f)/(exp(K_f)*exp(Q_f)))^(-KAPPArp)*exp(R_f)/exp(dP_f(+1));
 
 exp(K_f)-(1-DELTA)*exp(K_f(-1))/exp(dZtr)
@@ -319,13 +331,15 @@ exp(Rk_f) = (GAMMA1+GAMMA2*(exp(ut_f)-1))/exp(Zi);
 //////////////////////////////// Production ///////////////////////////////
 ///////////////////////////////////////////////////////////////////////////
 // MPK = MPL
-exp(W)*(1+v*(exp(R)-1))/exp(Rk) = (1-ALPHAk)/ALPHAk*exp(K(-1))*exp(ut)/exp(N)*1/exp(dZtr);
+exp(W)*(1+v*(exp(R)-1))/exp(Rk)
+= (1-ALPHAk)/ALPHAk*exp(K(-1))*exp(ut)/exp(N)*1/exp(dZtr);
 
 // MC
 exp(MC) = 1/exp(Za)*(exp(W)*(1+v*(exp(R)-1)))^(1-ALPHAk)*exp(Rk)^ALPHAk
           *(1-ALPHAk)^(ALPHAk-1)*ALPHAk^(-ALPHAk);
 
-exp(Y) = exp(Za)*(exp(K(-1))*exp(ut))^ALPHAk*exp(N)^(1-ALPHAk)*exp(dZtr)^(-ALPHAk)/exp(SS);
+exp(Y) = exp(Za)*(exp(K(-1))*exp(ut))^ALPHAk
+         *exp(N)^(1-ALPHAk)*exp(dZtr)^(-ALPHAk)/exp(SS);
 exp(Y) = exp(Ch) + exp(Ih) + exp(Xh) + exp(G)
          + KAPPAi/2*(exp(I)*exp(dZtr)/exp(I(-1))-exp(GAMMAtr))^2*exp(I)
          + 1/exp(Zi)*(GAMMA1*(exp(ut)-1)+GAMMA2*(exp(ut)-1)^2)*exp(ut)*exp(K(-1));
@@ -335,16 +349,19 @@ exp(G) = Gss*exp((Y))*exp(Zg)*(exp(Y)/exp(steady_state(Y)))^(-PHIg);
 
 /*  Production: W_f, R_f, Rk_f, K_f, ut_f, N_f, MC_f, Y_f
 // MPK = MPL
-exp(W_f)*(1+v*(exp(R_f)-1))/exp(Rk_f) = (1-ALPHAk)/ALPHAk*exp(K_f(-1))*exp(ut_f)/exp(N_f)/exp(dZtr);
+exp(W_f)*(1+v*(exp(R_f)-1))/exp(Rk_f)
+= (1-ALPHAk)/ALPHAk*exp(K_f(-1))*exp(ut_f)/exp(N_f)/exp(dZtr);
 
 // MC
 exp(MC_f) = 1/exp(Za)*(exp(W_f)*(1+v*(exp(R_f)-1)))^(1-ALPHAk)*exp(Rk_f)^ALPHAk
             *(1-ALPHAk)^(ALPHAk-1)*ALPHAk^(-ALPHAk);
 
-exp(Y_f) = exp(Za)*(exp(K_f(-1))*exp(ut_f))^ALPHAk*exp(N_f)^(1-ALPHAk)*exp(dZtr)^(-ALPHAk);
+exp(Y_f) = exp(Za)*(exp(K_f(-1))*exp(ut_f))^ALPHAk
+           *exp(N_f)^(1-ALPHAk)*exp(dZtr)^(-ALPHAk);
 exp(Y_f) = exp(Ch_f) + exp(Ih_f) + exp(Xh_f) + exp(G_f)
          + KAPPAi/2*(exp(I_f)*exp(dZtr)/exp(I_f(-1))-exp(GAMMAtr))^2*exp(I_f)
-         + 1/exp(Zi)*(GAMMA1*(exp(ut_f)-1)+GAMMA2*(exp(ut_f)-1)^2)*exp(ut_f)*exp(K_f(-1));
+         + 1/exp(Zi)*(GAMMA1*(exp(ut_f)-1)+GAMMA2*(exp(ut_f)-1)^2)
+           *exp(ut_f)*exp(K_f(-1));
 
 exp(G_f) = Gss*exp((Y_f))*exp(Zg)*(exp(Y_f)/exp(steady_state(Y_f)))^(-PHIg);
 */
@@ -352,32 +369,35 @@ exp(G_f) = Gss*exp((Y_f))*exp(Zg)*(exp(Y_f)/exp(steady_state(Y_f)))^(-PHIg);
 
 /////////////////////////// Export function & BOP  ////////////////////////
 ///////////////////////////////////////////////////////////////////////////
+//?? no foreign price?
 //exp(X) = exp(Zx)*(exp(X(-1))/exp(dZtr))^PHIx
-//                  *(((1+v*(exp(R)-1))*exp(Px)/exp(S))^(-XIh)*(exp(Ystar)))^(1-PHIx); //?? why no foreign price?
+//         *(((1+v*(exp(R)-1))*exp(Px)/exp(S))^(-XIh)*(exp(Ystar)))^(1-PHIx); 
 exp(X) = exp(Zx)*(exp(X(-1))/exp(dZtr))^PHIx
-                  *(((1+v*(exp(R)-1))*exp(Px)/exp(S)/exp(PIstar))^(-XIh)*(exp(Ystar)))^(1-PHIx); //?? why no foreign price?
+         *(((1+v*(exp(R)-1))*exp(Px)/exp(S)/exp(PIstar))^(-XIh)*(exp(Ystar)))^(1-PHIx);
 exp(Xh) = ALPHAx*exp(Px)^XIx*exp(X);
 exp(Xf) = (1-ALPHAx)*(exp(Px)/(exp(q)*exp(P)))^XIx*exp(X);
 exp(Px) = (ALPHAx+(1-ALPHAx)*(exp(q)*exp(P))^(1-XIx))^(1/(1-XIx));
 exp(dPx)*exp(epx) = exp(Px)/exp(Px(-1))*exp(dPh);
 
-exp(Px)*exp(X) //?? exp(q)*exp(Pxf)*exp(P)*exp(X)  // this modification chages SS values
+exp(Px)*exp(X) //?? exp(q)*exp(Pxf)*exp(P)*exp(X) //this modification chages SS values
 + exp(S)*exp(Rf(-1))*exp(F(-1))*exp(P)/exp(dZtr)/exp(dP) 
 = exp(S)*exp(F)*exp(P)
   + exp(q)*exp(P)*(1+v*(exp(R)-1))*(exp(Cf) + exp(If) + exp(Xf));
 
 
 /*  Export function & BOP   :X_f, R_f, Px_f, S_f, Xh_f, Xf_f, q_f, P_f, dPx_f, dPh_f
+//?? no foreign price?
 //exp(X) = exp(Zx)*(exp(X(-1))/exp(dZtr))^PHIx
-//         *(((1+v*(exp(R)-1))*exp(Px)/exp(S))^(-XIh)*(exp(Ystar)))^(1-PHIx); //?? no foreign price?
+//         *(((1+v*(exp(R)-1))*exp(Px)/exp(S))^(-XIh)*(exp(Ystar)))^(1-PHIx); 
 exp(X_f) = exp(Zx)*(exp(X_f(-1))/exp(dZtr))^PHIx
-         *(((1+v*(exp(R_f)-1))*exp(Px_f)/exp(S_f)/exp(PIstar))^(-XIh)*(exp(Ystar)))^(1-PHIx);
+           *(((1+v*(exp(R_f)-1))*exp(Px_f)/exp(S_f)/exp(PIstar))^(-XIh)
+             *(exp(Ystar)))^(1-PHIx);
 exp(Xh_f) = ALPHAx*exp(Px_f)^XIx*exp(X_f);
 exp(Xf_f) = (1-ALPHAx)*(exp(Px_f)/(exp(q_f)*exp(P_f)))^XIx*exp(X_f);
 exp(Px_f) = (ALPHAx+(1-ALPHAx)*(exp(q_f)*exp(P_f))^(1-XIx))^(1/(1-XIx));
 exp(dPx_f)*exp(epx) = exp(Px_f)/exp(Px_f(-1))*exp(dPh_f);
 
-exp(Px_f)*exp(X_f) //?? exp(q)*exp(Pxf)*exp(P)*exp(X)  // this modification chages SS values
+exp(Px_f)*exp(X_f)
 + exp(S_f)*exp(Rf_f(-1))*exp(F_f(-1))*exp(P_f)/exp(dZtr)/exp(dP_f)
 = exp(S_f)*exp(F_f)*exp(P_f)
   + exp(q_f)*exp(P_f)*(1+v*(exp(R_f)-1))*(exp(Cf_f) + exp(If_f) + exp(Xf_f));
@@ -408,7 +428,8 @@ exp(M) = exp(Cf) + exp(If) + exp(Xf);
 /*  UIP condition   : R_f, Rf_f, S_f, F_f, Y_f, q_f, M_f
 exp(R_f) = exp(Rf_f)*exp(S_f(+1))/(exp(S_f));
 exp(Rf_f) = exp(- UIPf*(exp(S_f)*exp(F_f)-(exp(steady_state(Y_f))*UIPy))
-                - UIPr*(exp(Rf_f)-exp(steady_state(Rf_f))-(exp(R_f)-exp(steady_state(R_f)))))
+                - UIPr*(exp(Rf_f)-exp(steady_state(Rf_f))
+                        - (exp(R_f)-exp(steady_state(R_f)))))
           *exp(Zcp)*exp(Rw)*(exp(Rstar));
 
 exp(Rw) = (1+GAMMAtr)/BETA;                   
@@ -423,23 +444,16 @@ exp(M_f) = exp(Cf_f) + exp(If_f) + exp(Xf_f);
 
 ///////////////////////////  Taylor rule ////////////////////////
 /////////////////////////////////////////////////////////////////
-log(exp(R)) = TAYLORr*log(exp(R(-1)))
+log(exp(R)) = er + TAYLORr*log(exp(R(-1)))
               + (1-TAYLORr)*(log(steady_state(exp(R)))+(1+TAYLORpi)*log(exp(dP))
-                             + TAYLORy*log(exp(Y)/steady_state(exp(Y))))
-              + er;
+                             + TAYLORy*log(exp(Y)/steady_state(exp(Y))));
 
 
-/*  Taylor rule :
-log(exp(R)) = TAYLORr*log(exp(R(-1)))
-              + (1-TAYLORr)*(log(steady_state(exp(R)))+(1+TAYLORpi)*log(exp(dP))
-                             + TAYLORy*log(exp(Y)/steady_state(exp(Y))))
-              + er;
+/*  Taylor rule : R, dP, Y
+log(exp(R_f)) = er + TAYLORr*log(exp(R_f(-1)))
+                + (1-TAYLORr)*(log(steady_state(exp(R_f)))+(1+TAYLORpi)*log(exp(dP_f))
+                               + TAYLORy*log(exp(Y_f)/steady_state(exp(Y_f))));
 */
-
-
-
-
-
 
 
 
@@ -467,7 +481,6 @@ PIstar  = a31*Ystar(-1)  + a32*Rstar(-1) + a33*PIstar(-1) + epistar;
 
  
 
-  
 
 /////////// RBC block /////////////////////////
 // RBC (1)
