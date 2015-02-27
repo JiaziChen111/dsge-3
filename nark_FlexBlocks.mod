@@ -4,7 +4,7 @@ exp(dZtr(+1))*exp(Zc)/(exp(C_f)-CHIc*exp(C_f(-1))/exp(dZtr))
 */
 
 /*  W_f : W_f, C_f
-exp(W_f) = PSIw/(PSIw-1)/(exp(C_f)-CHIc*exp(C_f(-1))/exp(dZtr));
+exp(W_f) = PSIw/(PSIw-1)*exp(Zw)*(exp(C_f)-CHIc*exp(C_f(-1))/exp(dZtr))*exp(N_f)^ETA;
 */
 
 /*  Consumption Composite_f : Ch_f, P_f, C_f, Cf_f, Pcf_f, dP_f, dPh_f
