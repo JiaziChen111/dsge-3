@@ -29,10 +29,10 @@ var // detrended variable (cf: Y = Y_trend/Z_t)
     GAPeff, Y_e, Ce, Ne, LAMe, We, R_e,Ke, Inve,  Rke, Qe, dY
 
     /* fb F-Blocks
-    C_f, R_f, dP_f, W_f, N_f, Ch_f, P_f, Cf_f, Pcf_f, dPh_f, Ph_f, MC_f,
-    dPcf_f, q_f, Ih_f, If_f, Pi_f, dPi_f, I_f, Pif_f, dPif_f, Re_f, Q_f, Rk_f, 
-    ut_f, NW_f, K_f, Y_f, Xh_f, G_f, X_f, Px_f, S_f, Xf_f, dPx_f, Rf_f,
-    F_f, M_f, Rw_f
+    c, r, w, n, ch, cf, pcf, ph, mc,
+    q_f, ih, if, pi, i, pif, re, Q_f, rk, 
+    u, nw, k, y, xh, g, x, px, xf, rf,
+    f, m,
     *///fe
 ;
 
@@ -153,12 +153,6 @@ exp(dZtr(+1))*exp(Zc)*1/(exp(C)-CHIc*exp(C(-1))/exp(dZtr)) =
     BETA*exp(Zc(+1))*1/(exp(C(+1))-CHIc*exp(C)/exp(dZtr(+1))) *exp(R)/exp(dP(+1));   
 
 
-/* fb (1) C, R, dP
-exp(dZtr(+1))*exp(Zc)/(exp(C_f)-CHIc*exp(C_f(-1))/exp(dZtr))
-= BETA*exp(Zc(+1))/(exp(C(+1))-CHIc*exp(C)/exp(dZtr(+1)))*exp(R_f)/exp(dP_f(+1));
-*///fe
-
-
 ////////////////////////////  W ////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////
 exp(X1w) = exp(Wstar)^(-PSIw*(ETA+1))*exp(X1ww);
@@ -172,25 +166,12 @@ exp(W) = (THETAw*exp(W(-1)/exp(dZtr))^(1-PSIw)
          + (1-THETAw)*exp(Wstar)^(1-PSIw))^(1/(1-PSIw));
 
 
-/* fb (2) W, C, N
-exp(W_f) = PSIw/(PSIw-1)*exp(Zw)*(exp(C_f)-CHIc*exp(C_f(-1))/exp(dZtr))*exp(N_f)^ETA;
-*///fe
-
-
 /////////////////////// C and P /////////////////////////////////
 /////////////////////////////////////////////////////////////////
-exp(Ch) = ALPHAc*exp(P)^XIc*exp(C);                        
-exp(Cf) = ((1-ALPHAc)*(exp(P)/exp(Pcf))^XIc*exp(C));                
-exp(P) = (ALPHAc+(1-ALPHAc)*(exp(Pcf))^(1-XIc))^(1/(1-XIc));   
-exp(dP)*exp(Zpi) = (exp(P)/exp(P(-1))*exp(dPh));             
-
-
-/* fb (3) Ch, P, C, Cf, Pcf, dP, dPh
-exp(Ch_f) = ALPHAc*exp(P_f)^XIc*exp(C_f);
-exp(Cf_f) = ((1-ALPHAc)*(exp(P_f)/exp(Pcf_f))^XIc*exp(C_f));
-exp(P_f) = (ALPHAc+(1-ALPHAc)*(exp(Pcf_f))^(1-XIc))^(1/(1-XIc));
-exp(dP_f)*exp(Zpi) = (exp(P_f)/exp(P_f(-1))*exp(dPh_f));
-*///fe
+exp(Ch) = ALPHAc*exp(P)^XIc*exp(C);
+exp(Cf) = ((1-ALPHAc)*(exp(P)/exp(Pcf))^XIc*exp(C));
+exp(P) = (ALPHAc+(1-ALPHAc)*(exp(Pcf))^(1-XIc))^(1/(1-XIc));
+exp(dP)*exp(Zpi) = (exp(P)/exp(P(-1))*exp(dPh));
 
 
 ////////////////// Ph ////////////////////////////
@@ -212,12 +193,6 @@ exp(SS) = (exp(dPh(-1))^IOTA*IT^(1-IOTA))^(-PSIh)*THETAh*exp(dPh)^(PSIh)*exp(SS(
           + (1-THETAh)*exp(Phstar)^(-PSIh);
 
 
-/* fb (4) Ph, MC, dPh
-exp(Ph_f) = Zmc/(Zmc-1)*exp(MC_f);
-exp(dPh_f) = exp(Ph_f)/exp(Ph_f(-1));
-*///fe
-
-
 ////////////////////// Pcf ////////////////////////////
 ///////////////////////////////////////////////////////////////////////////
 exp(X1f) = exp(Cf)*exp(q)*exp(P)*(1+v*(exp(R)-1)) //?? *exp(PIstar)
@@ -234,13 +209,6 @@ exp(Pcfstar) = PSIf/(PSIf-1)*exp(X1f)/exp(X2f);
 1 = exp(dPcf(-1))^(IOTA*(1-PSIf))*IT^((1-IOTA)*(1-PSIf))* THETAf*exp(dPcf)^(PSIf-1)
     + (1-THETAf)*(exp(Pcfstar)/exp(Pcf))^(1-PSIf);
 exp(dPcf)*exp(Zpif) = exp(Pcf)/exp(Pcf(-1))*exp(dPh);
-
-
-/* fb (5) Pcf, dPcf, q, P, R
-exp(Pcf_f) = PSIf/(PSIf-1)*exp(q_f)*exp(P_f)*(1+v*(exp(R_f)-1));
-exp(dPcf_f)*exp(Zpif) = exp(Pcf_f)/exp(Pcf_f(-1))*exp(dPh_f);
-*///fe
-
  
 /////////////////////////// I and Pi ////////////////////////
 ///////////////////////////////////////////////////////////////////////////
@@ -265,16 +233,22 @@ exp(Pifstar) = PSIf/(PSIf-1)*exp(X1if)/exp(X2if);
 exp(dPif)*exp(Zpif) = exp(Pif)/exp(Pif(-1))*exp(dPh);
 
 
-/* fb (6)   Ih, If, Pi, dPi, I, Pif, dPif, dPh, q, P, R
-exp(Ih_f) = ALPHAi*exp(Pi_f)^XIi*exp(I_f);
-exp(If_f) = (1-ALPHAi)*(exp(Pi_f)/exp(Pif_f))^XIi*exp(I_f);
-exp(Pi_f) = (ALPHAi+(1-ALPHAi)*(exp(Pif_f))^(1-XIi))^(1/(1-XIi));
-exp(dPi_f) = exp(Pi_f)/exp(Pi_f(-1))*exp(dPh_f);
+/////////////////////////// Export function & BOP  ////////////////////////
+///////////////////////////////////////////////////////////////////////////
+//?? no foreign price?
+//exp(X) = exp(Zx)*(exp(X(-1))/exp(dZtr))^PHIx
+//         *(((1+v*(exp(R)-1))*exp(Px)/exp(S))^(-XIh)*(exp(Ystar)))^(1-PHIx); 
+exp(X) = exp(Zx)*(exp(X(-1))/exp(dZtr))^PHIx
+         *(((1+v*(exp(R)-1))*exp(Px)/exp(S)/exp(PIstar))^(-XIh)*(exp(Ystar)))^(1-PHIx);
+exp(Xh) = ALPHAx*exp(Px)^XIx*exp(X);
+exp(Xf) = (1-ALPHAx)*(exp(Px)/(exp(q)*exp(P)))^XIx*exp(X);
+exp(Px) = (ALPHAx+(1-ALPHAx)*(exp(q)*exp(P))^(1-XIx))^(1/(1-XIx));
+exp(dPx)*exp(epx) = exp(Px)/exp(Px(-1))*exp(dPh);
 
-exp(Pif_f) = PSIf/(PSIf-1)*exp(q_f)*exp(P_f)*(1+v*(exp(R_f)-1));
-exp(dPif_f)*exp(Zpif) = exp(Pif_f)/exp(Pif_f(-1))*exp(dPh_f);
-*///fe
-
+exp(Px)*exp(X) //?? exp(q)*exp(Pxf)*exp(P)*exp(X) //this modification chages SS values
++ exp(S)*exp(Rf(-1))*exp(F(-1))*exp(P)/exp(dZtr)/exp(dP) 
+= exp(S)*exp(F)*exp(P)
+  + exp(q)*exp(P)*(1+v*(exp(R)-1))*(exp(Cf) + exp(If) + exp(Xf));
 
 
 ///////////////// Financial Accelerator //////////////////////
@@ -306,34 +280,6 @@ exp(Rk) = (GAMMA1+GAMMA2*(exp(ut)-1))/exp(Zi);
       *(exp(I(+1))*exp(dZtr(+1))/exp(I))^2;
 
 
-/* fb (7) Re, Q, Rk, ut, dPh, NW, K, R, dP, I, C
-exp(Re_f) = (exp(Q_f)*(1-DELTA) + exp(Rk_f)*exp(ut_f)
-             - 1/exp(Zi)*(GAMMA1*(exp(ut_f)-1)+GAMMA2/2*(exp(ut_f)-1)^2))
-            *exp(dPh_f)/exp(Q_f(-1));
-exp(NW_f) = exp(Znw)*SP
-            *(exp(Re_f)*exp(Q_f(-1))*exp(K_f(-1))/exp(dZtr)
-              - (exp(NW_f(-1))/(exp(K_f(-1))*exp(Q_f(-1))))^(-KAPPArp)*exp(R_f(-1))
-                /exp(dP_f)*(exp(Q_f(-1))*exp(K_f(-1))/exp(dZtr)
-                            - exp(NW_f(-1))/exp(dZtr)));
-exp(Re_f(+1)) = (exp(NW_f)/(exp(K_f)*exp(Q_f)))^(-KAPPArp)*exp(R_f)/exp(dP_f(+1));
-
-exp(K_f)-(1-DELTA)*exp(K_f(-1))/exp(dZtr)
-= exp(Zi)*exp(I_f)*(1-KAPPAi/2*(exp(I_f)*exp(dZtr)/exp(I_f(-1))-exp(GAMMAtr))^2);
-
-exp(Rk_f) = (GAMMA1+GAMMA2*(exp(ut_f)-1))/exp(Zi);
-
-1 = exp(Q_f)*exp(Zi)*(1 - KAPPAi/2*(exp(I_f)*exp(dZtr)/exp(I_f(-1))-exp(GAMMAtr))^2
-                      - KAPPAi*(exp(I_f)*exp(dZtr)/exp(I_f(-1))-exp(GAMMAtr))
-                        *exp(I_f)*exp(dZtr)/exp(I_f(-1)))
-    + BETA*exp(Q_f(+1))*exp(Zi(+1))
-      *(1/exp(dZtr(+1))*(exp(C_f)-CHIc*exp(C_f(-1))/exp(dZtr))
-        /(exp(C_f(+1))-CHIc*exp(C_f)/exp(dZtr(+1))))
-      *KAPPAi*(exp(I_f(+1))*exp(dZtr(+1))/exp(I_f)-exp(GAMMAtr))
-      *(exp(I_f(+1))*exp(dZtr(+1))/exp(I_f))^2;
-*///fe
-
-
-
 //////////////////////////////// Production ///////////////////////////////
 ///////////////////////////////////////////////////////////////////////////
 // MPK = MPL
@@ -353,65 +299,13 @@ exp(Y) = exp(Ch) + exp(Ih) + exp(Xh) + exp(G)
 exp(G) = Gss*exp((Y))*exp(Zg)*(exp(Y)/exp(steady_state(Y)))^(-PHIg);
 
 
-/* fb (8) W, R, Rk, K, ut, N, MC, Y, Ch, Ih, Xh, G, I
-exp(W_f)*(1+v*(exp(R_f)-1))/exp(Rk_f)
-= (1-ALPHAk)/ALPHAk*exp(K_f(-1))*exp(ut_f)/exp(N_f)/exp(dZtr);
-
-exp(MC_f) = 1/exp(Za)*(exp(W_f)*(1+v*(exp(R_f)-1)))^(1-ALPHAk)*exp(Rk_f)^ALPHAk
-            *(1-ALPHAk)^(ALPHAk-1)*ALPHAk^(-ALPHAk);
-
-exp(Y_f) = exp(Za)*(exp(K_f(-1))*exp(ut_f))^ALPHAk
-           *exp(N_f)^(1-ALPHAk)*exp(dZtr)^(-ALPHAk);
-exp(Y_f) = exp(Ch_f) + exp(Ih_f) + exp(Xh_f) + exp(G_f)
-           + KAPPAi/2*(exp(I_f)*exp(dZtr)/exp(I_f(-1))-exp(GAMMAtr))^2*exp(I_f)
-           + 1/exp(Zi)*(GAMMA1*(exp(ut_f)-1)+GAMMA2*(exp(ut_f)-1)^2)
-             *exp(ut_f)*exp(K_f(-1));
-
-exp(G_f) = Gss*exp((Y_f))*exp(Zg)*(exp(Y_f)/exp(steady_state(Y_f)))^(-PHIg);
-*///fe
-
-
-/////////////////////////// Export function & BOP  ////////////////////////
-///////////////////////////////////////////////////////////////////////////
-//?? no foreign price?
-//exp(X) = exp(Zx)*(exp(X(-1))/exp(dZtr))^PHIx
-//         *(((1+v*(exp(R)-1))*exp(Px)/exp(S))^(-XIh)*(exp(Ystar)))^(1-PHIx); 
-exp(X) = exp(Zx)*(exp(X(-1))/exp(dZtr))^PHIx
-         *(((1+v*(exp(R)-1))*exp(Px)/exp(S)/exp(PIstar))^(-XIh)*(exp(Ystar)))^(1-PHIx);
-exp(Xh) = ALPHAx*exp(Px)^XIx*exp(X);
-exp(Xf) = (1-ALPHAx)*(exp(Px)/(exp(q)*exp(P)))^XIx*exp(X);
-exp(Px) = (ALPHAx+(1-ALPHAx)*(exp(q)*exp(P))^(1-XIx))^(1/(1-XIx));
-exp(dPx)*exp(epx) = exp(Px)/exp(Px(-1))*exp(dPh);
-
-exp(Px)*exp(X) //?? exp(q)*exp(Pxf)*exp(P)*exp(X) //this modification chages SS values
-+ exp(S)*exp(Rf(-1))*exp(F(-1))*exp(P)/exp(dZtr)/exp(dP) 
-= exp(S)*exp(F)*exp(P)
-  + exp(q)*exp(P)*(1+v*(exp(R)-1))*(exp(Cf) + exp(If) + exp(Xf));
-
-
-/* fb (9) X, R, Px, S, Xh, Xf, q, P, dPx, dPh, Rf, F, dP, Cf, If, Xf
-exp(X_f) = exp(Zx)*(exp(X_f(-1))/exp(dZtr))^PHIx
-           *(((1+v*(exp(R_f)-1))*exp(Px_f)/exp(S_f)/exp(PIstar))^(-XIh)
-             *(exp(Ystar)))^(1-PHIx);
-exp(Xh_f) = ALPHAx*exp(Px_f)^XIx*exp(X_f);
-exp(Xf_f) = (1-ALPHAx)*(exp(Px_f)/(exp(q_f)*exp(P_f)))^XIx*exp(X_f);
-exp(Px_f) = (ALPHAx+(1-ALPHAx)*(exp(q_f)*exp(P_f))^(1-XIx))^(1/(1-XIx));
-exp(dPx_f)*exp(epx) = exp(Px_f)/exp(Px_f(-1))*exp(dPh_f);
-
-exp(Px_f)*exp(X_f)
-+ exp(S_f)*exp(Rf_f(-1))*exp(F_f(-1))*exp(P_f)/exp(dZtr)/exp(dP_f)
-= exp(S_f)*exp(F_f)*exp(P_f)
-  + exp(q_f)*exp(P_f)*(1+v*(exp(R_f)-1))*(exp(Cf_f) + exp(If_f) + exp(Xf_f));
-*///fe
-
-
-
 //////////////////////////////  UIP condition /////////////////////////////
 ///////////////////////////////////////////////////////////////////////////
 exp(R) = exp(Rf)*exp(S(+1))/(exp(S));
-exp(Rf) = exp(- UIPf*(exp(S)*exp(F)-(exp(steady_state(Y))*UIPy))
-              - UIPr*(exp(Rf)-exp(steady_state(Rf))-(exp(R)-exp(steady_state(R)))))
-          *exp(Zcp)*exp(Rw)*(exp(Rstar));
+exp(Rf) = exp(-UIPf*(exp(S)*exp(F)-(exp(steady_state(Y))*UIPy))
+              -UIPr*(exp(Rstar)-exp(steady_state(Rstar))-(exp(R)-exp(steady_state(R)))))
+          *exp(Zcp)*(exp(Rstar));   //exp(Rstar)-exp(steady_state(Rstar)) instead of Rf
+//        *exp(Zcp)*exp(Rw)*(exp(Rstar));
 
 exp(Rw) = (1+GAMMAtr)/BETA;
 exp(Pxf)  = exp(PPx);//*exp(S));                                         
@@ -424,23 +318,6 @@ exp(q) = exp(S)*exp(PIstar)/exp(P);
 exp(PPx) = 1;
 exp(PPm) = 1;
 exp(M) = exp(Cf) + exp(If) + exp(Xf);
-
-
-/* fb (10) R, Rf, S, F, Y, q, M, Rw, Cf, If, Xf
-exp(R_f) = exp(Rf_f)*exp(S_f(+1))/(exp(S_f));
-exp(Rf_f) = exp(- UIPf*(exp(S_f)*exp(F_f)-(exp(steady_state(Y_f))*UIPy))
-                - UIPr*(exp(Rf_f)-exp(steady_state(Rf_f))
-                        - (exp(R_f)-exp(steady_state(R_f)))))
-          *exp(Zcp)*exp(Rw)*(exp(Rstar));
-
-exp(Rw) = (1+GAMMAtr)/BETA;
-//exp(q) = exp(PPm)*(exp(PIstar))*exp(S)/exp(P);                          //??
-//exp(q) = exp(q(-1))*(exp(PIstar))*exp(S)/exp(S(-1))*exp(P(-1))/exp(P);    //
-//exp(q) = exp(Rf)*exp(q(+1))*exp(dP(+1))/exp(PIstar(+1))/exp(R);           //
-exp(q_f) = exp(S_f)*exp(PIstar)/exp(P_f);
-exp(M_f) = exp(Cf_f) + exp(If_f) + exp(Xf_f);
-*///fe
-
 
 
 ///////////////////////////  Taylor rule ////////////////////////
@@ -475,6 +352,88 @@ PIstar  = a31*Ystar(-1)  + a32*Rstar(-1) + a33*PIstar(-1) + epistar;
 
  
 
+/* fb   ////// Flexible Price block /////////////////////////
+//(1) c, r = R/dP(+1)
+exp(dZtr(+1))*exp(Zc)/(exp(c)-CHIc*exp(c(-1))/exp(dZtr))
+= BETA*exp(Zc(+1))/(exp(c(+1))-CHIc*exp(c)/exp(dZtr(+1)))*exp(r);
+
+//(2) w = W/P
+exp(w) = PSIw/(PSIw-1)*exp(Zw)*(exp(c)-CHIc*exp(c(-1))/exp(dZtr))*exp(n)^ETA;
+
+//(3) ch, cf, ph, pcf
+exp(ch) = ALPHAc*exp(ph)^(-XIc)*exp(c);
+exp(cf) = (1-ALPHAc)*exp(pcf)^(-XIc)*exp(c);
+1 = ALPHAc*(exp(ph))^(1-XIc) + (1-ALPHAc)*(exp(pcf))^(1-XIc);
+exp(ph) = Zmc/(Zmc-1)*exp(mc);
+exp(pcf) = PSIf/(PSIf-1)*exp(mcf);
+
+//(4) ih, ih, pi, pif
+exp(ih) = ALPHAi*(exp(ph)/exp(pi))^(-XIi)*exp(i);
+exp(if) = (1-ALPHAi)*(exp(pif)/exp(pi))^(-XIi)*exp(i);
+exp(pi) = (ALPHAi*(exp(ph))^(1-XIi)+(1-ALPHAi)*(exp(pif))^(1-XIi))^(1/(1-XIi));
+exp(pif) = PSIf/(PSIf-1)*exp(mcf);
+
+//(5) x, xh, xh, pxf, px, f
+exp(x) = exp(Zx)*(exp(x(-1))/exp(dZtr))^PHIx
+           *(((1+v*(exp(r)-1))*exp(px)/exp(q_f))^(-XIh)*(exp(Ystar)))^(1-PHIx);
+exp(xh) = ALPHAx*(exp(ph)/exp(px))^(-XIx)*exp(x);
+exp(xf) = (1-ALPHAx)*(exp(pxf)/exp(px))^(-XIx)*exp(x);
+exp(px) = (ALPHAx*exp(ph)^(1-XIx)+(1-ALPHAx)*exp(pxf)^(1-XIx))^(1/(1-XIx));
+exp(pxf) = exp(mcf);
+exp(px)*exp(x)
++ exp(q_f)*exp(rf(-1))*exp(f(-1))/exp(dZtr)/exp(PIstar)
+= exp(q_f)*exp(f)
+  + exp(q_f)*(1+v*(exp(Rstar)-1))*(exp(cf) + exp(if) + exp(xf));
+
+//(6) re, nw, k, Q, rk, u, i
+exp(re) = (exp(Q_f)*(1-DELTA) + exp(rk)*exp(u)
+             - 1/exp(Zi)*(GAMMA1*(exp(u)-1)+GAMMA2/2*(exp(u)-1)^2))
+            /exp(Q_f(-1));
+exp(nw) = exp(Znw)*SP
+            *(exp(re)*exp(Q_f(-1))*exp(k(-1))/exp(dZtr)
+              - (exp(nw(-1))/(exp(k(-1))*exp(Q_f(-1))))^(-KAPPArp)*exp(r(-1))
+                *(exp(Q_f(-1))*exp(k(-1))/exp(dZtr)
+                  - exp(nw(-1))/exp(dZtr)));
+exp(re(+1)) = (exp(nw)/(exp(k)*exp(Q_f)))^(-KAPPArp)*exp(r);
+exp(k)-(1-DELTA)*exp(k(-1))/exp(dZtr)
+= exp(Zi)*exp(i)*(1-KAPPAi/2*(exp(i)*exp(dZtr)/exp(i(-1))-exp(GAMMAtr))^2);
+exp(rk) = (GAMMA1+GAMMA2*(exp(u)-1))/exp(Zi);
+1 = exp(Q_f)*exp(Zi)*(1 - KAPPAi/2*(exp(i)*exp(dZtr)/exp(i(-1))-exp(GAMMAtr))^2
+                      - KAPPAi*(exp(i)*exp(dZtr)/exp(i(-1))-exp(GAMMAtr))
+                        *exp(i)*exp(dZtr)/exp(i(-1)))
+    + BETA*exp(Q_f(+1))*exp(Zi(+1))
+      *(1/exp(dZtr(+1))*(exp(c)-CHIc*exp(c(-1))/exp(dZtr))
+        /(exp(c(+1))-CHIc*exp(c)/exp(dZtr(+1))))
+      *KAPPAi*(exp(i(+1))*exp(dZtr(+1))/exp(i)-exp(GAMMAtr))
+      *(exp(i(+1))*exp(dZtr(+1))/exp(i))^2;
+
+//(7) w, rk, k, n, mc, mcf, y, ch, ih, xh, g
+exp(w)*(1+v*(exp(r)-1))/exp(rk)
+= (1-ALPHAk)/ALPHAk*exp(k(-1))*exp(u)/exp(n)/exp(dZtr);
+exp(mc) = 1/exp(Za)*(exp(w)*(1+v*(exp(r)-1))/(1-ALPHAk))^(1-ALPHAk)
+          *(exp(rk)/ALPHAk)^ALPHAk;
+exp(mcf) = exp(q_f)*(1+v*(exp(Rstar)-1))
+exp(y) = exp(Za)*(exp(k(-1))*exp(u))^ALPHAk
+         *exp(n)^(1-ALPHAk)*exp(dZtr)^(-ALPHAk);
+exp(y) = exp(ch) + exp(ih) + exp(xh) + exp(g)
+         + KAPPAi/2*(exp(i)*exp(dZtr)/exp(i(-1))-exp(GAMMAtr))^2*exp(i)
+         + 1/exp(Zi)*(GAMMA1*(exp(u)-1)+GAMMA2*(exp(u)-1)^2)
+           *exp(u)*exp(k(-1));
+exp(g) = Gss*exp((y))*exp(Zg)*(exp(y)/exp(steady_state(y)))^(-PHIg);
+
+//(8) r, rf, f, q, M, Rw
+exp(r) = exp(rf)/exp(PIstar)*exp(q_f(+1))/(exp(q_f));
+exp(rf) = exp(- UIPf*(exp(q_f)*exp(f)-(exp(steady_state(y))*UIPy))
+              - UIPr*(exp(Rstar)-exp(steady_state(Rstar))
+                      - (exp(r)-exp(steady_state(r)))))
+          *exp(Zcp)*(exp(Rstar));
+exp(Rw) = (1+GAMMAtr)/BETA;
+exp(m) = exp(cf) + exp(if) + exp(xf);
+*///fe
+
+
+
+
 
 /////////// RBC block /////////////////////////
 // RBC (1)
@@ -490,7 +449,7 @@ exp(dZtr(+1))*exp(Qe)*1/exp(Ce) = BETA*1/exp(Ce(+1))*(exp(Rke(+1))+exp(Qe(+1))*(
 exp(dZtr(+1))*1/exp(Ce) = BETA*(1/exp(Ce(+1))*exp(R_e));
 
 // RBC (5)
-exp(We) = (1-ALPHAk)*exp(Za)*exp(Ke(-1))^(ALPHAk)*exp(Ne)^(-ALPHAk)*exp(dZtr)^(1-ALPHAk);
+exp(We) = (1-ALPHAk)*exp(Za)*exp(Ke(-1))^(ALPHAk)*exp(Ne)^(-ALPHAk) *exp(dZtr)^(1-ALPHAk);
 
 // RBC (6)
 exp(Rke) = ALPHAk*exp(Za)*exp(Ke(-1))^(ALPHAk-1)*exp(Ne)^(1-ALPHAk)*exp(dZtr)^(1-ALPHAk);
@@ -551,6 +510,17 @@ end;
 
 
 initval;
+/*
+y           = 	 0.572716;
+c           =    0.0854136;
+n           =	-0.184133;
+r          	=	 log((1+GAMMAtr)/BETA);//0.0125045;
+rk         	=	-2.82762;
+k          	=	 2.11885;
+mc         	=	-0.182322;
+i        	=	-1.25595;
+*/
+
 Y           = 	 0.572716;
 C           =    0.0854136;
 N           =	-0.184133;
@@ -720,9 +690,9 @@ estimated_params;
 
 end;
 
-/*//be
+///*//be
 estimation(
-datafile     = data_201414, //data_201344_sa_soe_dmean.xls, //,
+datafile     = data_201414_sa_soe_dmean, //data_201344_sa_soe_dmean.xls, //,
 first_obs    = 1, 
 mh_replic    = 50000,
 //mode_file    = BOKDSGE2014_0623_TR_UIP_W_markup_mode,
@@ -742,4 +712,4 @@ S_obs, Ystar_obs, Rstar_obs, Pistar_obs dZtr G_obs W_obs Za,  Zi, Zc,
 Zpi, Znw, Zpif, Zx, Zg, Zw, Zcp;
 
 shock_decomposition   Y_obs, C_obs, R_obs, dP_obs, I_obs, GAPeff;
-*///be
+//*///be
