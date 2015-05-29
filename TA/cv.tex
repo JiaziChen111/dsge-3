@@ -1,0 +1,318 @@
+% LaTeX Curriculum Vitae Template
+%
+% Copyright (C) 2004-2009 Jason Blevins <jrblevin@sdf.lonestar.org>
+% http://jblevins.org/projects/cv-template/
+%
+% You may use use this document as a template to create your own CV
+% and you may redistribute the source code freely. No attribution is
+% required in any resulting documents. I do ask that you please leave
+% this notice and the above URL in the source code if you choose to
+% redistribute this file.
+
+\documentclass[letterpaper,11pt]{article}
+\usepackage[compact]{titlesec}
+\usepackage{hyperref,geometry,makebox,setspace}
+
+% Comment the following lines to use the default Computer Modern font
+% instead of the Palatino font provided by the mathpazo package.
+% Remove the 'osf' bit if you don't like the old style figures.
+\usepackage[T1]{fontenc}
+\usepackage[sc,osf]{mathpazo}
+
+%\newenvironment{packed_enum}{
+%\begin{enumerate}
+% \setlength{\itemsep}{5pt}
+% \setlength{\parskip}{5pt}
+% \setlength{\parsep}{5pt}
+%}{\end{enumerate}}
+
+%\setlength{\parskip}{\baselineskip} \onehalfspacing
+
+%\makeatletter \renewcommand{\@oddfoot}{\hfil \thepage\ of \pageref{LastPage} \hfil} \makeatother
+
+% Set your name here
+\def\name{Hyun Chang Yi}
+
+% Replace this with a link to your CV if you like, or set it empty
+% (as in \def\footerlink{}) to remove the link in the footer:
+\def\footerlink{http://works.bepress.com/yi/cv.pdf}
+
+% The following metadata will show up in the PDF properties
+\hypersetup{
+colorlinks = true,
+urlcolor = black,
+pdfauthor = {\name},
+pdfkeywords = {economics, statistics, mathematics},
+pdftitle = {\name: Curriculum Vitae},
+pdfsubject = {Curriculum Vitae},
+pdfpagemode = UseNone
+}
+
+\geometry{
+body={6.5in, 8.5in},
+left=1.0in,
+top=1.25in
+}
+
+% Customize page headers
+\pagestyle{myheadings}
+\markright{\name}
+\thispagestyle{empty}
+
+% Custom section fonts
+\usepackage{sectsty}
+\sectionfont{\rmfamily\mdseries\Large}
+\subsectionfont{\rmfamily\mdseries\itshape\large}
+
+% Other possible font commands include:
+% \ttfamily for teletype,
+% \sffamily for sans serif,
+% \bfseries for bold,
+% \scshape for small caps,
+% \normalsize, \large, \Large, \LARGE sizes.
+
+% Don't indent paragraphs.
+\setlength\parindent{0em}
+
+% Make lists without bullets
+\renewenvironment{itemize}{
+\begin{list}{}{
+\setlength{\leftmargin}{1.5em}
+}
+}{
+\end{list}
+}
+
+\begin{document}
+
+% Place name at left
+
+\centerline{ \Huge \name}
+
+\noindent\makebox[\linewidth]{\rule{\textwidth}{2pt}} 
+
+% Alternatively, print name centered and bold:
+%\centerline{\huge \bf \name}
+
+%\vspace{0.25in}
+
+\moveleft.5\hoffset\centerline{\href{http://business-school.exeter.ac.uk/research/areas/topics/economics/}{Department of Economics}, University of Exeter Business School,}
+\moveleft.5\hoffset\centerline{Rennes Drive, Exeter, EX4 4PU, United Kingdom. Phone: +44 7428 595264}
+\moveleft.5\hoffset\centerline{E-mail: \href{mailto:hcy202@exeter.ac.uk}{\color{blue}hcy202@exeter.ac.uk}, Webpage: \href{http://works.bepress.com/yi}{\color{blue}http://works.bepress.com/yi}}
+\moveleft.5\hoffset\centerline{Citizenship: South Korea. Last update: \today.}
+
+%\begin{minipage}{0.45\linewidth}
+% \href{http://www.birmingham.ac.uk/schools/business/departments/economics/index.aspx}{Department of Economics} \\
+% JG Smith Building \\
+% University of Birmingham \\
+% Birmingham, B15 2TT\\
+% United Kingdom
+%\end{minipage}
+%\begin{minipage}{0.45\linewidth}
+% \begin{tabular}{ll}
+% Phone: & +44 742 859 5264 \\
+% Email: & \href{mailto:hxy107@bham.ac.uk}{\color{blue} hxy107@bham.ac.uk} \\
+% Webpage: & \href{http://works.bepress.com/yi}{\color{blue} http://works.bepress.com/yi} \\
+% \end{tabular}
+%\end{minipage}
+
+%
+%\section*{Personal}
+%
+%\begin{itemize}
+%\item Born on September 29, 1895.
+%\item United States Citizen.
+%\end{itemize}
+
+\section*{Research Interest}
+\begin{itemize}
+\item Decision, Game and Learning Theory
+\end{itemize}
+
+
+\section*{Education}
+\begin{itemize}
+\item Ph.D. program in Economics, University of Exeter, UK, 2013 - (Expected July 2014).
+
+\item Ph.D. program in Economics, University of Birmingham, UK, 2011 - 2013.
+
+\item Ph.D. program in Economics, Texas A\&M University, USA, 2008 - 2011.
+
+\item B.A. (Honors) in Economics \& Applied Statistics, Yonsei University, South Korea, 2005.
+\end{itemize}
+
+
+\section*{Employment}
+
+\begin{itemize}
+\item Junior Economist, the Bank of Korea, 2005 - 2008.
+\end{itemize}
+
+
+\section*{Research Papers}
+\subsection*{Working Paper}
+\begin{itemize}
+\item ``\href{http://works.bepress.com/yi/1}{\color{blue}How Do You Persuade Someone You Do Not Know?}'' (First Chapter of Dissertation)
+\item ``A Model of Satisficing Behaviour'' with Rajiv Sarin (Job Market Paper; Second Chapter of Dissertation, available on request)
+\item ``Satisficing Behaviour in Extensive Form Games'' with Rajiv Sarin (Third Chapter of Dissertation)
+\end{itemize}
+
+%\subsection*{Work in Progress}
+%\begin{itemize}
+%\item ``Adaptive Learning and Dual Risk Attitudes''
+%\end{itemize}
+
+\section*{Teaching Experience}
+\subsection*{Class Teacher, University of Exeter}
+\begin{itemize}
+\item Microeconomics, Fall 2013.
+\end{itemize}
+\subsection*{Class Teacher, University of Birmingham}
+\begin{itemize}
+\item Game Theory, Fall 2012.
+\item Principles of Economics B, Spring 2012.
+\item Principles of Economics A, Fall 2011.
+\end{itemize}
+\subsection*{Teaching Assistant, Texas A\&M University}
+\begin{itemize}
+\item Mathematics (Ph.D. preliminary course), Summer 2010.
+\item Econometrics (Ph.D. core course), Spring 2010.
+\item Macroeconomic Theory (Ph.D. core course), Fall 2009.
+\end{itemize}
+
+
+\section*{Fellowships, Honors, and Awards}
+\begin{itemize}
+\item Graduate Assistantship, University of Exeter, 2013 - present.
+\item Graduate Assistantship, University of Birmingham, 2011 - 2013.
+\item Graduate Assistantship, Texas A\&M University, 2009 - 2011.
+\item Second Place in the Bank of Korea National Monetary Policy Challenge, 2004.
+\item Highest Honors Student, Yonsei University, spring 2003 - spring 2004.
+\end{itemize}
+
+
+\section*{Presentation}
+\begin{itemize}
+\item Norms, Actions, Games 2014, London, United Kingdom (The second chapter has been accepted for Poster Session)
+\item RES PhD Presentation Meeting 2014, London, United Kingdom
+\item RES PhD Presentation Meeting 2013, London, United Kingdom
+\item XXXVII Simposio de la Asociaci\'on Espa\~nola de Econom\'ia-Spanish Economic Association (SAEe), Vigo, Spain
+\item UECE Lisbon Meetings 2012: Game Theory and Applications, ISEG/Technical University of Lisbon, Lisbon, Portugal
+\end{itemize}
+
+%\section*{Membership}
+%\begin{itemize}
+% \item American Economic Association
+% \item Spanish Economic Association
+%\end{itemize}
+
+\section*{Language}
+\begin{itemize}
+\item English: fluent
+\item Korean: native
+\end{itemize}
+
+%\section*{Languages}
+%\begin{itemize}
+%\item English: fluent
+%\item Korean: native
+%\end{itemize}
+
+\section*{References}
+\begin{spacing}{1.1}
+\begin{itemize}
+\item {\large \bf Rajiv Sarin} (Main Supervisor)\\
+Professor of Economic Theory\\
+Department of Economics\\
+University of Exeter\\
+Exeter, EX4 4PU\\
+United Kingdom\\
+Email \href{mailto:R.Sarin@exeter.ac.uk}{\color{blue}R.Sarin@exeter.ac.uk}
+\vspace{0.1in}
+\item {\large \bf Dieter Balkenborg}\\
+Associate Professor of Economics\\
+Department of Economics\\
+University of Exeter\\
+Exeter, EX4 4PU\\
+United Kingdom\\
+Email \href{mailto:D.G.Balkenborg@exeter.ac.uk}{\color{blue}D.G.Balkenborg@exeter.ac.uk}
+\vspace{0.1in}
+\item {\large \bf Brit Grosskopf}\\
+Professor of Experimental Economics\\
+Department of Economics\\
+University of Exeter\\
+Exeter, EX4 4PU\\
+United Kingdom\\
+Email \href{mailto:B.Grosskopf@bham.ac.uk}{\color{blue}B.Grosskopf@exeter.ac.uk}
+\end{itemize}
+\end{spacing}
+%\vspace{0.25in}
+%\begin{minipage}[t]{0.5\linewidth}
+%{\large \bf Rajiv Sairn}\\
+%Professor of Economic Theory\\
+%Department of Economics\\
+%University of Birmingham\\
+%Birmingham, B15 2TT\\
+%United Kingdom\\
+%Phone +44 121 414 5025\\
+%Email \href{mailto:r.sarin@bham.ac.uk}{\color{blue}r.sarin@bham.ac.uk}
+%\end{minipage}
+%\begin{minipage}[t]{0.5\linewidth}
+%
+%%\begin{tabular}{l}
+%%{\bf Indrajit Ray}\\
+%%Professor of Economics (Chair in Economic Theory)\\
+%%Department of Economics\\
+%%University of Birmingham\\
+%%Birmingham, B15 2TT\\
+%%United Kingdom\\
+%%Phone +44 121 414 8566\\
+%%Email \href{mailto:i.ray@bham.ac.uk}{\color{blue}i.ray@bham.ac.uk}
+%%\end{tabular}
+%\end{minipage}
+%
+%{\large \bf Indrajit Ray}\\
+%Professor of Economics\\
+%Department of Economics\\
+%University of Birmingham\\
+%Birmingham, B15 2TT\\
+%United Kingdom\\
+%Phone +44 121 414 8566\\
+%Email \href{mailto:i.ray@bham.ac.uk}{\color{blue}i.ray@bham.ac.uk}
+
+\newpage
+
+\section*{Dissertation}
+\subsection*{First Chapter: ``\href{http://works.bepress.com/yi/1}{\color{blue}How Do You Persuade Someone You Do Not Know?}''}
+\begin{itemize}
+\item \begin{spacing}{1.0} We examine the potential for communication via cheap talk between an expert and a decision maker whose type (or preferences) is uncertain. The expert privately observes type-specific states and persuades the decision maker to choose an action in his favour by informing the decision maker about the state. The decision maker privately observes her type and chooses an action. The optimal action for the decision maker depends upon her type and the state of her type. We find that, in one-way cheap talk games where only the expert talks, the expert can \emph{always} inform the decision maker in the form of comparative statements and the decision maker can \emph{almost surely} make an informed decision. Furthermore, in two-way games where the decision maker talks before the expert does, the decision maker can \emph{partially reveal} her type to the expert or public without information loss. \end{spacing}
+\end{itemize}
+
+\vspace{-.3in}
+
+\subsection*{Second Chapter: ``A Model of Satisficing Behaviour'' with Rajiv Sarin}
+\begin{itemize}
+\item \begin{spacing}{1.0} We build a model of satisficing behaviour. We explicitly introduce the
+payoff the decision maker ``expects'' from a strategy, where this expectation is adaptively formed. This valuation of a strategy is differentiated from her satisficing level which is taken to be the payoff the agent ``expects'' from her best outside option. If the agent receives a payoff above her satisficing level she continues with the current action, updating her valuation of the action. If she receives a payoff below her satisficing level and her valuation of the action falls below her satisficing level she updates both her satisficing level and what she expects from the strategy. We show that in the long run, all players satisfice. In individual decision problems, satisficing behaviour results in cautious, maximin choice. In games like the Prisoner's Dilemma and Stag Hunt, they in the long run play either cooperative or defective outcomes and in a class of coordination games, they coordinate on Pareto optimal outcomes. In other games, such as canonical public good games, they converge to (selfish) Nash equilibria.
+\end{spacing}
+\end{itemize}
+
+\vspace{-.3in}
+
+\subsection*{Third Chapter: ``Satisficing Behaviour in Extensive Form Games'' with Rajiv Sarin}
+\begin{itemize}
+\item \begin{spacing}{1.0} We model the satisficing behaviour proposed by the second chapter in extensive form games. Players at different information sets are modeled to independently adjust their satisficing levels and satisfice with options with respect to the levels. We introduce a refinement of subgame perfection, named as \emph{subgame dominance}, which requires players choose `Best' actions at all information sets. Satisficing players play subgame dominant paths most of the time in perfect information games and a class of imperfect information games like simultaneous games with outside options. And, we identify conditions under which satisficing players 'always cooperate' in repeated Prisoner's Dilemma games and 'fairly coordinate' in repeated Battle of the Sexes games. Lastly, we show that players with same interests in the long run develop complete communication strategies in signaling games.
+\end{spacing}
+\end{itemize}
+
+\vfill
+
+% Footer
+\begin{center}
+\begin{footnotesize}
+Last updated: \today \\
+\href{\footerlink}{\texttt{\footerlink}}
+\end{footnotesize}
+\end{center}
+
+\end{document}

@@ -1,0 +1,98 @@
+Starting Dynare (version 4.4.3).
+Starting preprocessing of the model file ...
+WARNING: some exogenous (er, ea, ei, ec, epi, enw, epif, eg, epr, epx) are declared but not used in the model. This may lead to crashes or unexpected behaviour.
+Found 34 equation(s).
+Evaluating expressions...done
+Computing static model derivatives:
+ - order 1
+Computing dynamic model derivatives:
+ - order 1
+Processing outputs ...done
+Preprocessing completed.
+Starting MATLAB/Octave computing.
+
+SOLVE: maxit has been reached
+
+
+
+
+Residuals of the static equations:
+
+Equation number 1 : 0.00022983
+Equation number 2 : 0.9863
+Equation number 3 : 0.02368
+Equation number 4 : -0.75476
+Equation number 5 : -0.0049289
+Equation number 6 : 0.0068273
+Equation number 7 : 0.0049841
+Equation number 8 : -0.24255
+Equation number 9 : 0.004669
+Equation number 10 : 0.021587
+Equation number 11 : 1.0031
+Equation number 12 : -0.6022
+Equation number 13 : -2707875041.0674
+Equation number 14 : -4954036.4058
+Equation number 15 : 0.013852
+Equation number 16 : 0.0010128
+Equation number 17 : -0.30984
+Equation number 18 : 0.216
+Equation number 19 : 0.5445
+Equation number 20 : 0.4555
+Equation number 21 : 0
+Equation number 22 : 0.9999
+Equation number 23 : 0.63614
+Equation number 24 : 0.32686
+Equation number 25 : 0
+Equation number 26 : 0.99987
+Equation number 27 : 0
+Equation number 28 : 0
+Equation number 29 : 0
+Equation number 30 : 0
+Equation number 31 : 0
+Equation number 32 : 0
+Equation number 33 : 0
+Equation number 34 : 0
+
+
+{Error using <a href="matlab:helpUtils.errorDocCallback('print_info', 'C:\dynare\4.4.3\matlab\print_info.m', 74)" style="font-weight:bold">print_info</a> (<a href="matlab: opentoline('C:\dynare\4.4.3\matlab\print_info.m',74,0)">line 74</a>)
+Impossible to find the steady state. Either the model doesn't have a steady state, there are an
+infinity of steady states,  or the guess values are too far from the solution
+Error in <a href="matlab:helpUtils.errorDocCallback('steady', 'C:\dynare\4.4.3\matlab\steady.m', 92)" style="font-weight:bold">steady</a> (<a href="matlab: opentoline('C:\dynare\4.4.3\matlab\steady.m',92,0)">line 92</a>)
+    print_info(info,options_.noprint, options_);
+Error in <a href="matlab:helpUtils.errorDocCallback('nark_fc_fb_xm', 'C:\Users\0510203\Documents\GitHub\dsge\nark_fc_fb_xm.m', 633)" style="font-weight:bold">nark_fc_fb_xm</a> (<a href="matlab: opentoline('C:\Users\0510203\Documents\GitHub\dsge\nark_fc_fb_xm.m',633,0)">line 633</a>)
+steady;
+Error in <a href="matlab:helpUtils.errorDocCallback('dynare', 'C:\dynare\4.4.3\matlab\dynare.m', 180)" style="font-weight:bold">dynare</a> (<a href="matlab: opentoline('C:\dynare\4.4.3\matlab\dynare.m',180,0)">line 180</a>)
+evalin('base',fname) ;} 
+exp(0.5)
+ans =
+    1.6487
+exp(-2.65812)
+ans =
+    0.0701
+dynare nark
+
+Configuring Dynare ...
+[mex] Generalized QZ.
+[mex] Sylvester equation solution.
+[mex] Kronecker products.
+[mex] Sparse kronecker products.
+[mex] Local state space iteration (second order).
+[mex] Bytecode evaluation.
+[mex] k-order perturbation solver.
+[mex] k-order solution simulation.
+[mex] Quasi Monte-Carlo sequence (Sobol).
+[mex] Markov Switching SBVAR.
+
+Starting Dynare (version 4.4.3).
+Starting preprocessing of the model file ...
+Substitution of endo lags >= 2: added 3 auxiliary variables and equations.
+Found 104 equation(s).
+Evaluating expressions...done
+Computing static model derivatives:
+ - order 1
+Computing dynamic model derivatives:
+ - order 1
+Processing outputs ...done
+Preprocessing completed.
+Starting MATLAB/Octave computing.
+

@@ -1,0 +1,944 @@
+%%%%%%%%%%%%%% Preamble %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[11pt, a4paper]{article}
+\usepackage{kotex}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{fancyhdr}
+
+\usepackage[onehalfspacing]{setspace}
+\usepackage[left=2.5cm,right=2.5cm,top=3cm,bottom=3cm,a4paper]{geometry}
+
+\pagestyle{fancy}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+\begin{titlepage}
+\Huge\title{ \textbf{{New BOK-DSGE : Technical Appendix} \footnote{Please do not circulate without permission}} \\ }
+%\subtitle{Technical Appendix}
+%\institute{BOK}
+\author{\Large{Byoungho Bae}\footnote{email : byoungho.bae@bok.or.kr} \medskip \\{{Macroeconomic Modeling Division, Bank of Korea}}}
+
+\date{\today}%June, 2014}
+
+\end{titlepage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\maketitle \newpage
+
+\tableofcontents \newpage
+
+\section{Introduction}
+ This is a technical appendix that describes how to drive first-order conditions of New BOK-DSGE(2014).  
+ Since New BOK-DSGE has stochastic balanced growth trend i.e. labor augmented permanent technology shock, a couple of variables must be scaled by trend shock process $Z_t$ when it is coded in Dynare as follows.
+\[\bar{C}_t =\frac{C_t}{Z_t},~\bar{C}_t^H =\frac{C_t^H}{Z_t^{tr}},~\bar{C}_t^F =\frac{C_t^F}{Z_t}, ~\bar{Y}_t =\frac{Y_t}{Z_t}, ~\bar{K}_t =\frac{K_t}{Z_t},~\bar{I}_t =\frac{I_t}{Z_t},\] 
+\[\bar{I}_t^H =\frac{I_t^H}{Z_t},~\bar{I}_t^F =\frac{I_t^F}{Z_t},~\bar{W}_t =\frac{I_t}{Z_t}, ~\bar{W}_t^* =\frac{W_t^*}{Z_t},~\bar{F}_t =\frac{F_t}{Z_t}\]
+
+  In addition, due to the fact that the price of domestic produced final consumption good is normalized as $P_t^H = 1$, the prices of other goods are defined as below.\\
+\[ p_t=\frac{P_t}{P_t^H} , ~p_t^F=~\frac{P_t^F}{P_t^H},~p_t^I=\frac{P_t^I}{P_t^H},~p_t^{I,F}=\frac{P_t^{I,F}}{P_t^H},~p_t^{X}=\frac{P_t^{x}}{P_t^H} ,~p_t^{*X}=\frac{P_t^{*X}}{P_t^{*F}} ,~q_t =\frac{P_t^{*F}S_t}{P_t} \]
+\\
+
+\section{Households}
+ \subsection{Utility Maximization Problem}
+ 
+Individual household $i \in [0, 1]$ determine consumption and labor supply by maximizing following expected utility subject to their budget constraint. \\
+ \begin{displaymath}  U_t = E_0 \sum_{t=0}^{\infty} \beta^t \left[ Z_t^c \text{ log} (C_t - \chi_c C_{t-1})- Z_t^l \phi \frac{N_t^{1+\eta}}{1+\eta} + \chi_m \text{log} \left( \frac{M_t}{P_t} \right) \right]  \end{displaymath}
+ 
+ \begin{displaymath}  C_t  + \frac{B_t}{P_t} + \frac{S_t F_t}{P_t}= \frac{ W_t N_t} {P_t} +  \frac{R_{t-1}B_{t-1}} {P_t} + \frac{S_t R_{t-1}^f F_{t-1}} {P_t} + \Pi_t^F + T_t - \frac{M_t - M_{t-1}}{P_t} \end{displaymath} where $R_t^f = R_t^w \Phi_t $ is the return of foreign bond that is consist by foreign risk-free return plus risk premium $\Phi_t$. \\
+
+Consumption bundle $C_t$ is made of the combination of domestic produced final good and foreign imported final goods.
+\[C_t = \left[\gamma_c ^{\frac{1}{\xi_c}} (C_t^H )^{\frac{\xi_c -1}{\xi_c}} +(1-\gamma_c) ^{\frac{1}{\xi_c}} (C_t^F )^{\frac{\xi_c -1}{\xi_c}}  \right]^{\frac{\xi_c}{\xi_c -1}} \] \\
+Cost minimization problem generates following conditions \\
+\begin{equation}
+C_t^H = \gamma_c \left(p_t  \right) ^{\xi_c} C_t,~~~
+\end{equation}
+
+\begin{equation}C_t^F = (1-\gamma_c ) \left(\frac{p_t^F}{p_t}  \right) ^{-\xi_c} C_t \end{equation}
+
+\begin{equation}p_t = \left[ \gamma_c +(1-\gamma_c) {p_t^F}^{{1-\xi_c}}  \right]  ^{\frac{1}{1-\xi_c}} \end{equation} \\
+where ~$p_t = \frac{P_t} {P_t^H},~p_t^F = \frac{P_t^F} {P_t^H}$ \\
+
+ First order condition with respect to $C_t, B_t, \text{and} F_t$ are simply obtained as below. 
+
+\begin{equation}
+\lambda_t = \frac{Z_t^c}{(C_t - \chi_c C_{t-1})}
+\end{equation}
+\begin{equation}
+\lambda_t = \beta E_t \left[ \lambda_{t+1} \frac{R_t}{\pi_{t+1}} \right]
+\label{eq_bond}\end{equation}
+\begin{equation}
+\lambda_t = \beta E_t \left[ \lambda_{t+1} \frac{R_t^w \Phi_t}{\pi_{t+1}} \frac{S_{t+1}}{S_t} \right]
+\label{eq_fbond}\end{equation}
+\[ \Phi_t = \text{exp} (-\zeta_1 (\bar{F}_t - \phi \bar{Y}^*)  - \zeta_2 (R_t^F - R^{F*} - (R_t - R^*)  + Z_t^{cp}  ) \]
+where $\lambda_t$ represents the shadow price of one unit of consumption bundle. 
+Keep in mind that  plugging (\ref{eq_bond}) into (\ref{eq_fbond}) generates uncovered interest-rate parity condition with risk premium. \\
+
+
+\subsection{Wage Rigidity}
+In order to introduce wage rigidity, we need to assume that each household $i \in [0, 1]$ supplies a unit of labor to "labor packer" through labor union, which gives monopolistic competitive power to household sector in the labor market. Then, each labor packer produces the unit of composite labor-good by combining individual household's labor supply $N_{i,t}, \in [0,1]$ as in (\ref{eq_labor}).
+\begin{equation}N_t^d = \left( \int_0^1 N_{i,t}^{\frac{\psi_w -1}{\psi_w}}   di\right)^{\frac{\psi_w}{\psi_w -1}} \label{eq_labor}\end{equation} 
+ 
+ The demand of individual household's labor supply is determined by labor packer's profit maximization problem. \\
+\begin{equation}N_{i,t} = \left( \frac{W_{i,t}} {W_t}\right)^{-\psi_w} N_t^d  \label{eq_l_demand}\end{equation}
+And simply the aggregate wage is obtained by plugging (\ref{eq_labor}) into (\ref{eq_l_demand})  
+\[W_t = \left( \int_0^1 W_{i,t}^{1-\psi_w} \right)^{\frac{1}{1-\psi_w}} \]
+
+Solving individual Household's wage maximazation problem below provides following first-order condition with respect to optimal wage $W_t^*$
+\[\max_{{W_{i,t}}}~E_t \sum_{s=t}^{\infty} (\beta \theta_w)^{s-t}\left[\lambda_{i,s} W_{i,t} N_{i,s} - \phi {Z_t^n}\frac{n_{i,s}^{1+\eta}}{1+\eta} \right] \]
+\[s.t~ N_{i,s} = \left( \frac{W_{i,t}} {W_s}\right)^{-\psi_w} N_s \] 
+
+
+\begin{equation} \Rightarrow E_t \sum_{s=t}^{\infty} (\beta \theta_w)^{s-t}\left[(1-\psi_w) \lambda_{i,s} \left(\frac{W_{i,t}}{W_{s}} \right)^{-\psi_w} N_s + \frac{\psi_w {Z_t^n}\phi}{W_{i,t}} \left( \frac{W_{i,t}}{W_s} \right)^{-\psi_w (1+\eta)}N_s^{1+\eta}\right]=0 \label{foc_labor1}\end{equation} \\
+
+
+To write down in Dynare, rewriting equation (\ref{foc_labor1}) by replacing detrended variables is required as below.
+
+\[0 = E_t \sum_{s=t}^{\infty} (\beta \theta_w)^{s-t}\left[\frac{(1-\psi_w)}{\psi_w}\frac{\bar{\lambda_t}} {Z_s }({Z_t \bar{W}_{i,t}^*}) \left(\frac{Z_t \bar{W}_{i,t}}{Z_s \bar{W}_{s}} \right)^{-\psi_w} N_s + {{Z_t^n}\phi} \left(\frac{Z_t \bar{W}_{i,t}}{Z_s \bar{W}_{s}} \right)^{-\psi_w (1+\eta)}N_s^{1+\eta}\right] \]
+
+$\text{where} ~\frac{1}{ ({C_s}-\chi_c {{C}_{s-1}})} = \frac{1}{ Z_t(\bar{C_s}-\chi_c {\bar{C}_{s-1}}/\bigtriangleup Z_t)} = \frac{\bar{\lambda_t}}{Z_t} $ \\
+
+
+%Rearranging above equation
+ \[
+ \Rightarrow \sum_{s=t}^{\infty} (\beta \theta_w)^{s-t}\left[\frac{{\bar{W}_{i,t}}{\bar{\lambda}_{i,s}} \frac{(1-\psi_w)}{\psi_w}  \left(\frac{\bar{W}_{i,t}}{\bar{W}_{s}} \right)^{-\psi_w} N_s} { \left({\prod_{i=1}^{s-t} \bigtriangleup Z_{t+i}}\right)^{1-\psi_w}} + {{Z_t^n}\phi} \left( \frac{\bar{W}_{i,t}}{\bar{W}_s \left({\prod_{i=1}^{s-t} \bigtriangleup Z_{t+i}}\right)} \right)^{-\psi_w (1+\eta)} N_s^{1+\eta}\right]=0  \] 
+
+
+\[\Rightarrow {\bar{W}_{i,t}}E_t \sum_{s=t}^{\infty} (\beta \theta_w)^{s-t}\left[{{\bar{\lambda}_{i,s}}\frac{(\psi_w-1)}{\psi_w}  \left(\frac{\bar{W}_{i,t}}{\bar{W}_{s}} \right)^{-\psi_w} N_s} { \left({\prod_{i=1}^{s-t} \bigtriangleup Z_{t+i}}\right)^{\psi_w-1}} \right] \]
+\begin{equation}= \qquad E_t \sum_{s=t}^{\infty} (\beta \theta_w)^{s-t}\left[{{Z_t^n}\phi} \left( \frac{\bar{W}_{i,t}}{\bar{W}_s \left({\prod_{i=1}^{s-t} \bigtriangleup Z_{t+i}}\right)} \right)^{-\psi_w (1+\eta)} N_s^{1+\eta}\right] \label{eq_labor_foc} \end{equation} 
+\\
+
+Let's split above equation into two parts in order to transform into  recursive form. Define above equations (\ref{eq_labor_foc}) as 
+ \begin{equation} {\bar{W}_{i,t}} X_t^{2w}=X_t^{1w}\end{equation}
+ 
+ \[X_{t}^{2w} =E_t \sum_{s=t}^{\infty} (\beta \theta_w)^{s-t}\left[{{\bar{\lambda}_{i,s}}\frac{(\psi_w-1)}{\psi_w}  \left(\frac{\bar{W}_{i,t}}{\bar{W}_{s}} \right)^{-\psi_w} N_s} { \left({\prod_{i=1}^{s-t} \bigtriangleup Z_{t+i}}\right)^{\psi_w -1}} \right]\]
+
+\[X_{t}^{2w} = E_t \sum_{s=t}^{\infty} (\beta \theta_w)^{s-t}\left[{{Z_t^n}\phi} \left( \frac{\bar{W}_{i,t}}{\bar{W}_s \left({\prod_{i=1}^{s-t} \bigtriangleup Z_{t+i}}\right)} \right)^{-\psi_w (1+\eta)} N_s^{1+\eta}\right]\]
+
+ Transform $X_{t}^{2w}$ into recursive form
+ 
+\[X_{t}^{2w} =\frac{(\psi_w-1)}{\psi_w} {\bar{W}_{i,t}}^{-\psi_w} E_t \sum_{s=t}^{\infty} (\beta \theta_w)^{s-t}\left[{{\bar{\lambda}_{i,s}}  \left({\bar{W}_{s}} \right)^{\psi_w} N_s} { \left({\prod_{i=1}^{s-t} \bigtriangleup Z_{t+i}}\right)^{\psi_w -1}} \right ] \]
+
+ \begin{equation}  X_{t}^{2w} =\frac{(\psi_w-1)}{\psi_w} {\bar{W}_{i,t}}^{-\psi_w} \bar{X}_{t+1}^{2w} \end{equation}
+
+\[ \bar{X}_{t}^{2w} =  E_t \sum_{s=t}^{\infty} (\beta \theta_w)^{s-t}\left[{{\bar{\lambda}_{i,s}}  \left({\bar{W}_{s}} \right)^{\psi_w} N_s} { \left({\prod_{i=1}^{s-t} \bigtriangleup Z_{t+i}}\right)^{\psi_w-1}} \right ]\]
+
+ \begin{equation} \Rightarrow \bar{X}_{t}^{2w} =  {{\bar{\lambda}_{i,t}}  \left({\bar{W}_{t}} \right)^{\psi_w} N_t} + \beta \theta_w { \left({\bigtriangleup Z_{t+1}}\right)^{\psi_w-1}} \bar{X}_{t+1}^{2w} \end{equation}
+
+Transform $X_t^{1w}$ into recursive form
+
+\[X_{t}^{1w} = E_t \sum_{s=t}^{\infty} (\beta \theta_w)^{s-t}\left[{{Z_t^n}\phi} \left( \frac{\bar{W}_{i,t}}{\bar{W}_s \left({\prod_{i=1}^{s-t} \bigtriangleup Z_{t+i}}\right)} \right)^{-\psi_w (1+\eta)} N_s^{1+\eta}\right]\]
+
+\[X_{t}^{1w} = {\bar{W}_{i,t}}^{-\psi_w (1+\eta)}{{Z_t^n}\phi} E_t \sum_{s=t}^{\infty} (\beta \theta_w)^{s-t}\left[ \left( {\bar{W}_s \left({\prod_{i=1}^{s-t} \bigtriangleup Z_{t+i}}\right)} \right)^{\psi_w (1+\eta)} N_s^{1+\eta}\right] \]
+
+\begin{equation} X_{t}^{1w} = {\bar{W}_{i,t}}^{-\psi_w (1+\eta)}{{Z_t^n}\phi} \bar{X}_{t}^{1w} \end{equation}
+
+\[ \bar{X}_{t}^{1w} = E_t \sum_{s=t}^{\infty} (\beta \theta_w)^{s-t}\left[ \left( {\bar{W}_s \left({\prod_{i=1}^{s-t} \bigtriangleup Z_{t+i}}\right)} \right)^{\psi_w (1+\eta)} N_s^{1+\eta}\right]\]
+
+\begin{equation} \Rightarrow \bar{X}_{t}^{1w} = W_t^{\psi_w(1+\eta)}  N_t^{1+\eta} + \beta \theta_w (\bigtriangleup Z_{t+1})^{\psi_w(1+\eta)} \bar{X}_{t+1}^{1w}\end{equation}
+
+ The evolution of aggregate wage is described as follows.
+\[W_t^{1-\psi_w}  =  \int_0^1 W_{i,t}^{1-\psi_w}  \]
+\[W_t^{1-\psi_w}  =  \theta_w W_{t-1} ^{1-\psi_w} + (1-\theta_w) {W_{t}^*}^{1-\psi_w}  \]
+
+\[\Rightarrow\bar{W}_t^{1-\psi_w}  =  \theta_w (\bar{W}_{t-1}/{\bigtriangleup Z_t}) ^{1-\psi_w} + (1-\theta_w) ({\bar{W}_{t}^*})^{1-\psi_w}  \]
+where $W_t^*$ represents optimal wage. \\
+
+
+
+\section{Entreprenuer}
+
+
+ As in Bernanke et al.(1999), entreprenuers are introduced to embed financial accelerator to embed  transmission channel of financial sector in New BOK-DSGE. As in Bernanke et al.(1999), entrepreneurs are risk neutral and exposed to probability of survival, $\gamma^e$ until the next period.
+ At the end of each period, entrepreneurs purchase capital $K_{t+1}$ that will be used in production next period by paying price of $Q_t$. The total payment of capital purchase is financed by his own net wealth as well as lending from financial intermediaries.
+ \[L_{t+1} = Q_tK_{t+1} - N_{t+1}^w\]
+  
+ Following in Bernanke et al.(1999) and Christensen and Dib(2007), we introduce external finance premium that is a function of net wealth over total cost of capital investment. \footnote{Bernanke et al. shows that given parameter values associated with the cost of monitoring the borrower, characteristics of the distribution of entrepreneurial return and the expected life span of firm, their contract implies an external finance premium $\psi(\cdot )$ that depends on the entrepreneur's leverage ratio. The underlying parameter values determine the elasticity of the external finance premium with respect to the firm leverage.(Christensen and Dib(2008))}
+  \begin{equation}
+E_t  R_{t+1}^E = \psi\left( \frac{NW_{t+1}}{Q_t K_{t+1}} \right) \frac{R_t}{\pi_{t+1}}
+  \end{equation}
+  where $\psi\left( \cdot \right) = \left( \frac{NW_{t+1}}{Q_t K_{t+1}} \right)^{-\kappa}$ and $\psi(\cdot)'<0~ \text{and}~ \psi(1)=1$.
+  
+  Marginal benefit of unit of capital is defined as (\ref{eq_rk})
+  \begin{equation}
+  R_t^k = E_t \left[\frac{r_{t+1}^k u_{t+1} - a(u_{t+1})/Z_{t+1}^{inv}+ (1-\delta)P_{t+1}^H Q_{t+1}}{Q_t P_t^H} \right]
+  \label{eq_rk}\end{equation}
+  where $a(u_t)= \gamma_1(u_t -1) + \frac{\gamma_2}{2}(u_t -1)^2$ represents the capital utilization cost function
+  
+   The purchase of capital is determined at the point where marginal product of capital is equal to marginal cost of capital \[E_t R_{t+1}^E = E_t \left[\frac{r_{t+1}^k u_{t+1} - a(u_{t+1})/Z_{t+1}^{inv}+ (1-\delta)P_{t+1}^H Q_{t+1}}{Q_t P_t^H} \right] \] 
+ Dynamics of net wealth 
+    \begin{equation}
+    N^w_{t+1} = Z_t^n \gamma_e\left(R_t^k P_{t-1} ^H Q_{t-1} K_t   - \psi\left(\frac{NW_t}{Q_{t-1} K_t} \right)\frac{R_{t-1} L_t}{\pi_t}  \right) + W_t^e
+    \end{equation}
+where $\gamma_e$ represents the probability of entrepreneur's survival in next periods. If he leave the economy, the net wealth is assumed to transfer to household. 
+~\\
+
+
+\section{Domestic Production Sector}
+\subsection{Final good producer}
+
+ Final good producer produces final goods by combining the set of individual intermediate goods and sell them in competitive market with price $P_t^H$
+ \begin{displaymath}  Y_t = \left(\int_{0}^{1}   y_{j,t}^{\frac{\psi}{\psi-1}} dj\right)^{\frac{\psi-1}{\psi}} \end{displaymath}
+
+ 
+ The demand of intermediate goods is obtained by solving cost minimization. 
+  \begin{displaymath}
+  \min_{y_{j,t}} P_{j,t}^H~ y_{j,t} + \lambda_t \left[ Y_t - \left(\int_{0}^{1}   y_{j,t}^{\frac{\psi}{\psi-1}} dj\right)^{\frac{\psi-1}{\psi}}   \right]  \end{displaymath}
+  \begin{displaymath}
+  y_{j,t} =  \left(\frac{P_{j,t}^H}{P_t^H} \right)^{-\psi} Y_t 
+ \end{displaymath}
+Aggregate domestic good price level is given as below
+  \begin{displaymath}
+  P_{t}^H =  \left(\int_0^1 (P_{j,t}^H)^{1-\psi} dj \right)^{\frac{1}{1-\psi}} 
+ \end{displaymath}
+
+ 
+ \subsection{Intermediate goods producer}
+
+ Intermediate good producer  $j \in [0,1]$ has Cobb-Douglas technology to produce intermediate good that is sold in monopolistic competitive
+\ item production technology 
+\begin{equation}
+y_{j,t} = e^{Z_t^a} k_{j,t}^\alpha \left(n_{j,t} e^{Z_t} \right)^{1-\alpha}
+\end{equation}
+where $Z_t^a = \rho_a Z_{t-1}^a + \epsilon_t^a$, $\bigtriangleup Z_t = \rho_{tr} \bigtriangleup Z_{t-1} + (1-\rho_{tr}) \bar{\gamma} + \epsilon_t$
+ Individual intermediate good producer solves cost minimization problem 
+ \begin{displaymath}
+\min_{n_{j,t}, k_{j,t}} ~~w_t n_{j,t} + r_t^k k_{j,t} ~+
+ \mu_t \left[ y_{j,t} -  e^{Z_t^a} k_{j,t}^\alpha \left(n_{j,t} e^{Z_t} \right)^{1-\alpha} \right]
+\end{displaymath}
+where $\mu_t$ is real marginal cost\footnote{Let's check what $\mu_t$ represents
+ \begin{eqnarray} w_t n_t + r_t^k k_t = k_t (\mu_t \alpha k_{j,t-1}^{\alpha-1}n_{j,t}^{1-\alpha})+ n_t (\mu_t (1-\alpha) k_{j,t-1}^{\alpha}n_{j,t}^{-\alpha}) = \mu_t y_{j,t} \end{eqnarray}   } and we obtain following two conditions
+ \begin{eqnarray} r_t^k &=& \mu_t e^{Z_t^a} \alpha k_{j,t-1}^{\alpha-1} (e^{Z_{t}} n_{j,t})^{1-\alpha} 
+\end{eqnarray}    
+ \begin{eqnarray}
+  w_t &=& \mu_t e^{Z_t^a} (1-\alpha) k_{j,t-1}^{\alpha}n_{j,t}^{-\alpha}(e^{Z_{t}})^{1-\alpha}
+\end{eqnarray}    
+ 
+
+ nominal stickiness : intermediate good producer can reset the price ($P_{j,t}^*$) with the probability of $(1-\theta)$ (see Calvo(1983)) 
+If we apply price indexation, we can increase the persistency of inflation
+ \begin{displaymath}
+\left\lbrace \begin{array}{ll}
+ \pi_{t-1}^\iota \pi_*^{1-\iota} P_{j,t-1} &:\textrm{prob of}  ~~\theta\\
+ P_{j,t}^* &:\textrm{prob of} ~~ 1-\theta
+\end{array} \right.
+ \end{displaymath}\\
+ where $\pi_*$ is target inflation
+ 
+
+ Solve below problem in order to find optimal domestic intermediate good price $P_{j,t}^*$
+ \begin{eqnarray*}
+\max_{P_{j,t}}& E_t \left[  \sum_{s=t}^{\infty}  \theta^{s-t}  \bigtriangleup_{s|t} \left(P_{j,t}  \prod_{l=t}^s \pi_{l-1}^\iota \pi_*^{1-\iota} y_{j,s} - P_s mc_s y_{j,s} \right)\right] \\
+&s.t ~~ y_{j,s}  = \left(  \frac{P_{j,t}\prod_{l=t}^s \pi_{l-1}^\iota \pi_*^{1-\iota}}{P_s} \right)^{-\psi} Y_s \end{eqnarray*}
+where $\bigtriangleup_{s|t} = \frac{u_{c,s}}{u_{c,t}}\frac{P_s}{P_t}=\frac{Z_t (\bar{C}_t - \chi_c \bar{C}_{t-1}/\bigtriangleup Z_{t-1})}{Z_s (\bar{C}_s - \chi_c \bar{C}_{s-1}/\bigtriangleup Z_{s-1})} \frac{P_t}{P_s}$
+\begin{itemize}
+ \item Rewriting the problem 
+ \begin{displaymath}
+\max_{P_{j,t}} E_t \left[  \sum_{s=t}^{\infty}  \theta^{s-t}  \bigtriangleup_{s|t} \left(P_{j,t}^{1-\psi} \left(  { \prod_{l=t}^s \pi_{l-1}^\iota \pi_*^{1-\iota}} \right)^{1-\psi} {P_s}^{\psi}  - {P_s}^{1+\psi} P_{j,t}^{-\psi}mc_s \left(  { \prod_{l=t}^s \pi_{l-1}^\iota \pi_*^{1-\iota}}\right)^{-\psi}  \right)Y_s\right] 
+\end{displaymath}
+
+\item First order condition 
+
+ \footnotesize \begin{eqnarray*}
+ 0&=& E_t \left[  \sum_{s=t}^{\infty}  \theta^{s-t}  \bigtriangleup_{s|t} \left( (1-\psi)P_{j,t}^{-\psi}  \left(  {\prod_{l=t}^s \pi_{l-1}^\iota \pi_*^{1-\iota} } \right)^{1-\psi} {P_s}^{\psi}  + \psi {P_s}^{1+\psi} mc_s {P_{j,t}}^{-\psi -1} \left(  {\prod_{l=t}^s \pi_{l-1}^\iota \pi_*^{1-\iota} } \right)^{-\psi}  \right)Y_s\right]  \\
+  0&=& E_t \left[  \sum_{s=t}^{\infty}  \theta^{s-t}  \frac{ Z_t}{Z_s}\bar{\bigtriangleup}_{s|t} \left( \frac{(1-\psi)}{\psi}P_{j,t}  \left(  {\prod_{l=t}^s \pi_{l-1}^\iota \pi_*^{1-\iota} } \right)^{1-\psi} {P_s}^{\psi}  + {P_s}^{1+\psi} mc_s \left(  {\prod_{l=t}^s \pi_{l-1}^\iota \pi_*^{1-\iota} } \right)^{-\psi}  \right)\bar{Y}_s\frac{ Z_s}{Z_t}\right]  
+\end{eqnarray*}
+
+where $\bar{\bigtriangleup}_{s|t} = \frac{(\bar{C}_t - \chi_c \bar{C}_{t-1}/\bigtriangleup Z_{t-1})}{ (\bar{C}_s - \chi_c \bar{C}_{s-1}/\bigtriangleup Z_{s-1})} \frac{P_t}{P_s}$
+
+\normalsize
+\begin{eqnarray*}
+ P_{j,t}^* &=& \frac{\psi}{\psi-1} \frac{ E_t \left[  \sum_{s=t}^{\infty}  \theta^{s-t}  \bar{\bigtriangleup}_{s|t}  P_s mc_s \left(  \prod_{l=t}^s \pi_{l-1}^{(-\psi)\iota} \pi_*^{{(-\psi)(1-\iota)}}  \right) {P_s^{\psi+1}}\bar{ Y}_s\right]}{  E_t \left[  \sum_{s=t}^{\infty}  \theta^{s-t}  \bar{\bigtriangleup}_{s|t}   \left( \prod_{l=t}^s \pi_{l-1}^{(1-\psi)\iota} \pi_*^{{1-\psi}(1-\iota) } \right) P_s^{\psi} \bar{ Y}_s \right]}  \\
+ \frac{P_{j,t}^*}{P_t} &=& \frac{\psi}{\psi-1} \frac  { E_t \left[  \sum_{s=t}^{\infty}  \theta^{s-t}  \bar{\bigtriangleup}_{s|t}  P_s mc_s \left(  \prod_{l=t}^s \pi_{l-1}^{(-\psi)\iota} \pi_*^{{(-\psi)(1-\iota)}}  \right) {{(\pi_{t+1}\pi_{t+2}\cdots \pi_{s})}^{\psi+1}}\bar{Y}_s\right]} {  E_t \left[  \sum_{s=t}^{\infty}  \theta^{s-t}  \bar{\bigtriangleup}_{s|t}  \left( \prod_{l=t}^s \pi_{l-1}^{(1-\psi)\iota} \pi_*^{{(1-\psi)}(1-\iota) }  \right){{(\pi_{t+1}\pi_{t+2}\cdots \pi_{s})}^{\psi}} \bar{Y}_s \right]} 
+\end{eqnarray*}
+
+\end{itemize}
+\normalsize
+\begin{itemize}
+\item To write in recursive form, let   $p_t^* = P_{j,t}^*/P_t$ ~~and  \\ 
+ \[X_t^1 = E_t \left[  \sum_{s=t}^{\infty}  \theta^{s-t}  \bar{\bigtriangleup}_{s|t}  P_s mc_s \left(  \prod_{l=t}^s \pi_{l-1}^{(-\psi)\iota} \pi_*^{{(-\psi)(1-\iota)}}  \right) {{(\pi_{t+1}\pi_{t+2}\cdots \pi_{s})}^{\psi+1}}\bar{Y}_s\right]\] \[X_t^2 =  E_t \left[  \sum_{s=t}^{\infty}  \theta^{s-t}  \bar{\bigtriangleup}_{s|t}  \left( \prod_{l=t}^s \pi_{l-1}^{(1-\psi)\iota} \pi_*^{{(1-\psi)}(1-\iota) }  \right){{(\pi_{t+1}\pi_{t+2}\cdots \pi_{s})}^{\psi}}\bar{Y}_s \right]\] \\
+
+ \item Write recursive form
+\begin{eqnarray*}  X_t^1 &=& E_t \left[  \sum_{s=t}^{\infty}  \theta^{s-t}  \bar{\bigtriangleup}_{s|t}  P_s mc_s \left(  \prod_{l=t}^s \pi_{l-1}^{(-\psi)\iota} \pi_*^{{(-\psi)(1-\iota)}}  \right) {{(\pi_{t+1}\pi_{t+2}\cdots \pi_{s})}^{\psi+1}}\bar{Y}_s\right] \\
+ \Rightarrow X_t^1 &=&  mc_t \bar{Y}_t + E_t \left[\theta \bar{\bigtriangleup}_{t+1|t}  \pi_{t+1}^{\psi +1} \pi_t^{(-\psi)\iota} \pi_*^{{(-\psi)}(1-\iota) } X_{t+1}^1 \right] \end{eqnarray*} 
+
+\begin{eqnarray*} X_t^2 &=& E_t \left[  \sum_{s=t}^{\infty}  \theta^{s-t}  \bar{\bigtriangleup}_{s|t}  P_s mc_s \left(  \prod_{l=t}^s \pi_{l-1}^{(1-\psi)\iota} \pi_*^{{(1-\psi)(1-\iota)}}  \right) {{(\pi_{t+1}\pi_{t+2}\cdots \pi_{s})}^{\psi}} \bar{Y}_s\right] \\
+\Rightarrow  X_t^2 &=&  \bar{Y}_t + E_t \left[\theta \bar{\bigtriangleup}_{t+1|t}  \pi_{t+1}^{\psi} \pi_t^{(1-\psi)\iota} \pi_*^{{(1-\psi)}(1-\iota) } X_{t+1}^2 \right]
+\end{eqnarray*} \\
+
+
+ \item Modify aggregate price 
+\begin{eqnarray*}
+P_{t}^{1-\psi} &=&  \int_0^1 P_{j,t}^{1-\psi} dj  \\
+  \Rightarrow P_{t}^{1-\psi} &=&  \int_0^{\theta} \left( \pi_{t-1}^\iota \pi_*^{1-\iota} P_{j,t-1} \right)^{1-\psi} dj + \int_{\theta}^1 {P_t^{*}}^{1-\psi} dj \\  
+  \Rightarrow P_{t}^{1-\psi} &=&  {\theta} {(\pi_{t-1}^\iota \pi_*^{1-\iota})}^{1-\psi} {P_{t-1}}^{1-\psi}  + (1-\theta)  {P_t^{*}}^{1-\psi}    \\
+    \Rightarrow~~~~~ 1 &=&  {\theta} {(\pi_{t-1}^\iota \pi_*^{1-\iota})}^{1-\psi} \pi_t^{\psi-1}  + (1-\theta)  {p_t^{*}}^{1-\psi}
+\end{eqnarray*} 
+
+\end{itemize}
+
+\subsection{Price Distortion}
+\normalsize
+
+Aggregate of $K_t$ and $N_t$ are described as
+$
+N_t = \int_0^1 n_{j,t} dj,   \quad K_t = \int_0^1 k_{j,t} dj
+$
+  and according to symmetric equilibrium,
+ $\frac{k_{j,t}}{n_{j,t}} = \frac{K_t}{N_t}$
+ Since firm $j$'s product is defined as $y_{j,t} = \left(\frac{P_{j,t}}{P_t} \right)^{-\psi} Y_t$, aggregate product across all firms is 
+ \begin{displaymath}
+\int_0^1 y_{j,t} dj = \int_0^1 \left(\frac{P_{j,t}}{P_t} \right)^{-\psi} Y_t dj 
+\end{displaymath}
+
+if all firm can optimize the price(or flexible price), aggregate demand is equal to aggregate output\\
+\begin{displaymath} 
+\int_0^1 y_{j,t} dj = \int_0^1 \left(\frac{P_{j,t}}{P_t} \right)^{-\psi} Y_t dj = Y_t \int_0^1 \left(\frac{P_{t}}{P_t} \right)^{-\psi} dj = Y_t \end{displaymath}
+
+
+ However, due to price dispersion, aggregate product from all firms $j \in [0,1]$ is greater than total amount of final consumption goods $Y_t$
+
+\begin{displaymath} Y_t = \frac{1}{
+\int_0^1 \left(\frac{P_{j,t}}{P_t} \right)^{-\psi} dj } f(K_{t-1}, N_t)
+\end{displaymath}
+
+derivation
+
+ \begin{displaymath}
+\int_0^1 y_{j,t} dj = \int_0^1 \left(\frac{P_{j,t}}{P_t} \right)^{-\psi} Y_t dj = \int_0^1 f(k_{j,t-1}, n_{j,t}) dj 
+\end{displaymath}
+\begin{displaymath}
+= \int_0^1 n_{j,t} f \left(\frac{k_{j,t-1}}{n_{j,t}, 1} \right) dj = f \left(\frac{K_{t-1}}{N_{t}}, 1 \right) \underbrace{\int_0^1 n_{j,t}  dj}  = f(K_{t-1}, N_t) 
+\end{displaymath}
+where \[
+s_t = \int_0^1 \left(\frac{P_{j,t}}{P_t} \right)^{-\psi} dj = \int_0^\theta \left(\frac{P_{j,t}}{P_t} \right)^{-\psi} dj + \int_\theta^1 \left(\frac{P_{j,t}}{P_t} \right)^{-\psi} dj 
+\]
+
+\[
+= \int_0^\theta \left(\frac{P_{j,t-1}}{P_t} \right)^{-\psi} dj + \int_\theta^1 \left(\frac{P_{j,t}}{P_t} \right)^{-\psi} dj = \int_0^\theta \left(\frac{P_{j,t-1}}{P_{t-1}} \right)^{-\psi} \left(\frac{P_{t-1}}{P_{t}} \right)^{-\psi} dj + \int_\theta^1 \left(\frac{P_{j,t}}{P_t} \right)^{-\psi} dj 
+\]
+\[
+= \int_0^\theta \left(\frac{P_{j,t-1}}{P_{t-1}} \right)^{-\psi} \left(\frac{1}{\pi_{t}} \right)^{-\psi} dj + \int_\theta^1 \left(\frac{P_{j,t}}{P_t} \right)^{-\psi} dj 
+= \theta s_{t-1} {\pi_{t}}^{\psi}  + (1-\theta) {p_{t}^*} ^{-\psi} \]
+
+~\\
+
+\subsection {Investment goods producer} 
+\normalsize
+ Composite investment goods consists of the composition of domestic produced investement good and foreign imported goods as below.
+\[I_t = \left[\gamma_i ^{\frac{1}{\xi_i}} (I_t^H )^{\frac{xi_i -1}{\xi_i}} +(1-\gamma_i) ^{\frac{1}{\xi_i}} (I_t^F )^{\frac{\xi_i -1}{\xi_i}}  \right] \]
+
+Cost minimization problem provides following three first order conditions \\
+\begin{equation}
+I_t^H = \gamma_c \left({p_t^{I}}  \right) ^{\xi_i} I_t
+\end{equation}
+
+\begin{equation} I_t^F = (1-\gamma_i ) \left(\frac{p_t^{I,F}}{p_t^I}  \right) ^{-\xi_i} I_t \end{equation}
+
+\begin{equation}p_t^I = \left[ \gamma_i  +(1-\gamma_i) {(p_t^{I,F})}^{{1-\xi_i}}  \right]  ^{\frac{1}{1-\xi_i}} \end{equation}
+
+
+
+
+%%%%%%%%%수입재 관련 %%%%%%%%%%%%%%%%%%%
+\section {Import and Export Sector}
+\subsection{Imported good producer}
+\normalsize 
+There are unit of intermediate foreign goods importer $h \in [0, 1]$ who sell intermediate foreign goods in monopolistic competitive market and final foreign goods producer who produce final foreign goods by combining intermediate foreign goods  
+
+ \begin{displaymath}  C_t^F = \left(\int_{0}^{1}   {C_{h,t}^F}^{\frac{\psi_f}{\psi_f-1}} dh\right)^{\frac{\psi_f-1}{\psi_f}} \end{displaymath}
+
+ \begin{displaymath}  I_t^F = \left(\int_{0}^{1}   {I_{h,t}^F}^{\frac{\psi_f}{\psi_f-1}} dh\right)^{\frac{\psi_f-1}{\psi_f}} \end{displaymath}
+
+By solving cost minimization problem, we obtain demand function of foreign imported consumption goods and foreign imported investment goods 
+
+  \begin{displaymath}
+  C_{h,t}^F =  \left(\frac{P_{h,t}^F}{P_t^F} \right)^{-\psi_f} C_t^F
+ \end{displaymath}
+   \begin{displaymath}
+  I_{h,t}^F =  \left(\frac{P_{h,t}^{I,F}}{P_t^{I,F}} \right)^{-\psi_f} I_t^F
+ \end{displaymath}
+ Aggregate price level of each goods are obtained.
+  \begin{displaymath}
+  P_{t}^F =  \left(\int_0^1 {(P_{h,t}^F)}^{1-\psi_f} dh \right)^{\frac{1}{1-\psi_f}} 
+ \end{displaymath}
+   \begin{displaymath}
+  P_{t}^{I,F} =  \left(\int_0^1 {(P_{h,t}^{I,F})}^{1-\psi_f} dh \right)^{\frac{1}{1-\psi_f}} 
+ \end{displaymath}
+
+In order to consider imperfect pass-through of exchange rate, we introduce the price rigidity in the decision of optimal price of foreign imported goods.
+
+ Thus, we assume that possibility of change of price is given to each individual importer of foreign intermediate goods such as in domestic intermediate goods producer. 
+
+ \begin{eqnarray*}
+\max_{P_{h,t}^F}& E_t \left[  \sum_{s=t}^{\infty}  \theta^{s-t}  \bigtriangleup_{s|t} \left(P_{h,t}^F  \prod_{l=t}^s {(\pi_{l-1}^F)}^\iota \pi_*^{1-\iota} - P_s^{*m} S_s R_s^m  \right)C_{h,s}^F \right] \\
+&s.t ~~ C_{h,s}^F  = \left(  \frac{P_{h,t}^F \prod_{l=t}^s {(\pi_{l-1}^F)}^\iota \pi_*^{1-\iota}}{P_s^F} \right)^{-\psi_f} C_s^F \end{eqnarray*}
+
+ \begin{eqnarray*}
+\max_{P_{h,t}^I}& E_t \left[  \sum_{s=t}^{\infty}  \theta^{s-t}  \bigtriangleup_{s|t} \left(P_{h,t}^I  \prod_{l=t}^s {(\pi_{l-1}^I)}^\iota \pi_*^{1-\iota} - P_s^{*m} S_s R_s^m \right)I_{h,s}^F\right] \\
+&s.t ~~ I_{h,s}^F  = \left(  \frac{P_{h,t}^{I,F} \prod_{l=t}^s {(\pi_{l-1}^{I,F})}^\iota \pi_*^{1-\iota}}{P_s^{I,F}} \right)^{-\psi_f} I_s^F \end{eqnarray*}
+
+ Rewriting the problem  \scriptsize
+ \begin{displaymath}
+ \max_{P_{h,t}^F} E_t \left[  \sum_{s=t}^{\infty}  \theta_f^{s-t}  \bigtriangleup_{s|t} \left({P_{h,t}^F}^{1-\psi_f} \left(  { \prod_{l=t}^s {(\pi_{l-1}^F)}^\iota \pi_*^{1-\iota}} \right)^{1-\psi_f} {P_s^F}^{\psi_f}  - P_s^{*m} S_s R_s^m {\left(\frac{P_{h,t}^F} {P_{s}^F}\right)}^{-\psi_f} \left(  { \prod_{l=t}^s {(\pi_{l-1}^F)}^\iota \pi_*^{1-\iota}}\right)^{-\psi}  \right)C_s^F\right] 
+\end{displaymath} 
+
+\normalsize 
+First order condition
+
+ \scriptsize \begin{eqnarray*}
+ 0=E_t \left[  \sum_{s=t}^{\infty}  \theta_f^{s-t}  \bigtriangleup_{s|t} \left( \frac{1-\psi_f}{\psi_f}{P_{h,t}^F}^{-\psi}  \left(  {\prod_{l=t}^s {(\pi_{l-1}^F)}^\iota \pi_*^{1-\iota} } \right)^{1-\psi_f} {P_s^F}^{\psi_f}  +  P_s^{*m} S_s R_s^m{P_s^F}^{\psi_f} {P_{h,t}^F}^{-\psi_f -1} \left(  {\prod_{l=t}^s {(\pi_{l-1}^F)}^\iota \pi_*^{1-\iota} } \right)^{-\psi_f}  \right)C_s^F\right]  
+\end{eqnarray*}
+
+\normalsize \begin{eqnarray*}
+ P_{h,t}^{*F} &=& \frac{\psi_f}{\psi_f-1} \frac{ E_t \left[  \sum_{s=t}^{\infty}  \theta_f^{s-t}  \bigtriangleup_{s|t} P_s^{*m} S_s R_s^m{P_s^F}^{\psi_f} \left(  {\prod_{l=t}^s {(\pi_{l-1}^F)}^\iota \pi_*^{1-\iota} } \right)^{-\psi_f}  C_s^F\right]}{  E_t \left[  \sum_{s=t}^{\infty}  \theta_f^{s-t}  \bigtriangleup_{s|t}    \left(  {\prod_{l=t}^s {(\pi_{l-1}^F)}^\iota \pi_*^{1-\iota} } \right)^{1-\psi_f} {P_s^F}^{\psi_f} C_s^F \right]}  \\~\\~\\ 
+ \frac{P_{h,t}^{*F}}{P_t} &=& \frac{\psi_f}{\psi_f-1} \frac{ E_t \left[  \sum_{s=t}^{\infty}  \theta_f^{s-t}  \bigtriangleup_{s|t}  \frac{P_s^{*m} S_s {P_s^{F}}^{\psi_f}}{P_t} R_s^m \left(  {\prod_{l=t}^s {(\pi_{l-1}^F)}^\iota \pi_*^{1-\iota} } \right)^{-\psi_f} C_s^F\right]} {  E_t \left[  \sum_{s=t}^{\infty}  \theta_f^{s-t}  \bigtriangleup_{s|t}  \left(  {\prod_{l=t}^s {(\pi_{l-1}^F)}^\iota \pi_*^{1-\iota} } \right)^{1-\psi_f}{P_s^{F}}^{\psi_f} C_s^F \right]}
+ \\~\\~\\ 
+ {p_{t}^{*F}} &=& \frac{\psi_f}{\psi_f-1} \frac{ E_t \left[  \sum_{s=t}^{\infty}  \theta_f^{s-t}  \bigtriangleup_{s|t}  \frac{P_s^{*m} S_s }{P_s^c} \frac{P_s^c}{P_s} \frac{P_s}{P_t} \left(\frac{ P_s^{F}}{P_t^F} \right)^{\psi_f} R_s^m \left(  {\prod_{l=t}^s {(\pi_{l-1}^F)}^\iota \pi_*^{1-\iota} } \right)^{-\psi_f} C_s^F\right]} {  E_t \left[  \sum_{s=t}^{\infty}  \theta_f^{s-t}  \bigtriangleup_{s|t} \left(\frac{ {P_s^{F}}}{P_t^F} \right)^{\psi_f} \left(  {\prod_{l=t}^s {(\pi_{l-1}^F)}^\iota \pi_*^{1-\iota} } \right)^{1-\psi_f} C_s^F \right]}
+\end{eqnarray*}
+
+\begin{eqnarray*}
+ {p_{t}^{*F}} &=& \frac{\psi_f}{\psi_f-1} \frac{ E_t \left[  \sum_{s=t}^{\infty}  \theta_f^{s-t}  \bigtriangleup_{s|t} q_s {p_s^c} (\pi_{t+1}^H \cdots \pi_{s}^H ) (\pi_{t+1}^F \cdots \pi_s^F)^{\psi_f} R_s^m \left(  {\prod_{l=t}^s {(\pi_{l-1}^F)}^\iota \pi_*^{1-\iota} } \right)^{-\psi_f} C_s^F\right]} {  E_t \left[  \sum_{s=t}^{\infty}  \theta_f^{s-t}  \bigtriangleup_{s|t} (\pi_{t+1}^F \cdots \pi_s^F)^{\psi_f} \left(  {\prod_{l=t}^s {(\pi_{l-1}^F)}^\iota \pi_*^{1-\iota} } \right)^{1-\psi_f} C_s^F \right]} 
+  \\~\\~\\ 
+ {p_{t}^{*F}} &=& \frac{\psi_f}{\psi_f-1} \frac{ E_t \left[  \sum_{s=t}^{\infty}  \theta_f^{s-t}  \bigtriangleup_{s|t} q_s {p_s^c} (\pi_{t+1}^H \cdots \pi_{s}^H ) (\pi_{t+1}^F \cdots \pi_s^F)^{\psi_f} R_s^m \left(  {\prod_{l=t}^s {(\pi_{l-1}^F)}^\iota \pi_*^{1-\iota} } \right)^{-\psi_f} \frac{Z_s}{Z_t}\bar{C}_s^F\right]} {  E_t \left[  \sum_{s=t}^{\infty}  \theta_f^{s-t}  \bigtriangleup_{s|t} (\pi_{t+1}^F \cdots \pi_s^F)^{\psi_f} \left(  {\prod_{l=t}^s {(\pi_{l-1}^F)}^\iota \pi_*^{1-\iota} } \right)^{1-\psi_f} \frac{Z_s}{Z_t}\bar{C}_s^F \right]}
+\end{eqnarray*}
+\\~
+
+\normalsize
+
+ To transform into a recursive form, let  
+ \begin{eqnarray*} X_t^{1,F}&=& E_t \left[  \sum_{s=t}^{\infty}  \theta_f^{s-t}  \bigtriangleup_{s|t} q_s {p_s^c}  R_s^m(\pi_{t+1}^H \cdots \pi_{s}^H ) (\pi_{t+1}^F \cdots \pi_s^F)^{\psi_f} \left(  {\prod_{l=t}^s {(\pi_{l-1}^F)}^\iota \pi_*^{1-\iota} } \right)^{-\psi_f} \frac{Z_s}{Z_t}\bar{C}_s^F\right]\\~\\ 
+ X_t^{2,F}&=&E_t \left[  \sum_{s=t}^{\infty}  \theta_f^{s-t}  \bigtriangleup_{s|t} (\pi_{t+1}^F \cdots \pi_s^F)^{\psi_f} \left(  {\prod_{l=t}^s {(\pi_{l-1}^F)}^\iota \pi_*^{1-\iota} } \right)^{1-\psi_f} \frac{Z_s}{Z_t}\bar{C}_s^F \right]
+ \end{eqnarray*} 
+ 
+  Write recursive form 
+\begin{eqnarray*}  X_t^{1,F}&=&E_t \left[  \sum_{s=t}^{\infty}  (\beta\theta_f)^{s-t}  \left(\frac{\bar{C}_t - \frac{\chi_c\bar{C}_{t-1}}{\bigtriangleup Z_t}}{\bar{C}_s -  \frac{\chi_c\bar{C}_{s-1}}  {\bigtriangleup Z_s}}\right) q_s {p_s^c}R_s^m  (\pi_{t+1}^H \cdots \pi_{s}^H ) (\pi_{t+1}^F \cdots \pi_s^F)^{\psi_f} \left(  {\prod_{l=t}^s {(\pi_{l-1}^F)}^\iota \pi_*^{1-\iota} } \right)^{-\psi_f}\bar{C}_s^F\right] \\~\\
+ \Rightarrow X_t^{1,F}&=&q_t p_t^c R_t^m  \bar{C}_t^F + E_t \left[\beta\theta_f \left(\frac{\bar{C}_t - \frac{\chi_c\bar{C}_{t-1}}{\bigtriangleup Z_t}}{\bar{C}_s -  \frac{\chi_c\bar{C}_{s-1}}  {\bigtriangleup Z_{t+1}}}\right) \pi_{t+1}^H {(\pi_{t+1}^F)}^{\psi_f} {(\pi_t^F)}^{-\psi\iota} (\pi_*)^{{-\psi}(1-\iota) }  X_{t+1}^{1,F} \right] \\~\\~\\ 
+X_t^{2,F}&=&E_t \left[  \sum_{s=t}^{\infty}  (\beta\theta_f)^{s-t}  \left(\frac{\bar{C}_t - \frac{\chi_c\bar{C}_{t-1}}{\bigtriangleup Z_t}}{\bar{C}_s -  \frac{\chi_c\bar{C}_{s-1}}  {\bigtriangleup Z_s}}\right) (\pi_{t+1}^F \cdots \pi_s^F)^{\psi_f} \left(  {\prod_{l=t}^s {(\pi_{l-1}^F)}^\iota \pi_*^{1-\iota} } \right)^{-\psi_f}\frac{Z_s}{Z_t}\bar{C}_s^F\right] \\~\\
+ \Rightarrow X_t^{2,F} &=&  \bar{C}_t^F + E_t \left[\beta\theta_f \left(\frac{\bar{C}_t - \frac{\chi_c\bar{C}_{t-1}}{\bigtriangleup Z_t}}{\bar{C}_s -  \frac{\chi_c\bar{C}_{s-1}}  {\bigtriangleup Z_s}}\right) {(\pi_{t+1}^F)}^{\psi_f} {(\pi_t^F)}^{-\psi_f\iota} (\pi_*)^{{-\psi_f}(1-\iota) }  X_{t+1}^{1,F} \right] \\~\\ 
+\end{eqnarray*} \\
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection {Export good producer}
+\begin{itemize}
+\item Composite investment goods
+\[X_t = \left[\gamma_x ^{\frac{1}{\xi_x}} (X_t^H )^{\frac{\xi_x -1}{\xi_x}} +(1-\gamma_x) ^{\frac{1}{\xi_x}} (X_t^F )^{\frac{\xi_x -1}{\xi_x}}  \right] \]
+
+
+cost minimization problem generates following conditions \\
+\begin{equation}
+X_t^H = \gamma_x \left(\frac{P_t^{X,H}}{P_t^X}  \right) ^{-\xi_x} X_t
+\end{equation}
+
+\begin{equation} X_t^F = (1-\gamma_x ) \left(\frac{P_t^{X,F}}{P_t^X}  \right) ^{-\xi_x} X_t \end{equation}
+
+\begin{equation}P_t^X = \left[ \gamma_x ({P_t^{X,H}})^{1-\xi_x} +(1-\gamma_x) {(P_t^{X,F})}^{{1-\xi_x}}  \right]  ^{\frac{1}{1-\xi_x}} \end{equation}
+\end{itemize}~\\
+
+
+\section {The Rest of the Model}
+
+  The rest of the model are defined as following.
+  \begin{itemize}
+  
+\item Monetary policy rule 
+\begin{equation} \frac{R_t}{{R}} = \left( \frac{R_{t-1}}{{R}} \right) ^{\rho_r} \left[ \left(\frac{\pi_t}{{\pi}^{ss}} \right)^{1+\rho_{\pi}} \left(\frac{\bar{Y}_t}{\bar{Y}} \right)^{\rho_{y}} \right]^{1-\rho_r}e^{\epsilon_t^r} \end{equation}
+
+\item Foreign VAR
+\begin{equation} \begin{bmatrix} Y_t^* \\ \pi_t^* \\ R_t^* \end{bmatrix} = 
+\begin{pmatrix}
+a_{11} & a_{12} & a_{13} \\
+a_{21} & a_{22} & a_{23} \\
+a_{31} & a_{32} & a_{33} 
+\end{pmatrix} 
+\begin{bmatrix} Y_{t-1}^* \\ \pi_{t-1}^* \\ R_{t-1}^* \end{bmatrix}
++ \begin{pmatrix}
+\sigma_{y^*} & 0 & 0 \\
+0 & \sigma_{\pi^*} & 0 \\
+0 & 0 & \sigma_{r^*} 
+\end{pmatrix} \begin{bmatrix}
+\epsilon_t^y \\
+\epsilon_t^{\pi} \\
+\epsilon_t^r 
+\end{bmatrix} \end{equation}
+
+\item Labor and capital market clearing condition
+\[K_t = \int_0^1 K_{j,t} dj, ~~~ N_t = \int_0^1 N_{j,t} dj\]
+
+\item Market clearing condition
+\[Y_t = C_t^H + I_t^H + X_t^H + adj_t\]
+\item Balance of payment 
+\[ S_t P_t^{*x}X_t + S_t R_{t-1}^F F_{t-1} = S_t F_t + S_t P_t^{*F}R_t^m (C_t^F + I_t^F + X_t^F)\]
+\begin{equation*}
+\Rightarrow \frac{S_t P_t^{*x}\bar{X}_t}{P_t^H} + \frac{S_t R_{t-1}^F \bar{F}_{t-1}}{P_t^H \bigtriangleup Z_t} = \frac{S_t \bar{F}_t}{P_t^H} + \frac{S_t P_t^{*F}R_t^m}{P_t^H} (\bar{C}_t^F + \bar{I}_t^F + \bar{X}_t^F)
+\end{equation*}
+\begin{equation*}
+\Rightarrow \frac{S_t P_t^{*F} P_t^{*x}P_t\bar{X}_t}{P_t^{*F} P_t P_t^H} + \frac{S_t R_{t-1}^F \bar{F}_{t-1}}{P_t^H \bigtriangleup Z_t} = \frac{S_t \bar{F}_t}{P_t^H} + \frac{S_t P_t^{*F}R_t^m P_t }{P_t P_t^H} (\bar{C}_t^F + \bar{I}_t^F + \bar{X}_t^F)
+\end{equation*}
+\begin{equation}
+\Rightarrow {q_t p_t^{*x}p_t\bar{X}_t} + \frac{S_t R_{t-1}^F \tilde{\bar{F}}_{t-1}p_t}{ \pi_t \bigtriangleup Z_t} = {S_t \tilde{\bar{F}}_t p_t} + {q_t p_t R_t^m }(\bar{C}_t^F + \bar{I}_t^F + \bar{X}_t^F)
+\end{equation} 
+where $\tilde{\bar{F}}_t =\frac{\bar{F}_t}{P_t}$
+  \end{itemize}
+
+
+\pagebreak
+\appendix{\LARGE \textbf{Appendix}}
+\section{The Steady State}
+
+
+\small
+%\subsection{Household sector}
+\begin{itemize}
+\item Optimal saving with domestic bonds
+\[\bigtriangleup Z\frac{Z^c}{(\bar{C} - \chi_c \bar{C}/{\bigtriangleup Z})} = \beta \left[ \frac{Z^c}{(\bar{C} - \chi_c \bar{C}/{\bigtriangleup Z})} \frac{R}{\pi} \right] \] 
+
+~\\~
+
+\item Wage rigidity
+ \[  X^{2w} =\frac{(\psi_w-1)}{\psi_w} {\bar{W}_{i}}^{-\psi_w} \bar{X}^{2w} \]
+
+$\text{where} ~\bar{\lambda}= \frac{1}{ (\bar{C}-\chi_c {\bar{C}}/\bigtriangleup Z)}$ 
+
+\[ \bar{X}^{2w} =  {{\bar{\lambda}_{i}}  \left({\bar{W}} \right)^{\psi_w} N} + \beta \theta_w { \left({\bigtriangleup Z}\right)^{\psi_w-1}} \bar{X}^{2w} \]
+  
+ \[  X^{1w} ={\bar{W}_{i}}^{-\psi_w(\eta +1)} \bar{X}^{1w} \]
+
+\[ \bar{X}^{2w} =  {{\bar{\lambda}_{i}}  \left({\bar{W}} \right)^{\psi_w} N} + \beta \theta_w { \left({\bigtriangleup Z}\right)^{\psi_w-1}} \bar{X}^{2w} \]
+  
+ \[W = \left(\frac{\psi_w}{\psi_w -1}\right) Z^w \frac{X^{1w}}{X^{2w}}\]
+ 
+ \[ W^{1-\psi_w} = \theta_w (W/\bigtriangleup Z)^{1-\psi_w} + (1-\theta_w)(W^*)^{1-\psi_w}\]
+ ~\\
+
+ \item Composite goods with price rigidity
+ \[C^H = \gamma_c (p)^{\xi_c} C  \]
+ 
+  \[C^F = (1-\gamma_c) \left(\frac{p}{p^F}\right)^{\xi_c} C  \]
+ 
+ \[p^{1-\xi_c} = \left(\gamma_c + (1-\gamma_c){p^F}^{1-\xi_c}\right) \]
+
+
+\begin{eqnarray*} X^1 &=&  mc \bar{Y} + \left[\theta \bar{\bigtriangleup}  {\pi^H}^{\psi +1} {\pi^H}^{(-\psi)\iota} \pi_*^{{(-\psi)}(1-\iota) } X_{t+1}^1 \right] \end{eqnarray*} 
+\\
+since $\bar{\bigtriangleup} = \beta \frac{\bar{C} - \chi_c \bar{C}/\bigtriangleup Z}{\bar{C} - \chi_c \bar{C}/\bigtriangleup Z}$ 
+
+\begin{eqnarray*} X^2 &=&  \bar{Y} +  \left[\theta \bar{\bigtriangleup}  {\pi^H}^{\psi} {\pi^H}{(1-\psi)\iota} \pi_*^{{(1-\psi)}(1-\iota) }  X^2 \right]
+\end{eqnarray*} 
+
+\[p^* = \frac{\psi}{\psi-1} \frac{X^1}{X^2} \]
+
+\begin{eqnarray*}
+1 &=&  {\theta} {({(\pi^H)}^\iota \pi_*^{1-\iota})}^{1-\psi} {(\pi^H)}^{\psi-1}  + (1-\theta)  {p^{*}}^{1-\psi}
+\end{eqnarray*} 
+
+\item Imported consumption goods sector with imperfect pass-through
+
+\begin{eqnarray*} X^{1F} &=&  mc^F \bar{C}^F + \left[\theta \bar{\bigtriangleup}  {(\pi^F)}^{\psi_f} {(\pi^F)}^{(-\psi_f)\iota} \pi_*^{{(-\psi_f)}(1-\iota) } \pi^H X^{1F} \right] \end{eqnarray*} 
+\\
+where  $mc^F  = q p(1+v(R -1))\pi^{*}$. 
+
+\begin{eqnarray*} X^{2F} &=&  C^F + \left[\theta_f \bar{\bigtriangleup}  {\pi^F}^{\psi_f} {\pi^F}^{(1-\psi_f)\iota} \pi_*^{(1-\psi_f)(1-\iota) } X^{2F} \right]
+\end{eqnarray*} 
+
+\[p^{*F} = \frac{\psi_f}{\psi_f-1} \frac{X^{1F}}{X^{2F}} \]
+\begin{equation} \Rightarrow \widehat{p}_t^{*F} = \widehat{X}_t^{1F} - \widehat{X}_t^{2F}\end{equation}
+
+\begin{eqnarray*}
+1 &=&  {\theta} {({(\pi^F)}^{\iota} \pi_*^{1-\iota})}^{1-\psi_f} {(\pi^F)}^{\psi_f-1}  + (1-\theta_f)  \left({\frac{p^{*F}} {\tilde{p}^{f}}}\right)^{1-\psi_f}
+\end{eqnarray*} 
+
+\[ \pi^F = \frac{\tilde{p}^{F}} {\tilde{p}^{F}} \pi^H Z^{\pi^F}\]
+
+
+\item Composite investment goods with price rigidity
+\[I^H = \gamma_i {\left(p^I \right)}^\xi_i I\]
+ 
+  \[I^F = (1-\gamma_i) \left(\frac{p^I}{p^{I,F}}\right)^{\xi_{i}} I  \]
+ 
+ 
+ \[{p^I}^{1-\xi_i} = \left(\gamma_i + (1-\gamma_i){p^{I,F}}^{1-\xi_i}\right) \]
+
+\begin{eqnarray*} X^{1I^F} &=&  mc^F \bar{I}^F + \left[\theta_f \bar{\bigtriangleup}  {(\pi^{I^F})}^{\psi_f} {(\pi^{I^F})}^{(-\psi_f)\iota} \pi_*^{{(-\psi_f)}(1-\iota) } \pi^H X^{1I^F} \right] \end{eqnarray*} 
+
+
+\begin{eqnarray*} X^{2I^F} &=&  I^F + \left[\theta_f \bar{\bigtriangleup}  {\pi^{I^F}}^{\psi_f} {\pi^{I^F}}^{(1-\psi_f)\iota} \pi_*^{(1-\psi_f)(1-\iota) } X^{2I^F} \right]
+\end{eqnarray*} 
+\[p^{*I^F} = \frac{\psi_f}{\psi_f-1} \frac{X^{1I^F}}{X^{2I^F}} \]
+
+\begin{eqnarray*}
+1 &=&  {\theta_f} {\left({(\pi^{I^F})}^{\iota} \pi_*^{1-\iota}\right)}^{1-\psi_f} {(\pi^{I^F})}^{\psi_f-1}  + (1-\theta_f)  \left({\frac{p^{*I^F}} {\tilde{p}^{I^F}}}\right)^{1-\psi_f}
+\end{eqnarray*} 
+
+\[ \pi^F = \frac{\tilde{p}^{F}} {\tilde{p}^{F}} \pi^H Z^{\pi^F}\]
+
+\item Entreprenuer sector with financial accelerator
+\[ R^e =  \left[\frac{(r^k u - a(u)/Z^{inv}+ (1-\delta)Q)\pi^H}{Q} \right]\]
+  where $a(u)= \gamma_1(u -1) + \frac{\gamma_2}{2}(u -1)^2$
+  
+    \[ N^w = Z^n \gamma_e\left(R^k Q K/ {\bigtriangleup Z}   - \left(\frac{N^w}{Q K} \right)^{-\kappa} R L /\pi^H (QK/{\bigtriangleup Z} - N^w/{\bigtriangleup Z})+ W^e \right)  \]  
+    
+    \[R^e =\left(\frac{N^w}{Q K} \right)^{-\kappa} R/\pi \]
+    
+    \[Z^{inv} \bar{I} \left(1-\frac{\chi_k}{2} \left(\frac{\bar{I} {\bigtriangleup Z}}{\bar{I}} -\gamma^g \right)^2  \right )= \bar{K} -(1-\delta) \bar{K}/{\bigtriangleup Z} \]
+    
+    \[r^k = \frac{\gamma_1 + \gamma_2(u -1)}{Z^{inv}}\]
+    
+    \[1 = Q Z^{inv}\left(1-\frac{\chi_k}{2} \left(\frac{\bar{I} {\bigtriangleup Z}}{\bar{I}} -\gamma^g\right)^2 -\chi_k\left(\frac{\bar{I} {\bigtriangleup Z}}{\bar{I} } - \gamma^g  \right)\frac{\bar{I} {\bigtriangleup Z}}{\bar{I} }  \right)\]
+    
+    \[  + \left[ \beta Q\frac{1}{\bigtriangleup Z}\frac{\bar{C}-\chi_c \bar{C}/{\bigtriangleup Z}}{\bar{C}-\chi_c \bar{C}/{\bigtriangleup Z}}\chi_k \left(\frac{\bar{I} {\bigtriangleup Z}}{\bar{I} } - \gamma^g  \right) \left(\frac{\bar{I} {\bigtriangleup Z}}{\bar{I} } \right)^2 \right]\]
+
+\[\frac{\bar{W} (1+v(R -1))}{r^k} = \frac{1-\alpha_k}{\alpha_k} \frac{\bar{K} u}{N } \frac{1}{{\bigtriangleup Z}}\]
+
+
+\[ MC = \frac{1}{Z^a}\left(\bar{W}(1+v(R-1))  \right)^{1-\alpha_k} {r_t^k}^\alpha_k(1-\alpha_k)^{\alpha_k -1}\alpha_k ^{-\alpha_k}\]
+
+\[\bar{Y} = Z^a (\bar{K}u)^{\alpha_k}N^{1-\alpha_k} {\bigtriangleup Z}^{-\alpha_k}\]
+
+\[\bar{Y} = \bar{C}^H + \bar{I}^H + \bar{X}^H + \frac{\chi_k}{2}\left( \frac{\bar{I} {\bigtriangleup Z}}{\bar{I}} -\gamma^g \right)^2\bar{I}+ \bar{G} + \frac{\left(\gamma_1(u -1) + \frac{\gamma_2}{2}(u -1)^2\right)}{Z^{inv}} \bar{K}\]
+
+
+\[\bar{G} = Z^g g\bar{Y}\left( \frac{\bar{Y}}{\bar{Y}} \right)^{-\psi_g}\]
+
+\[ \frac{R}{{R}} = \left( \frac{R}{{R}} \right) ^{\rho_r} \left[ \left(\frac{\pi}{{\pi}^{ss}} \right)^{1+\rho_{\pi}} \left(\frac{\bar{Y}}{\bar{Y}} \right)^{\rho_{y}} \right]^{1-\rho_r}e^{\epsilon_t^r} \]
+
+\item Export sector
+\[X = Z^x \left(\frac{X} {\bigtriangleup Z} \right)^{-\psi_x}\left[\left( \frac{(1+v(R-1))P^{*x}}{S} \right)^{-\psi_{px}}Y^* \right]^{1-\psi_x}\]
+
+\[\bar{X}^H = \gamma_x (p^x)^{\eta_x} \bar{X}\]
+
+\[\bar{X}^F = (1-\gamma_x) \left( \frac{p^{x}}{q p} \right)^{\eta_x}\bar{X}\]
+
+\[ p^x = \left(\gamma_x + (1-\gamma_x)(q p)^{1-\eta_x}\right)^{\frac{1}{1-\eta_x}}\]
+
+\[\pi^x = \frac{p^x}{p^x}\pi^H\]
+
+\[ q = \frac{S P^{*F}} {P}  \]
+\[
+ {q p^{*x}p\bar{X}} + \frac{S R^F \tilde{\bar{F}}p}{ \pi \bigtriangleup Z} = {S \tilde{\bar{F}} p} + {q p R^m }(\bar{C}^F + \bar{I}^F + \bar{X}^F)
+\]
+
+\item Foreign VAR
+\begin{equation} \begin{bmatrix} \widehat{Y}_t^* \\ \widehat{\pi}_t^* \\ \widehat{R}_t^* \end{bmatrix} = 
+\begin{pmatrix}
+a_{11} & a_{12} & a_{13} \\
+a_{21} & a_{22} & a_{23} \\
+a_{31} & a_{32} & a_{33} 
+\end{pmatrix} 
+\begin{bmatrix} \widehat{Y}_{t-1}^* \\ \widehat{\pi}_{t-1}^* \\ \widehat{R}_{t-1}^* \end{bmatrix}
++ \begin{pmatrix}
+\sigma_{y^*} & 0 & 0 \\
+0 & \sigma_{\pi^*} & 0 \\
+0 & 0 & \sigma_{r^*} 
+\end{pmatrix} \begin{bmatrix}
+\epsilon_t^y \\
+\epsilon_t^{\pi} \\
+\epsilon_t^r 
+\end{bmatrix} \end{equation}
+
+
+\end{itemize}
+\pagebreak
+
+\section{Log-linear Approximation}
+\small
+%\subsection{Household sector}
+\begin{itemize}
+\item Optimal saving with domestic bonds
+\[\bigtriangleup Z_{t+1}\frac{Z_t^c}{(\bar{C}_t - \chi_c \bar{C}_{t-1}/{\bigtriangleup Z_t})} = \beta E_t \left[ \frac{Z_{t+1}^c}{(\bar{C}_{t+1} - \chi_c \bar{C}_{t}/{\bigtriangleup Z_{t+1}})} \frac{R_t}{\pi_{t+1}} \right] \] 
+\begin{equation}
+\Rightarrow \widehat{Z_t}^c + \widehat{\bigtriangleup Z}_{t+1} + \frac{\left({-\widehat{C_t} + \frac{\chi_c }{\bigtriangleup Z} \widehat{C}_{t-1} -\frac{\chi_c}{\bigtriangleup Z} \widehat{\bigtriangleup Z}_t}\right)}{1-\chi_c / \bigtriangleup Z}  = \frac{\left({-\widehat{C}_{t+1} + \frac{\chi_c }{\bigtriangleup Z} \widehat{C_{t}} -\frac{\chi_c}{\bigtriangleup Z} \widehat{\bigtriangleup Z}_{t+1}}\right)}{1-\chi_c / \bigtriangleup Z}  + \widehat{R}_t - \widehat{\pi}_{t+1}\end{equation}
+~\\~
+
+\item Wage rigidity
+ \[  X_{t}^{2w} =\frac{(\psi_w-1)}{\psi_w} {\bar{W}_{i,t}}^{-\psi_w} \bar{X}_t^{2w} \]
+  \begin{equation} \Rightarrow \widehat{X}_{t}^{2w} = \widehat{Z_t}^w - {\psi_w}{\widehat{\bar{W}}_{i,t}} +  \widehat{\bar{X}}_t^{2w} \end{equation}
+$\text{where} ~\bar{\lambda_t}= \frac{1}{ (\bar{C_s}-\chi_c {\bar{C}_{t-1}}/\bigtriangleup Z_t)}$ 
+
+\[ \bar{X}_t^{2w} =  {{\bar{\lambda}_{i,t}}  \left({\bar{W}_{t}} \right)^{\psi_w} N_t} + \beta \theta_w { \left({\bigtriangleup Z_{t+1}}\right)^{\psi_w-1}} \bar{X}_{t+1}^{2w} \]
+ \begin{equation} \Rightarrow {\bar{X}^{2w}}\widehat{\bar{X}}_t^{2w} = 
+  ({{\bar{\lambda}}  {\bar{W}} ^{\psi_w} N})({{\widehat{\bar{\lambda}}_{i,t}}  +\psi_w {\widehat{\bar{W}}_{t}} + \widehat{ N}_t)} + (\beta \theta_w  (\bigtriangleup Z)^{\psi_w -1} \bar{X}^{2w} )( (\psi_w -1)\widehat{\bigtriangleup Z}_{t+1} + \widehat{\bar{X}}_{t+1}^{2w})  \end{equation}
+  
+ \[  X_{t}^{1w} ={\bar{W}_{i,t}}^{-\psi_w(\eta +1)} \bar{X}_t^{1w} \]
+  \begin{equation} \Rightarrow \widehat{X}_{t}^{1w} = - {\psi_w(\eta+1)}{\widehat{\bar{W}}_{i,t}} +  \widehat{\bar{X}}_t^{1w} \end{equation}
+  
+\[ \bar{X}_t^{2w} =  {{\bar{\lambda}_{i,t}}  \left({\bar{W}_{t}} \right)^{\psi_w} N_t} + \beta \theta_w { \left({\bigtriangleup Z_{t+1}}\right)^{\psi_w-1}} \bar{X}_{t+1}^{2w} \]
+ \begin{equation} \Rightarrow {\bar{X}^{2w}}\widehat{\bar{X}}_t^{2w} = 
+  ({{\bar{\lambda}}  {\bar{W}} ^{\psi_w} N})({{\widehat{\bar{\lambda}}_{i,t}}  +\psi_w {\widehat{\bar{W}}_{t}} + \widehat{ N}_t)} + (\beta \theta_w  (\bigtriangleup Z)^{\psi_w -1} \bar{X}^{2w} )( (\psi_w -1)\widehat{\bigtriangleup Z}_{t+1} + \widehat{\bar{X}}_{t+1}^{2w})  \end{equation}
+  
+ \[W_t = \left(\frac{\psi_w}{\psi_w -1}\right) Z_t^w \frac{X_t^{1w}}{X_t^{2w}}\]
+ \begin{equation}\Rightarrow  \widehat{W}_t =  \widehat{Z}_t^w + \widehat{X}_t^{1w} - \widehat{X}_t^{2w} \end{equation}
+ 
+ \[ W_t^{1-\psi_w} = \theta_w (W_{t-1}/\bigtriangleup Z_{t})^{1-\psi_w} + (1-\theta_w)(W_t^*)^{1-\psi_w}\]
+ \begin{equation} \Rightarrow (1-\psi_w) W^{1-\psi_w} \widehat{W}_t = \theta_w (W/\bigtriangleup Z)^{1-\psi_w}\left( (1-\psi_w)\widehat{W}_{t-1}  - (1-\psi_w)\widehat{\bigtriangleup Z}_t  \right) + (1-\theta){W^*}^{1-\psi_w}(1-\psi_w)\widehat{W_t^*} \end{equation}
+ ~\\
+
+ \item Composite goods with price rigidity
+ \[C_t^H = \gamma_c (p_t)^{\xi_c} C_t  \]
+ \begin{equation}
+ \Rightarrow \widehat{C}_t^H = \xi_c \widehat{p}_t + \widehat{C}_t
+ \end{equation}
+ 
+  \[C_t^F = (1-\gamma_c) \left(\frac{p_t}{p^F}\right)^{\xi_c} C_t  \]
+ \begin{equation}
+ \Rightarrow \widehat{C}_t^F = \xi_c (\widehat{p}_t -\widehat{p}^F) + \widehat{C}_t
+ \end{equation}
+ 
+ \[p_t^{1-\xi_c} = \left(\gamma_c + (1-\gamma_c){p^F}^{1-\xi_c}\right) \]
+ \begin{equation}
+ \Rightarrow (1-\xi_c){p^{1-\xi_c}} \widehat{p}_t = (1-\gamma_c){p^F}^{1-\xi_c} (1-\xi_c)\widehat{p}_t^F
+ \end{equation}
+
+
+\begin{eqnarray*} X_t^1 &=&  mc_t \bar{Y}_t + E_t \left[\theta \bar{\bigtriangleup}_{t+1|t}  {\pi^H}_{t+1}^{\psi +1} {\pi^H}_t^{(-\psi)\iota} \pi_*^{{(-\psi)}(1-\iota) } X_{t+1}^1 \right] \end{eqnarray*} 
+\begin{equation}\Rightarrow  \widehat{X}_t^1 = \frac{ mc~ Y} {X^1} (\widehat{mc}_t + \widehat{Y}_t) + \theta \beta {\pi^H}^{\psi(1-\iota)+1} \pi_*^{-\psi + \psi\iota} \left(\widehat{\bar{\bigtriangleup}}_{t+1|t} + (\psi +1 )\widehat{{\pi}}^H_{t+1}-\psi\iota \widehat{\pi}_t + \widehat{X}_{t+1}^1 \right)\end{equation}
+\\
+since $\bar{\bigtriangleup}_{t+1|t} = \beta \frac{\bar{C}_{t} - \chi_c \bar{C}_{t-1}/\bigtriangleup Z_{t-1}}{\bar{C}_{t+1} - \chi_c \bar{C}_{t}/\bigtriangleup Z_{t}}$ 
+
+\begin{eqnarray*} X_t^2 &=&  \bar{Y}_t + E_t \left[\theta \bar{\bigtriangleup}_{t+1|t}  {\pi_{t+1}^H}^{\psi} {\pi_{t+1}^H}{(1-\psi)\iota} \pi_*^{{(1-\psi)}(1-\iota) }  X_{t+1}^2 \right]
+\end{eqnarray*} 
+\begin{equation}\Rightarrow \widehat{X}_t^2 =  \frac{  Y} {X^2} \widehat{Y}_t + \theta \beta \pi^{\psi+(1-\psi)\iota} \pi_*^{(1-\psi)(1-\iota)} \left(\widehat{\bar{\bigtriangleup}}_{t+1|t} + \psi\widehat{\pi}_{t+1}^H + (1-\psi)\iota \widehat{\pi}_t^H + \widehat{X}_{t+1}^2 \right)\end{equation}
+
+\[p_t^* = \frac{\psi}{\psi-1} \frac{X_t^1}{X_t^2} \]
+\begin{equation} \Rightarrow \widehat{p}_t^* = \widehat{X}_t^1 - \widehat{X}_t^2\end{equation}
+
+\begin{eqnarray*}
+1 &=&  {\theta} {({(\pi_{t-1}^H)}^\iota \pi_*^{1-\iota})}^{1-\psi} {(\pi_t^H)}^{\psi-1}  + (1-\theta)  {p_t^{*}}^{1-\psi}
+\end{eqnarray*} 
+\begin{equation} \Rightarrow 0 = {\theta} {{(\pi^H)}^{(1-\iota)(\psi -1)}\pi_*^{(1-\iota)(1-\psi)}} \left[\iota(1-\psi)\widehat{\pi}_{t-1}^H + (\psi-1) \widehat{\pi}_{t-1}^H\right]  + (1-\theta)  {p^{*}}^{1-\psi}(1-\psi)\widehat{p}_t^* \end{equation}
+
+~\\
+\item Imported consumption goods sector with imperfect pass-through
+
+\begin{eqnarray*} X_t^{1F} &=&  mc_t^F \bar{C}_t^F + E_t \left[\theta \bar{\bigtriangleup}_{t+1|t}  {(\pi_{t+1}^F)}^{\psi_f} {(\pi_t^F)}^{(-\psi_f)\iota} \pi_*^{{(-\psi_f)}(1-\iota) } \pi_{t+1}^H X_{t+1}^{1F} \right] \end{eqnarray*} 
+\begin{equation}\Rightarrow  \widehat{X}_t^{1F} = \frac{ mc^F~ \bar{C}^F} {X^1} (\widehat{mc}_t^F + \widehat{C}_t^F) + \theta \beta {(\pi^F)}^{(\psi_f - \psi_f\iota)} \pi_*^{-\psi + \psi\iota} \pi^H \left(\widehat{\bar{\bigtriangleup}}_{t+1|t} + \psi\widehat{{\pi}}^F_{t+1}-\psi_f\iota \widehat{\pi}_t^F + \widehat{\pi}_t^H + \widehat{X}_{t+1}^{1F} \right)\end{equation}
+\\
+where  $mc_t^F  = q_t p_t(1+v(R_t -1))\pi_t^{*}$, $\widehat{mc}_t^F = \frac{qp\pi^*}{mc^F}{(\widehat{q}_t + \widehat{p}_t + \widehat{\pi}_t^*) +\frac{qpvR\pi^*}{mc^F} (\widehat{q}_t + \widehat{p}_t + \widehat{R}_t + \widehat{\pi}_t^*) - \frac{vqp\pi^*}{mc^F}(\widehat{q}_t + \widehat{p}_t + \widehat{\pi}_t^*)}$ 
+
+\begin{eqnarray*} X_t^{2F} &=&  C_t^F + E_t \left[\theta_f \bar{\bigtriangleup}_{t+1|t}  {\pi_{t+1}^F}^{\psi_f} {\pi_{t}^F}^{(1-\psi_f)\iota} \pi_*^{(1-\psi_f)(1-\iota) } X_{t+1}^{2F} \right]
+\end{eqnarray*} 
+\begin{equation}\Rightarrow \widehat{X}_t^{2F} =  \frac{ C^F} {X^2} \widehat{C}_t^F + \theta_f \beta {\pi^F}^{\psi+(1-\psi)\iota} \pi_*^{(1-\psi)(1-\iota)} \left(\widehat{\bar{\bigtriangleup}}_{t+1|t} + \psi_f\widehat{\pi}_{t+1}^F + (1-\psi_f)\iota \widehat{\pi}_t^F + \widehat{X}_{t+1}^{2F} \right)\end{equation}
+
+\[p_t^{*F} = \frac{\psi_f}{\psi_f-1} \frac{X_t^{1F}}{X_t^{2F}} \]
+\begin{equation} \Rightarrow \widehat{p}_t^{*F} = \widehat{X}_t^{1F} - \widehat{X}_t^{2F}\end{equation}
+
+\begin{eqnarray*}
+1 &=&  {\theta} {({(\pi_{t-1}^F)}^{\iota} \pi_*^{1-\iota})}^{1-\psi_f} {(\pi_t^F)}^{\psi_f-1}  + (1-\theta_f)  \left({\frac{p_t^{*F}} {\tilde{p}_t^{f}}}\right)^{1-\psi_f}
+\end{eqnarray*} 
+\begin{equation} \Rightarrow 0 = {\theta} {{(\pi^F)}^{(1-\iota)(\psi -1)}\pi_*^{(1-\iota)(1-\psi)}} \left[\iota(1-\psi)\widehat{\pi}_{t-1}^F + (\psi-1) \widehat{\pi}_{t}^F\right]   + (1-\theta_f)  \left(\frac{{p^{*F}}}{\tilde{p}_t^{F}}\right)^{1-\psi_f}(1-\psi_f)\left(\widehat{p}_t^{*F} - \tilde{p}_t^{F}\right) \end{equation}
+where  ${p}_t^{*F} = \frac{P_t^{*F}}{P_t^H}$, and  $\tilde{p}_t^F = \frac{P_t^F}{P_t^H}$
+
+\[ \pi_t^F = \frac{\tilde{p}_t^{F}} {\tilde{p}_{t-1}^{F}} \pi_t^H Z_t^{\pi^F}\]
+\begin{equation}
+\widehat{\pi}_t^F = \widehat{\tilde{p}}_t^{F} -\widehat{\tilde{p}}_{t-1}^{F} + \widehat{\pi}_t^H + \widehat{Z}_t^{\pi^F}
+\end{equation}
+\par
+~\\
+
+\item Composite investment goods with price rigidity
+\[I_t^H = \gamma_i {\left(p_t^I \right)}^\xi_i I_t\]
+ \begin{equation}
+ \Rightarrow \widehat{I}_t^H = \xi_i \widehat{p}_t^I + \widehat{I}_t
+ \end{equation}
+ 
+  \[I_t^F = (1-\gamma_i) \left(\frac{p_t^I}{p^{I,F}}\right)^{\xi_{i}} I_t  \]
+ \begin{equation}
+ \Rightarrow \widehat{I}_t^F = \xi_i (\widehat{p}_t^I -\widehat{p}^{I,F}) + \widehat{I}_t
+ \end{equation}
+ 
+ \[{p_t^I}^{1-\xi_i} = \left(\gamma_i + (1-\gamma_i){p^{I,F}}^{1-\xi_i}\right) \]
+ \begin{equation}
+ \Rightarrow (1-\xi_c){{p^I}^{1-\xi_c}} \widehat{p}_t^I = (1-\gamma_i){p^{I,F}}^{1-\xi_i} (1-\xi_i)\widehat{p}_t^{I,F}
+ \end{equation}
+
+\begin{eqnarray*} X_{t}^{1I^F} &=&  mc_t^F \bar{I}_t^F + E_t \left[\theta_f \bar{\bigtriangleup}_{t+1|t}  {(\pi_{t+1}^{I^F})}^{\psi_f} {(\pi_t^{I^F})}^{(-\psi_f)\iota} \pi_*^{{(-\psi_f)}(1-\iota) } \pi_{t+1}^H X_{t+1}^{1I^F} \right] \end{eqnarray*} 
+\begin{equation}\Rightarrow  \widehat{X}_t^{1I^F} = \frac{ mc^F~ \bar{I}^F} {X^{1I^F}} (\widehat{mc}_t^F + \widehat{I}_t^F) + \theta_f \beta {(\pi^{I^F})}^{(\psi_f - \psi_f\iota)} \pi_*^{-\psi + \psi\iota} \pi^H \left(\widehat{\bar{\bigtriangleup}}_{t+1|t} + \psi_f\widehat{{\pi}}_{t+1}^{I^F}-\psi_f\iota \widehat{\pi}_t^{I^F} + \widehat{\pi}_t^H + \widehat{X}_{t+1}^{1I^F} \right)\end{equation}
+\\
+where  $\widehat{mc}_t^F = \frac{qp\pi^*}{mc^F}{(\widehat{q}_t + \widehat{p}_t + \widehat{\pi}_t^*) +\frac{qpvR\pi^*}{mc^F} (\widehat{q}_t + \widehat{p}_t + \widehat{R}_t + \widehat{\pi}_t^*) - \frac{vqp\pi^*}{mc^F}(\widehat{q}_t + \widehat{p}_t + \widehat{\pi}_t^*)}$ 
+
+\begin{eqnarray*} X_t^{2I^F} &=&  I_t^F + E_t \left[\theta_f \bar{\bigtriangleup}_{t+1|t}  {\pi_{t+1}^{I^F}}^{\psi_f} {\pi_{t}^{I^F}}^{(1-\psi_f)\iota} \pi_*^{(1-\psi_f)(1-\iota) } X_{t+1}^{2I^F} \right]
+\end{eqnarray*} 
+\begin{equation}\Rightarrow \widehat{X}_t^{2I^F} =  \frac{ I^F} {X^{2I^F}} \widehat{I}_t^F + \theta_f \beta {\pi^{I^F}}^{\psi_f+(1-\psi_f)\iota} \pi_*^{(1-\psi_f)(1-\iota)} \left(\widehat{\bar{\bigtriangleup}}_{t+1|t} + \psi_f\widehat{\pi}_{t+1}^{I^F} + (1-\psi_f)\iota \widehat{\pi}_t^{I^F} + \widehat{X}_{t+1}^{2I^F }\right)\end{equation}
+
+\[p_t^{*I^F} = \frac{\psi_f}{\psi_f-1} \frac{X_t^{1I^F}}{X_t^{2I^F}} \]
+\begin{equation} \Rightarrow \widehat{p}_t^{*I^F} = \widehat{X}_t^{1I^F} - \widehat{X}_t^{2I^F}\end{equation}
+
+\begin{eqnarray*}
+1 &=&  {\theta_f} {\left({(\pi_{t-1}^{I^F})}^{\iota} \pi_*^{1-\iota}\right)}^{1-\psi_f} {(\pi_t^{I^F})}^{\psi_f-1}  + (1-\theta_f)  \left({\frac{p_t^{*I^F}} {\tilde{p}_t^{I^F}}}\right)^{1-\psi_f}
+\end{eqnarray*} 
+\begin{equation} \Rightarrow 0 = {\theta_f} {{(\pi^{I^F})}^{(1-\iota)(\psi -1)}\pi_*^{(1-\iota)(1-\psi)}} \left[\iota(1-\psi)\widehat{\pi}_{t-1}^{I^F} + (\psi-1) \widehat{\pi}_{t}^{I^F}\right]  + (1-\theta)  \left(\frac{{p^{*I^F}}}{\tilde{p}_t^{I^F}}\right)^{1-\psi}(1-\psi)\left(\widehat{p}_t^* - \tilde{p}_t^{I^F}\right)\end{equation}
+
+where  ${p}_t^{*F} = \frac{P_t^{*F}}{P_t^H}$, and  $\tilde{p}_t^F = \frac{P_t^F}{P_t^H}$
+
+\[ \pi_t^F = \frac{\tilde{p}_t^{F}} {\tilde{p}_{t-1}^{F}} \pi_t^H Z_t^{\pi^F}\]
+\begin{equation}
+\widehat{\pi}_t^F = \widehat{\tilde{p}}_t^{F} -\widehat{\tilde{p}}_{t-1}^{F} + \widehat{\pi}_t^H + \widehat{Z}_t^{\pi^F}
+\end{equation}
+\par
+
+~\\
+\item Entreprenuer sector with financial accelerator
+\[ R_t^e = E_t \left[\frac{(r_{t}^k u_{t} - a(u_{t})/Z_{t}^{inv}+ (1-\delta)Q_{t})\pi_t^H}{Q_{t-1}} \right]
+\] \begin{equation}
+\Rightarrow R^e\widehat{R}_t^e =  \frac{r^k u \pi^H}{Q}(\widehat{r}_t^k + \widehat{u}_t + \widehat{\pi}_t^H - \widehat{Q}_{t-1}) - \frac{a \pi^H}{Q}(\widehat{a}_t -\widehat{Z}_t^{inv} + \widehat{\pi}_t^H - \widehat{Q}_{t-1} ) + (1-\delta)\pi^H(\widehat{Q}_t + \widehat{\pi}_t^H - \widehat{Q}_{t-1}) \end{equation}
+  where $a(u_t)= \gamma_1(u_t -1) + \frac{\gamma_2}{2}(u_t -1)^2$, then $\widehat{a}_t = \frac{(\gamma_1u + \gamma_2 (u-1)u)\widehat{u}_t}{\gamma_1(u-1) + \frac{\gamma_2}{2}(u-1)^2}  $ 
+  
+    \[ N^w_{t+1} = Z_t^n \gamma_e\left(R_t^k Q_{t-1} K_t/ {\bigtriangleup Z_t}   - \left(\frac{N^w_t}{Q_{t-1} K_t} \right)^{-\kappa} R_{t-1} L_t /\pi_t^H (Q_{t-1}K_{t}/{\bigtriangleup Z_t} - N^w_{t}/{\bigtriangleup Z_t})+ W_t^e \right)  \]  \begin{eqnarray*}
+\Rightarrow   N^w~ \widehat{N}^w_{t+1} = \widehat{Z}_t^n +  \gamma_eR^k Q K/\bigtriangleup Z(\widehat{R}_t^k + \widehat{Q}_t + \widehat{K}_{t-1} - \widehat{\bigtriangleup Z}_{t})\\
+ - \gamma_eR^e L/\pi^HQK/\bigtriangleup Z (\widehat{R}_t^e + \widehat{L}_t - \widehat{\pi}_t^H + \widehat{Q}_{t-1} + \widehat{K}_{t-1} - \widehat{\bigtriangleup Z}_t) \\
+   + \gamma_eR^e L/\pi^HN^w/\bigtriangleup Z (\widehat{R}_t^e + \widehat{L}_t - \widehat{\pi}_t^H + \widehat{N}^w_{t-1}  - \widehat{\bigtriangleup Z}_t)
+    \end{eqnarray*}
+    
+    \[R_t^e =\left(\frac{N^w_t}{Q_{t-1} K_t} \right)^{-\kappa} R_t/\pi_{t} \]
+    \begin{equation}\Rightarrow\widehat{R}_t^e = -\kappa \left( \widehat{N}_t^w - \widehat{Q}_{t-1} -\widehat{K}_t  \right) + \widehat{R}_t - \widehat{\pi}_{t}\end{equation}
+    
+    \[Z_t^{inv} \bar{I}_t \left(1-\frac{\chi_k}{2} \left(\frac{\bar{I}_t {\bigtriangleup Z_t}}{\bar{I}_{t-1}} -\gamma^g \right)^2  \right )= \bar{K}_t -(1-\delta) \bar{K}_{t-1}/{\bigtriangleup Z_t} \]
+    \begin{equation}
+    \Rightarrow ( \widehat{Z}_t^{inv} + \widehat{\bar{I}}_t) = \frac{K}{I} \widehat{\bar{K}}_t - (1-\delta) \frac{K{\bigtriangleup Z}}{I}/(\widehat{\bar{K}}_{t-1} - \widehat{\bigtriangleup Z_t})
+    \end{equation}
+    
+    \[r_t^k = \frac{\gamma_1 + \gamma_2(u_t -1)}{Z_t^{inv}}\]
+    \begin{equation} 
+      \Rightarrow  \widehat{r}_t^k + \widehat{Z}_t^{inv}= \frac{\gamma_2u}{r^k} \widehat{u}_t     
+    \end{equation} 
+    
+    \[1 = Q_t Z_t^{inv}\left(1-\frac{\chi_k}{2} \left(\frac{\bar{I}_t {\bigtriangleup Z_t}}{\bar{I}_{t-1}} -\gamma^g\right)^2 -\chi_k\left(\frac{\bar{I}_t {\bigtriangleup Z_t}}{\bar{I}_{t-1} } - \gamma^g  \right)\frac{\bar{I}_t {\bigtriangleup Z_t}}{\bar{I}_{t-1} }  \right)\]
+    
+    \[  + E_t\left[ \beta Q_{t+1}\frac{1}{\bigtriangleup Z_{t+1}}\frac{\bar{C}_{t}-\chi_c \bar{C}_{t-1}/{\bigtriangleup Z_t}}{\bar{C}_{t+1}-\chi_c \bar{C}_{t}/{\bigtriangleup Z_{t+1}}}\chi_k \left(\frac{\bar{I}_{t+1} {\bigtriangleup Z_{t+1}}}{\bar{I}_{t} } - \gamma^g  \right) \left(\frac{\bar{I}_{t+1} {\bigtriangleup Z_{t+1}}}{\bar{I}_{t} } \right)^2 \right]\]
+    \begin{equation} \Rightarrow 0= Q(\widehat{Q}_t + \widehat{Z}_t^{inv}) \end{equation}
+
+\[\frac{\bar{W}_t (1+v(R_t -1))}{r_t^k} = \frac{1-\alpha_k}{\alpha_k} \frac{\bar{K}_{t-1} u_t}{N_t } \frac{1}{{\bigtriangleup Z_t}}\]
+\begin{equation*}
+\Rightarrow \frac{r^k}{W(1+v(R-1))}\left(\frac{1+v(R-1))}{r^k}W\widehat{\bar{W}}_t -\frac{W(1+v(R-1))}{r^k}\widehat{r}_t^k + \frac{W}{r^k}R\widehat{R}_t\right) = \widehat{\bar{K}}_{t-1} + \widehat{u}_t - \widehat{N}_t - \widehat{\bigtriangleup Z_t}
+\end{equation*}
+\begin{equation}
+\Rightarrow \left(\widehat{\bar{W}}_t -\widehat{r}_t^k + \frac{R}{(1+v(R-1))}\widehat{R}_t\right) = \widehat{\bar{K}}_{t-1} + \widehat{u}_t - \widehat{N}_t - \widehat{\bigtriangleup Z_t}
+\end{equation}
+
+\[ MC_t = \frac{1}{Z_t^a}\left(\bar{W}_t(1+v(R_t-1))  \right)^{1-\alpha_k} {r_t^k}^\alpha_k(1-\alpha_k)^{\alpha_k -1}\alpha_k ^{-\alpha_k}\]
+\begin{equation}
+\Rightarrow \widehat{MC}_t = -\widehat{Z}_t^a + (1-\alpha_k) \widehat{\bar{W}}_t + \alpha_k \widehat{r}_t^k + (1-\alpha_k)\frac{vR}{(1+v(R-1))}\widehat{R}_t
+\end{equation}
+
+\[\bar{Y}_t = Z_t^a (\bar{K}_{t-1}u_t)^{\alpha_k}N_t^{1-\alpha_k} {\bigtriangleup Z_t}^{-\alpha_k}\]
+\begin{equation}
+\Rightarrow \widehat{\bar{Y}_t} = \widehat{Z}_t^a + \alpha_k ( \widehat{\bar{K}}_{t-1} + \widehat{u}_t ) + (1-\alpha_k) \widehat{N}_t -\alpha_k \widehat{\bigtriangleup Z_t}
+\end{equation}
+
+\[\bar{Y}_t = \bar{C}_t^H + \bar{I}_t^H + \bar{X}_t^H + \frac{\chi_k}{2}\left( \frac{\bar{I}_t {\bigtriangleup Z_t}}{\bar{I}_{t-1}} -\gamma^g \right)^2\bar{I}_t+ \bar{G}_t + \frac{\left(\gamma_1(u_t -1) + \frac{\gamma_2}{2}(u_t -1)^2\right)}{Z_t^{inv}} \bar{K}_{t-1}\]
+\begin{equation}
+\bar{Y}\widehat{\bar{Y}_t} = \bar{C}^H \widehat{\bar{C}}_t^H + \bar{I}^H \widehat{\bar{I}}_t^H + \bar{X}^H \widehat{\bar{X}}_t^H + \bar{G}\widehat{\bar{G}}_t
+\end{equation}
+
+\[\bar{G}_t = Z_t^g g\bar{Y}_t\left( \frac{\bar{Y}_t}{\bar{Y}} \right)^{-\psi_g}\]
+\begin{equation}
+\widehat{\bar{G}}_t = \widehat{Z}_t ^g + \widehat{\bar{Y}}_t - \psi_g \widehat{\bar{Y}}_t
+\end{equation}
+
+\[ \frac{R_t}{{R}} = \left( \frac{R_{t-1}}{{R}} \right) ^{\rho_r} \left[ \left(\frac{\pi_t}{{\pi}^{ss}} \right)^{1+\rho_{\pi}} \left(\frac{\bar{Y}_t}{\bar{Y}} \right)^{\rho_{y}} \right]^{1-\rho_r}e^{\epsilon_t^r} \]
+\begin{equation} \Rightarrow \widehat{R_t} = \rho_r \widehat{R}_{t-1} + (1-\rho_r) \left(({1+\rho_{\pi}})\widehat{\pi}_t + \rho_y\widehat{\bar{Y}_t} \right) + {\epsilon_t^r} \end{equation}
+
+~\\
+
+\item Export sector
+
+\[X_t = Z_t^x \left(\frac{X_{t-1}} {\bigtriangleup Z_t} \right)^{-\psi_x}\left[\left( \frac{(1+v(R_t-1))P_t^{*x}}{S_t} \right)^{-\psi_{px}}Y_t^* \right]^{1-\psi_x}\]
+\begin{equation}
+\Rightarrow \widehat{\bar{X}}_t = \widehat{Z}_t^x -\psi_x \widehat{\bar{X}}_{t-1} - \psi_x \widehat{{\bigtriangleup Z_t}} - \psi_{px} (1-\psi_x) \left(\widehat{P}_t^{*x}+ \frac{vR}{(1+v(R-1))}\widehat{R}_t - \widehat{S}_t \right) + (1-\psi_x) \widehat{\bar{Y}}_t^*  
+\end{equation}
+
+\[\bar{X}_t^H = \gamma_x (p_t^x)^{\eta_x} \bar{X}_t\]
+\begin{equation}
+\Rightarrow \widehat{\bar{X}}_t^H = \eta_x \widehat{p}_t^x + \widehat{\bar{X}}_t
+\end{equation}
+
+\[\bar{X}_t^F = (1-\gamma_x) \left( \frac{p_t^{x}}{q_t p_t} \right)^{\eta_x}\bar{X}_t\]
+\begin{equation}
+\Rightarrow \widehat{\bar{X}}_t^F = \eta_x \left(\widehat{\bar{p}}_t^{x} - \hat{q}_t - \hat{p}_t \right) + \widehat{\bar{X}}_t
+\end{equation}
+
+\[ p_t^x = \left(\gamma_x + (1-\gamma_x)(q_t p_t)^{1-\eta_x}\right)^{\frac{1}{1-\eta_x}}\]
+\begin{equation*}
+\Rightarrow (1-\eta_x)({p^{x}})^{1-\eta_x}\widehat{p}_t^x = (1-\gamma_x)(qp)^{1-\eta_x}(1-\eta_x)(\hat{q}_t + \hat{p}_t)
+\end{equation*}
+\begin{equation}
+\Rightarrow \widehat{p}_t^x = \frac{(1-\gamma_x)(qp)^{1-\eta_x}}{({p^{x}})^{1-\eta_x}}(\hat{q}_t + \hat{p}_t)
+\end{equation}
+
+\[\pi_t^x = \frac{p_t^x}{p_{t-1}^x}\pi_t^H\]
+\begin{equation}
+\Rightarrow \widehat{\pi}_t^x = \widehat{p}_t^x -\widehat{p}_{t-1}^x + \hat{\pi}_t^H
+\end{equation}
+
+\[ q_t = \frac{S_t P_t^{*F}} {P_t}  \]
+\begin{equation}\Rightarrow \hat{q}_t = \hat{S}_t  - \hat{p}_t \end{equation}
+
+\[
+ {q_t p_t^{*x}p_t\bar{X}_t} + \frac{S_t R_{t-1}^F \tilde{\bar{F}}_{t-1}p_t}{ \pi_t \bigtriangleup Z_t} = {S_t \tilde{\bar{F}}_t p_t} + {q_t p_t R_t^m }(\bar{C}_t^F + \bar{I}_t^F + \bar{X}_t^F)
+\]
+\begin{equation*}
+\Rightarrow qp^{*x}pX(\widehat{q}_t + \widehat{p}_t + \widehat{\bar{X}}_t) + \frac{SR^F\bar{F} p}{\pi {\bigtriangleup Z}}(\widehat{S}_t + \widehat{R}_t^F + \widehat{\bar{F}}_{t-1} + \widehat{p}_t - \widehat{\pi}_t - \widehat{\bigtriangleup Z_t})
+\end{equation*}
+\begin{equation}
+= S\bar{F}p(\widehat{S}_t + \widehat{\bar{F}}_t + \widehat{p}_t) + qpR^m(C^F \widehat{\bar{C}}_t^F + I^F \widehat{\bar{I}}_t^F + X^F \widehat{\bar{X}}_t^F)
+\end{equation}
+\item Foreign VAR
+
+\begin{equation} \begin{bmatrix} \widehat{Y}_t^* \\ \widehat{\pi}_t^* \\ \widehat{R}_t^* \end{bmatrix} = 
+\begin{pmatrix}
+a_{11} & a_{12} & a_{13} \\
+a_{21} & a_{22} & a_{23} \\
+a_{31} & a_{32} & a_{33} 
+\end{pmatrix} 
+\begin{bmatrix} \widehat{Y}_{t-1}^* \\ \widehat{\pi}_{t-1}^* \\ \widehat{R}_{t-1}^* \end{bmatrix}
++ \begin{pmatrix}
+\sigma_{y^*} & 0 & 0 \\
+0 & \sigma_{\pi^*} & 0 \\
+0 & 0 & \sigma_{r^*} 
+\end{pmatrix} \begin{bmatrix}
+\epsilon_t^y \\
+\epsilon_t^{\pi} \\
+\epsilon_t^r 
+\end{bmatrix} \end{equation}
+
+
+\end{itemize}
+\pagebreak
+\section{Estimation Results}
+
+\begin{figure}[h]\begin{center}
+\caption{One-step Ahead Kalman Forecast}
+\includegraphics[scale=0.40]{onestep_ahead.eps}~\\~
+\caption{Smoothed Shocks}
+\includegraphics[scale=0.40]{smoothed_shocks.eps}
+
+\end{center}
+\end{figure}
+
+
+\begin{figure}[t]
+\caption{Posterior distribution}
+\includegraphics[scale=0.4]{posterior1}
+\includegraphics[scale=0.4]{posterior2}
+\includegraphics[scale=0.4]{posterior3}
+\includegraphics[scale=0.4]{posterior4}
+\includegraphics[scale=0.4]{posterior5}
+\includegraphics[scale=0.4]{posterior6}
+\includegraphics[scale=0.4]{posterior7}
+
+\end{figure}
+
+
+%\begin{figure}[t] \centering
+%\includegraphics[scale=0.6]{effi_gap}
+%\caption{Estimated efficiency gap}
+%\end{figure}
+
+
+
+
+\end{document}
+

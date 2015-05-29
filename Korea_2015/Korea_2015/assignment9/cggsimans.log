@@ -1,0 +1,73 @@
+Starting Dynare (version 4.4.3).
+Starting preprocessing of the model file ...
+Found 7 equation(s).
+Evaluating expressions...done
+Computing static model derivatives:
+ - order 1
+Computing dynamic model derivatives:
+ - order 1
+ - order 2
+Processing outputs ...done
+Preprocessing completed.
+Starting MATLAB/Octave computing.
+
+MODEL SUMMARY
+
+  Number of variables:         7
+  Number of stochastic shocks: 2
+  Number of state variables:   4
+  Number of jumpers:           3
+  Number of static variables:  2
+
+
+MATRIX OF COVARIANCE OF EXOGENOUS SHOCKS
+
+Variables     eps_a    eps_tau 
+eps_a        0.000400  0.000000
+eps_tau      0.000000  0.000400
+
+POLICY AND TRANSITION FUNCTIONS
+                                   da              pie             r               rstar           tau             x               dy   
+r(-1)                              0       -0.714560        0.528075               0               0       -1.918561       -1.918561
+tau(-1)                            0        0.037575        0.016338        0.125000        0.500000        0.168857        0.418857
+da(-1)                      0.900000        1.295875        0.469703        0.810000               0        2.698007        3.598007
+x(-1)                              0               0               0               0               0               0       -1.000000
+eps_a                       1.000000        1.439861        0.521892        0.900000               0        2.997785        3.997785
+eps_tau                            0        0.075151        0.032677        0.250000        1.000000        0.337714       -0.162286
+
+
+MOMENTS OF SIMULATED VARIABLES
+
+VARIABLE      MEAN    STD. DEV.   VARIANCE   SKEWNESS   KURTOSIS 
+da          -0.001187   0.044667   0.001995  -0.036161  -0.049100
+pie         -0.000729   0.040062   0.001605   0.017625  -0.061158
+r           -0.001318   0.045787   0.002096  -0.060979  -0.012371
+rstar       -0.000995   0.040748   0.001660  -0.032496  -0.032066
+tau          0.000296   0.022429   0.000503  -0.061442  -0.051066
+x           -0.000886   0.074601   0.005565   0.021466  -0.028246
+dy          -0.001175   0.084004   0.007057   0.068059   0.069720
+
+
+CORRELATION OF SIMULATED VARIABLES
+
+VARIABLE     da      pie      r     rstar    tau      x      dy   
+da          1.0000  0.9063  0.9624  0.9905  0.0286  0.7881  0.6008
+pie         0.9063  1.0000  0.7588  0.9045  0.0752  0.9739  0.7578
+r           0.9624  0.7588  1.0000  0.9548  0.0388  0.5954  0.4399
+rstar       0.9905  0.9045  0.9548  1.0000  0.1658  0.7960  0.5940
+tau         0.0286  0.0752  0.0388  0.1658  1.0000  0.1344  0.0091
+x           0.7881  0.9739  0.5954  0.7960  0.1344  1.0000  0.7807
+dy          0.6008  0.7578  0.4399  0.5940  0.0091  0.7807  1.0000
+
+
+AUTOCORRELATION OF SIMULATED VARIABLES
+
+VARIABLE      1       2       3       4       5   
+da          0.8937  0.7930  0.7050  0.6255  0.5553
+pie         0.6893  0.4934  0.3788  0.3014  0.2472
+r           0.9647  0.8970  0.8181  0.7378  0.6616
+rstar       0.8850  0.7807  0.6914  0.6120  0.5414
+tau         0.4909  0.2326  0.1265  0.0620  0.0478
+x           0.5818  0.3360  0.2073  0.1313  0.0849
+dy          0.0111  0.0801  0.1440  0.1513  0.1455
+Total computing time : 0h00m02s

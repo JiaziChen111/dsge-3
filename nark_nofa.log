@@ -1,0 +1,218 @@
+Starting Dynare (version 4.4.3).
+Starting preprocessing of the model file ...
+Substitution of endo lags >= 2: added 3 auxiliary variables and equations.
+Found 130 equation(s).
+Evaluating expressions...done
+Computing static model derivatives:
+ - order 1
+Computing dynamic model derivatives:
+ - order 1
+Processing outputs ...done
+Preprocessing completed.
+Starting MATLAB/Octave computing.
+ons_.noprint, options_);
+Error in <a href="matlab:helpUtils.errorDocCallback('nark_nofa', 'C:\Users\0510203\Documents\GitHub\dsge\nark_nofa.m', 1121)" style="font-weight:bold">nark_nofa</a> (<a href="matlab: opentoline('C:\Users\0510203\Documents\GitHub\dsge\nark_nofa.m',1121,0)">line 1121</a>)
+steady;
+Error in <a href="matlab:helpUtils.errorDocCallback('dynare', 'C:\dynare\4.4.3\matlab\dynare.m', 180)" style="font-weight:bold">dynare</a> (<a href="matlab: opentoline('C:\dynare\4.4.3\matlab\dynare.m',180,0)">line 180</a>)
+evalin('base',fname) ;} 
+dynare nark_nofa
+
+Configuring Dynare ...
+[mex] Generalized QZ.
+[mex] Sylvester equation solution.
+[mex] Kronecker products.
+[mex] Sparse kronecker products.
+[mex] Local state space iteration (second order).
+[mex] Bytecode evaluation.
+[mex] k-order perturbation solver.
+[mex] k-order solution simulation.
+[mex] Quasi Monte-Carlo sequence (Sobol).
+[mex] Markov Switching SBVAR.
+
+Starting Dynare (version 4.4.3).
+Starting preprocessing of the model file ...
+Substitution of endo lags >= 2: added 3 auxiliary variables and equations.
+Found 130 equation(s).
+Evaluating expressions...done
+Computing static model derivatives:
+ - order 1
+Computing dynamic model derivatives:
+ - order 1
+Processing outputs ...done
+Preprocessing completed.
+Starting MATLAB/Octave computing.
+
+
+SOLVE: maxit has been reached
+
+
+
+
+Residuals of the static equations:
+
+Equation number 1 : 4.1657e-05
+Equation number 2 : 0.38886
+Equation number 3 : -0.0053516
+Equation number 4 : 0.084004
+Equation number 5 : -1.0627
+Equation number 6 : -0.96159
+Equation number 7 : 0.00031379
+Equation number 8 : 0.052379
+Equation number 9 : -0.033445
+Equation number 10 : -0.0027
+Equation number 11 : 0
+Equation number 12 : -0.069841
+Equation number 13 : -0.088751
+Equation number 14 : 0.00011681
+Equation number 15 : -8.2852e-07
+Equation number 16 : 0
+Equation number 17 : -0.016579
+Equation number 18 : -0.0214
+Equation number 19 : -0.0082265
+Equation number 20 : -0.13862
+Equation number 21 : 0
+Equation number 22 : -0.0032778
+Equation number 23 : 0.013499
+Equation number 24 : -0.01817
+Equation number 25 : 0
+Equation number 26 : 0.081135
+Equation number 27 : 0.072694
+Equation number 28 : -0.099677
+Equation number 29 : -0.069057
+Equation number 30 : 4.499e-07
+Equation number 31 : -0.048099
+Equation number 32 : -0.011539
+Equation number 33 : -0.084693
+Equation number 34 : 0.054399
+Equation number 35 : 0
+Equation number 36 : -0.056088
+Equation number 37 : -1.2551e-05
+Equation number 38 : -0.0080325
+Equation number 39 : 0
+Equation number 40 : -0.012272
+Equation number 41 : 0.00037803
+Equation number 42 : 0.00034188
+Equation number 43 : 0.069478
+Equation number 44 : 1.8053e-07
+Equation number 45 : -0.00068613
+Equation number 46 : 0.0069007
+Equation number 47 : 2.0278e-06
+Equation number 48 : 1.3207e-06
+Equation number 49 : -0.59167
+Equation number 50 : -0.0082247
+Equation number 51 : 4.005e-07
+Equation number 52 : 4.005e-07
+Equation number 53 : -0.43453
+Equation number 54 : 0
+Equation number 55 : 0
+Equation number 56 : 0
+Equation number 57 : 0
+Equation number 58 : 0
+Equation number 59 : 0
+Equation number 60 : 0
+Equation number 61 : 0
+Equation number 62 : 0
+Equation number 63 : 0
+Equation number 64 : 0
+Equation number 65 : 0
+Equation number 66 : 0
+Equation number 67 : 0
+Equation number 68 : 0
+Equation number 69 : 0
+Equation number 70 : 0
+Equation number 71 : 0
+Equation number 72 : 0
+Equation number 73 : 0
+Equation number 74 : 0
+Equation number 75 : 0
+Equation number 76 : 0
+Equation number 77 : 0
+Equation number 78 : 0
+Equation number 79 : 0
+Equation number 80 : 0
+Equation number 81 : 0
+Equation number 82 : 0
+Equation number 83 : 0
+Equation number 84 : 0
+Equation number 85 : 0
+Equation number 86 : 0
+Equation number 87 : 0
+Equation number 88 : 0
+Equation number 89 : 0
+Equation number 90 : 0
+Equation number 91 : 0
+Equation number 92 : 0
+Equation number 93 : 0
+Equation number 94 : 0
+Equation number 95 : 0
+Equation number 96 : 0
+Equation number 97 : 0
+Equation number 98 : 0
+Equation number 99 : 0
+Equation number 100 : -0.52909
+Equation number 101 : 3.1873e-05
+Equation number 102 : 0
+Equation number 103 : 0
+Equation number 104 : 2.2578e-07
+Equation number 105 : 0
+Equation number 106 : 0
+Equation number 107 : 0
+Equation number 108 : 0
+Equation number 109 : 0
+Equation number 110 : 0
+Equation number 111 : -1.6637
+Equation number 112 : 3.1874e-05
+Equation number 113 : 0
+Equation number 114 : 0
+Equation number 115 : 0
+Equation number 116 : 0
+Equation number 117 : 0
+Equation number 118 : 0
+Equation number 119 : 0
+Equation number 120 : 0
+Equation number 121 : 0
+Equation number 122 : 0
+Equation number 123 : 0
+Equation number 124 : 0
+Equation number 125 : 0
+Equation number 126 : 0
+Equation number 127 : -98.8241
+
+
+{Error using <a href="matlab:helpUtils.errorDocCallback('print_info', 'C:\dynare\4.4.3\matlab\print_info.m', 74)" style="font-weight:bold">print_info</a> (<a href="matlab: opentoline('C:\dynare\4.4.3\matlab\print_info.m',74,0)">line 74</a>)
+Impossible to find the steady state. Either the model doesn't have a steady
+state, there are an infinity of steady states,  or the guess values are too
+far from the solution
+Error in <a href="matlab:helpUtils.errorDocCallback('steady', 'C:\dynare\4.4.3\matlab\steady.m', 92)" style="font-weight:bold">steady</a> (<a href="matlab: opentoline('C:\dynare\4.4.3\matlab\steady.m',92,0)">line 92</a>)
+    print_info(info,options_.noprint, options_);
+Error in <a href="matlab:helpUtils.errorDocCallback('nark_nofa', 'C:\Users\0510203\Documents\GitHub\dsge\nark_nofa.m', 1121)" style="font-weight:bold">nark_nofa</a> (<a href="matlab: opentoline('C:\Users\0510203\Documents\GitHub\dsge\nark_nofa.m',1121,0)">line 1121</a>)
+steady;
+Error in <a href="matlab:helpUtils.errorDocCallback('dynare', 'C:\dynare\4.4.3\matlab\dynare.m', 180)" style="font-weight:bold">dynare</a> (<a href="matlab: opentoline('C:\dynare\4.4.3\matlab\dynare.m',180,0)">line 180</a>)
+evalin('base',fname) ;} 
+dynare narkk
+
+Configuring Dynare ...
+[mex] Generalized QZ.
+[mex] Sylvester equation solution.
+[mex] Kronecker products.
+[mex] Sparse kronecker products.
+[mex] Local state space iteration (second order).
+[mex] Bytecode evaluation.
+[mex] k-order perturbation solver.
+[mex] k-order solution simulation.
+[mex] Quasi Monte-Carlo sequence (Sobol).
+[mex] Markov Switching SBVAR.
+
+Starting Dynare (version 4.4.3).
+Starting preprocessing of the model file ...
+Substitution of endo lags >= 2: added 3 auxiliary variables and equations.
+Found 142 equation(s).
+Evaluating expressions...done
+Computing static model derivatives:
+ - order 1
+Computing dynamic model derivatives:
+ - order 1
+Processing outputs ...done
+Preprocessing completed.
+Starting MATLAB/Octave computing.
+

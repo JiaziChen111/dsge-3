@@ -1,0 +1,541 @@
+Starting Dynare (version 4.4.3).
+Starting preprocessing of the model file ...
+Substitution of endo lags >= 2: added 3 auxiliary variables and equations.
+Found 135 equation(s).
+Evaluating expressions...done
+Computing static model derivatives:
+ - order 1
+Computing dynamic model derivatives:
+ - order 1
+Processing outputs ...done
+Preprocessing completed.
+Starting MATLAB/Octave computing.
+              0 
+xf                 -1.609 
+rf                 0.0125 
+rk                 -2.817 
+u                 0.06322 
+f                 -0.2277 
+m                 -0.6393 
+Ygap                    0 
+Rgap                    0 
+ct                 0.8468 
+rt                0.01046 
+wt                 0.1898 
+kt                  2.572 
+nt                  0.264 
+mct               -0.1684 
+yt                  1.023 
+rkt                -2.817 
+it                -0.8027 
+Ygapt                   0 
+Rgapt                   0 
+AUX_ENDO_LAG_0_1   0.5727 
+AUX_ENDO_LAG_0_2   0.5727 
+AUX_ENDO_LAG_0_3   0.5727 
+
+{Error using <a href="matlab:helpUtils.errorDocCallback('lnsrch1', 'C:\dynare\4.4.3\matlab\lnsrch1.m', 71)" style="font-weight:bold">lnsrch1</a> (<a href="matlab: opentoline('C:\dynare\4.4.3\matlab\lnsrch1.m',71,0)">line 71</a>)
+Some element of Newton direction isn't finite. Jacobian maybe singular or
+there is a problem with initial values
+Error in <a href="matlab:helpUtils.errorDocCallback('solve1', 'C:\dynare\4.4.3\matlab\solve1.m', 107)" style="font-weight:bold">solve1</a> (<a href="matlab: opentoline('C:\dynare\4.4.3\matlab\solve1.m',107,0)">line 107</a>)
+    [x,f,fvec,check]=lnsrch1(xold,fold,g,p,stpmax,func,j1,j2,varargin{:});
+Error in <a href="matlab:helpUtils.errorDocCallback('dynare_solve', 'C:\dynare\4.4.3\matlab\dynare_solve.m', 150)" style="font-weight:bold">dynare_solve</a> (<a href="matlab: opentoline('C:\dynare\4.4.3\matlab\dynare_solve.m',150,0)">line 150</a>)
+        [x,info]=solve1(func,x,j1(r(i):r(i+1)-1),j2(r(i):r(i+1)-1),jacobian_flag,
+        ...
+Error in <a href="matlab:helpUtils.errorDocCallback('evaluate_steady_state', 'C:\dynare\4.4.3\matlab\evaluate_steady_state.m', 66)" style="font-weight:bold">evaluate_steady_state</a> (<a href="matlab: opentoline('C:\dynare\4.4.3\matlab\evaluate_steady_state.m',66,0)">line 66</a>)
+            [ys,check] = dynare_solve([M.fname '_static'],...
+Error in <a href="matlab:helpUtils.errorDocCallback('steady_', 'C:\dynare\4.4.3\matlab\steady_.m', 54)" style="font-weight:bold">steady_</a> (<a href="matlab: opentoline('C:\dynare\4.4.3\matlab\steady_.m',54,0)">line 54</a>)
+[steady_state,params,info] =
+evaluate_steady_state(oo_.steady_state,M_,options_,oo_,~options_.steadystate.nocheck);
+Error in <a href="matlab:helpUtils.errorDocCallback('steady', 'C:\dynare\4.4.3\matlab\steady.m', 81)" style="font-weight:bold">steady</a> (<a href="matlab: opentoline('C:\dynare\4.4.3\matlab\steady.m',81,0)">line 81</a>)
+[steady_state,M_.params,info] = steady_(M_,options_,oo_);
+Error in <a href="matlab:helpUtils.errorDocCallback('narkk', 'C:\Users\0510203\Documents\GitHub\dsge\narkk.m', 1145)" style="font-weight:bold">narkk</a> (<a href="matlab: opentoline('C:\Users\0510203\Documents\GitHub\dsge\narkk.m',1145,0)">line 1145</a>)
+steady;
+Error in <a href="matlab:helpUtils.errorDocCallback('dynare', 'C:\dynare\4.4.3\matlab\dynare.m', 180)" style="font-weight:bold">dynare</a> (<a href="matlab: opentoline('C:\dynare\4.4.3\matlab\dynare.m',180,0)">line 180</a>)
+evalin('base',fname) ;} 
+dynare narkk
+
+Configuring Dynare ...
+[mex] Generalized QZ.
+[mex] Sylvester equation solution.
+[mex] Kronecker products.
+[mex] Sparse kronecker products.
+[mex] Local state space iteration (second order).
+[mex] Bytecode evaluation.
+[mex] k-order perturbation solver.
+[mex] k-order solution simulation.
+[mex] Quasi Monte-Carlo sequence (Sobol).
+[mex] Markov Switching SBVAR.
+
+Starting Dynare (version 4.4.3).
+Starting preprocessing of the model file ...
+Substitution of endo lags >= 2: added 3 auxiliary variables and equations.
+Found 135 equation(s).
+Evaluating expressions...done
+Computing static model derivatives:
+ - order 1
+Computing dynamic model derivatives:
+ - order 1
+Processing outputs ...done
+Preprocessing completed.
+Starting MATLAB/Octave computing.
+
+[Warning: Matrix is singular to working precision.] 
+[> In <a href="matlab: opentoline('C:\dynare\4.4.3\matlab\solve1.m',102,1)">solve1 at 102</a>
+  In <a href="matlab: opentoline('C:\dynare\4.4.3\matlab\dynare_solve.m',150,1)">dynare_solve at 150</a>
+  In <a href="matlab: opentoline('C:\dynare\4.4.3\matlab\evaluate_steady_state.m',66,1)">evaluate_steady_state at 66</a>
+  In <a href="matlab: opentoline('C:\dynare\4.4.3\matlab\steady_.m',54,1)">steady_ at 54</a>
+  In <a href="matlab: opentoline('C:\dynare\4.4.3\matlab\steady.m',81,1)">steady at 81</a>
+  In <a href="matlab: opentoline('C:\Users\0510203\Documents\GitHub\dsge\narkk.m',1145,1)">narkk at 1145</a>
+  In <a href="matlab: opentoline('C:\dynare\4.4.3\matlab\dynare.m',180,1)">dynare at 180</a>] 
+
+An infinite element was encountered when trying to solve equation(s) 58, 60, 105, 93, 106, 108, 110, 107, 112, 109, 113, 111 
+with respect to the variable(s): u, dZtr, Zi, ct, rt, wt, kt, nt, mct, yt, rkt, it.
+The values of the endogenous variables when the problem was encountered were:
+Y                  0.5727 
+C                 0.08541 
+N                 -0.1841 
+R                 0.01046 
+W                  0.1615 
+Rk                 -2.828 
+K                   2.119 
+dZtr               0.0095 
+dP                      0 
+G                  -1.037 
+MC                -0.1823 
+Phstar                  0 
+X1                   1.74 
+X2                  1.922 
+SS                      0 
+Q                 -0.2867 
+F                 -0.2277 
+Rf                 0.0125 
+S                 -0.2867 
+Pxf               1.721e-06 
+Px                      0 
+Pm                -0.2867 
+X                 -0.6312 
+PPx               4.005e-07 
+PPm               4.005e-07 
+Rw                0.01246 
+Xh                 -1.609 
+Xf                 -1.609 
+dPx                     0 
+Pk                2.234e-11 
+I                  -1.256 
+Re                0.03482 
+NW                  1.896 
+ut                0.06322 
+Wstar              0.1615 
+X1w                   1.2 
+X1ww                    0 
+X2w                     0 
+X2ww                    0 
+Ch                 -0.243 
+Cf                 -1.164 
+P                 -0.0351 
+Pcfstar           -0.1551 
+dPh                     0 
+dPcf             -0.09902 
+Pcf                     0 
+Pif                     0 
+X1f               -0.9758 
+X2f               -0.6383 
+Ih                 -2.658 
+If                 -1.535 
+Pi               -0.06606 
+Pifstar          -0.09191 
+dPi                     0 
+dPif             -0.04325 
+X1if              -0.0223 
+X2if              -0.0223 
+M                 -0.6393 
+Ystar                   0 
+Rstar                   0 
+PIstar                  0 
+Za                      0 
+Zi                      0 
+Zc                      0 
+Zpi                     0 
+Znw                     0 
+Zpif                    0 
+Zx                      0 
+Zg                      0 
+Zw                      0 
+Zcp                     0 
+Zmc                     0 
+Zq                      0 
+Y_obs                   0 
+R_obs                   0 
+dP_obs                  0 
+C_obs                   0 
+Inv_obs                 0 
+NN_obs                  0 
+dPcf_obs                0 
+X_obs                   0 
+dPi_obs                 0 
+S_obs                   0 
+Ystar_obs               0 
+Rstar_obs               0 
+Pistar_obs              0 
+G_obs                   0 
+SP_obs                  0 
+dPx_obs                 0 
+dY                      0 
+c                  0.8468 
+r                 0.01046 
+w                  0.1898 
+n                   0.264 
+ch                 -0.243 
+cf                 -1.164 
+pcf               -0.1551 
+ph                      0 
+mc                -0.1823 
+mcf                     0 
+q                 -0.2867 
+ih                 -2.658 
+if                 -1.535 
+pi               -0.06606 
+i                 -0.8027 
+pif              -0.09191 
+k                   2.572 
+y                   1.023 
+xh                 -1.609 
+g                  -1.037 
+x                 -0.6312 
+px                      0 
+pxf                     0 
+xf                 -1.609 
+rf                 0.0125 
+rk                 -2.817 
+u                       0 
+f                 -0.2277 
+m                 -0.6393 
+Ygap                    0 
+Rgap                    0 
+ct                 0.8468 
+rt                0.01046 
+wt                 0.1898 
+kt                  2.572 
+nt                  0.264 
+mct               -0.1684 
+yt                  1.023 
+rkt                -2.817 
+it                -0.8027 
+Ygapt                   0 
+Rgapt                   0 
+AUX_ENDO_LAG_0_1   0.5727 
+AUX_ENDO_LAG_0_2   0.5727 
+AUX_ENDO_LAG_0_3   0.5727 
+
+{Error using <a href="matlab:helpUtils.errorDocCallback('lnsrch1', 'C:\dynare\4.4.3\matlab\lnsrch1.m', 71)" style="font-weight:bold">lnsrch1</a> (<a href="matlab: opentoline('C:\dynare\4.4.3\matlab\lnsrch1.m',71,0)">line 71</a>)
+Some element of Newton direction isn't finite. Jacobian maybe singular or
+there is a problem with initial values
+Error in <a href="matlab:helpUtils.errorDocCallback('solve1', 'C:\dynare\4.4.3\matlab\solve1.m', 107)" style="font-weight:bold">solve1</a> (<a href="matlab: opentoline('C:\dynare\4.4.3\matlab\solve1.m',107,0)">line 107</a>)
+    [x,f,fvec,check]=lnsrch1(xold,fold,g,p,stpmax,func,j1,j2,varargin{:});
+Error in <a href="matlab:helpUtils.errorDocCallback('dynare_solve', 'C:\dynare\4.4.3\matlab\dynare_solve.m', 150)" style="font-weight:bold">dynare_solve</a> (<a href="matlab: opentoline('C:\dynare\4.4.3\matlab\dynare_solve.m',150,0)">line 150</a>)
+        [x,info]=solve1(func,x,j1(r(i):r(i+1)-1),j2(r(i):r(i+1)-1),jacobian_flag,
+        ...
+Error in <a href="matlab:helpUtils.errorDocCallback('evaluate_steady_state', 'C:\dynare\4.4.3\matlab\evaluate_steady_state.m', 66)" style="font-weight:bold">evaluate_steady_state</a> (<a href="matlab: opentoline('C:\dynare\4.4.3\matlab\evaluate_steady_state.m',66,0)">line 66</a>)
+            [ys,check] = dynare_solve([M.fname '_static'],...
+Error in <a href="matlab:helpUtils.errorDocCallback('steady_', 'C:\dynare\4.4.3\matlab\steady_.m', 54)" style="font-weight:bold">steady_</a> (<a href="matlab: opentoline('C:\dynare\4.4.3\matlab\steady_.m',54,0)">line 54</a>)
+[steady_state,params,info] =
+evaluate_steady_state(oo_.steady_state,M_,options_,oo_,~options_.steadystate.nocheck);
+Error in <a href="matlab:helpUtils.errorDocCallback('steady', 'C:\dynare\4.4.3\matlab\steady.m', 81)" style="font-weight:bold">steady</a> (<a href="matlab: opentoline('C:\dynare\4.4.3\matlab\steady.m',81,0)">line 81</a>)
+[steady_state,M_.params,info] = steady_(M_,options_,oo_);
+Error in <a href="matlab:helpUtils.errorDocCallback('narkk', 'C:\Users\0510203\Documents\GitHub\dsge\narkk.m', 1145)" style="font-weight:bold">narkk</a> (<a href="matlab: opentoline('C:\Users\0510203\Documents\GitHub\dsge\narkk.m',1145,0)">line 1145</a>)
+steady;
+Error in <a href="matlab:helpUtils.errorDocCallback('dynare', 'C:\dynare\4.4.3\matlab\dynare.m', 180)" style="font-weight:bold">dynare</a> (<a href="matlab: opentoline('C:\dynare\4.4.3\matlab\dynare.m',180,0)">line 180</a>)
+evalin('base',fname) ;} 
+dynare nark0
+
+Configuring Dynare ...
+[mex] Generalized QZ.
+[mex] Sylvester equation solution.
+[mex] Kronecker products.
+[mex] Sparse kronecker products.
+[mex] Local state space iteration (second order).
+[mex] Bytecode evaluation.
+[mex] k-order perturbation solver.
+[mex] k-order solution simulation.
+[mex] Quasi Monte-Carlo sequence (Sobol).
+[mex] Markov Switching SBVAR.
+
+Starting Dynare (version 4.4.3).
+Starting preprocessing of the model file ...
+Substitution of endo lags >= 2: added 3 auxiliary variables and equations.
+Found 142 equation(s).
+Evaluating expressions...done
+Computing static model derivatives:
+ - order 1
+Computing dynamic model derivatives:
+ - order 1
+Processing outputs ...done
+Preprocessing completed.
+Starting MATLAB/Octave computing.
+
+[Warning: Matrix is singular to working precision.] 
+[> In <a href="matlab: opentoline('C:\dynare\4.4.3\matlab\solve1.m',102,1)">solve1 at 102</a>
+  In <a href="matlab: opentoline('C:\dynare\4.4.3\matlab\dynare_solve.m',150,1)">dynare_solve at 150</a>
+  In <a href="matlab: opentoline('C:\dynare\4.4.3\matlab\evaluate_steady_state.m',66,1)">evaluate_steady_state at 66</a>
+  In <a href="matlab: opentoline('C:\dynare\4.4.3\matlab\steady_.m',54,1)">steady_ at 54</a>
+  In <a href="matlab: opentoline('C:\dynare\4.4.3\matlab\steady.m',81,1)">steady at 81</a>
+  In <a href="matlab: opentoline('C:\Users\0510203\Documents\GitHub\dsge\narkk.m',1145,1)">narkk at 1145</a>] 
+
+An infinite element was encountered when trying to solve equation(s) 58, 60, 105, 93, 106, 108, 110, 107, 112, 109, 113, 111 
+with respect to the variable(s): u, dZtr, Zi, ct, rt, wt, kt, nt, mct, yt, rkt, it.
+The values of the endogenous variables when the problem was encountered were:
+Y                  0.5727 
+C                 0.08541 
+N                 -0.1841 
+R                 0.01046 
+W                  0.1615 
+Rk                 -2.828 
+K                   2.119 
+dZtr               0.0095 
+dP                      0 
+G                  -1.037 
+MC                -0.1823 
+Phstar                  0 
+X1                   1.74 
+X2                  1.922 
+SS                      0 
+Q                 -0.2867 
+F                 -0.2277 
+Rf                 0.0125 
+S                 -0.2867 
+Pxf               1.721e-06 
+Px                      0 
+Pm                -0.2867 
+X                 -0.6312 
+PPx               4.005e-07 
+PPm               4.005e-07 
+Rw                0.01246 
+Xh                 -1.609 
+Xf                 -1.609 
+dPx                     0 
+Pk                2.234e-11 
+I                  -1.256 
+Re                0.03482 
+NW                  1.896 
+ut                0.06322 
+Wstar              0.1615 
+X1w                   1.2 
+X1ww                    0 
+X2w                     0 
+X2ww                    0 
+Ch                 -0.243 
+Cf                 -1.164 
+P                 -0.0351 
+Pcfstar           -0.1551 
+dPh                     0 
+dPcf             -0.09902 
+Pcf                     0 
+Pif                     0 
+X1f               -0.9758 
+X2f               -0.6383 
+Ih                 -2.658 
+If                 -1.535 
+Pi               -0.06606 
+Pifstar          -0.09191 
+dPi                     0 
+dPif             -0.04325 
+X1if              -0.0223 
+X2if              -0.0223 
+M                 -0.6393 
+Ystar                   0 
+Rstar                   0 
+PIstar                  0 
+Za                      0 
+Zi                      0 
+Zc                      0 
+Zpi                     0 
+Znw                     0 
+Zpif                    0 
+Zx                      0 
+Zg                      0 
+Zw                      0 
+Zcp                     0 
+Zmc                     0 
+Zq                      0 
+Y_obs                   0 
+R_obs                   0 
+dP_obs                  0 
+C_obs                   0 
+Inv_obs                 0 
+NN_obs                  0 
+dPcf_obs                0 
+X_obs                   0 
+dPi_obs                 0 
+S_obs                   0 
+Ystar_obs               0 
+Rstar_obs               0 
+Pistar_obs              0 
+G_obs                   0 
+SP_obs                  0 
+dPx_obs                 0 
+dY                      0 
+c                  0.8468 
+r                 0.01046 
+w                  0.1898 
+n                   0.264 
+ch                 -0.243 
+cf                 -1.164 
+pcf               -0.1551 
+ph                      0 
+mc                -0.1823 
+mcf                     0 
+q                 -0.2867 
+ih                 -2.658 
+if                 -1.535 
+pi               -0.06606 
+i                 -0.8027 
+pif              -0.09191 
+k                   2.572 
+y                   1.023 
+xh                 -1.609 
+g                  -1.037 
+x                 -0.6312 
+px                      0 
+pxf                     0 
+xf                 -1.609 
+rf                 0.0125 
+rk                 -2.817 
+u                       0 
+f                 -0.2277 
+m                 -0.6393 
+Ygap                    0 
+Rgap                    0 
+ct                 0.8468 
+rt                0.01046 
+wt                 0.1898 
+kt                  2.572 
+nt                  0.264 
+mct               -0.1684 
+yt                  1.023 
+rkt                -2.817 
+it                -0.8027 
+Ygapt                   0 
+Rgapt                   0 
+AUX_ENDO_LAG_0_1   0.5727 
+AUX_ENDO_LAG_0_2   0.5727 
+AUX_ENDO_LAG_0_3   0.5727 
+
+{Error using <a href="matlab:helpUtils.errorDocCallback('lnsrch1', 'C:\dynare\4.4.3\matlab\lnsrch1.m', 71)" style="font-weight:bold">lnsrch1</a> (<a href="matlab: opentoline('C:\dynare\4.4.3\matlab\lnsrch1.m',71,0)">line 71</a>)
+Some element of Newton direction isn't finite. Jacobian maybe singular or there is a problem with initial values
+Error in <a href="matlab:helpUtils.errorDocCallback('solve1', 'C:\dynare\4.4.3\matlab\solve1.m', 107)" style="font-weight:bold">solve1</a> (<a href="matlab: opentoline('C:\dynare\4.4.3\matlab\solve1.m',107,0)">line 107</a>)
+    [x,f,fvec,check]=lnsrch1(xold,fold,g,p,stpmax,func,j1,j2,varargin{:});
+Error in <a href="matlab:helpUtils.errorDocCallback('dynare_solve', 'C:\dynare\4.4.3\matlab\dynare_solve.m', 150)" style="font-weight:bold">dynare_solve</a> (<a href="matlab: opentoline('C:\dynare\4.4.3\matlab\dynare_solve.m',150,0)">line 150</a>)
+        [x,info]=solve1(func,x,j1(r(i):r(i+1)-1),j2(r(i):r(i+1)-1),jacobian_flag, ...
+Error in <a href="matlab:helpUtils.errorDocCallback('evaluate_steady_state', 'C:\dynare\4.4.3\matlab\evaluate_steady_state.m', 66)" style="font-weight:bold">evaluate_steady_state</a> (<a href="matlab: opentoline('C:\dynare\4.4.3\matlab\evaluate_steady_state.m',66,0)">line 66</a>)
+            [ys,check] = dynare_solve([M.fname '_static'],...
+Error in <a href="matlab:helpUtils.errorDocCallback('steady_', 'C:\dynare\4.4.3\matlab\steady_.m', 54)" style="font-weight:bold">steady_</a> (<a href="matlab: opentoline('C:\dynare\4.4.3\matlab\steady_.m',54,0)">line 54</a>)
+[steady_state,params,info] = evaluate_steady_state(oo_.steady_state,M_,options_,oo_,~options_.steadystate.nocheck);
+Error in <a href="matlab:helpUtils.errorDocCallback('steady', 'C:\dynare\4.4.3\matlab\steady.m', 81)" style="font-weight:bold">steady</a> (<a href="matlab: opentoline('C:\dynare\4.4.3\matlab\steady.m',81,0)">line 81</a>)
+[steady_state,M_.params,info] = steady_(M_,options_,oo_);
+Error in <a href="matlab:helpUtils.errorDocCallback('narkk', 'C:\Users\0510203\Documents\GitHub\dsge\narkk.m', 1145)" style="font-weight:bold">narkk</a> (<a href="matlab: opentoline('C:\Users\0510203\Documents\GitHub\dsge\narkk.m',1145,0)">line 1145</a>)
+steady;} 
+eye(2,2)*100
+ans =
+   100     0
+     0   100
+help heval
+
+heval not found.
+
+Use the Help browser search field to <a href="matlab:docsearch heval">search the documentation</a>, or
+type "<a href="matlab:help help">help help</a>" for help command options, such as help for methods.
+
+help feval
+ <strong>feval</strong> Execute the specified function.
+    <strong>feval</strong>(F,x1,...,xn) evaluates the function specified by a function
+    handle or function name, F, at the given arguments, x1,...,xn.
+    For example, if F = @foo, <strong>feval</strong>(F,9.64) is the same as foo(9.64).
+ 
+    If a function handle is bound to more than one built-in or 
+    M-file, (that is, it represents a set of overloaded functions), 
+    then the data type of the arguments x1 through xn, determines 
+    which function is executed.
+ 
+    <strong>feval</strong> is usually used inside functions which take function
+    handles or function strings as arguments.  Examples include 
+    FZERO and EZPLOT.
+ 
+    [y1,..,yn] = <strong>feval</strong>(F,x1,...,xn) returns multiple output arguments.
+ 
+    Within methods that overload built-in functions, use BUILTIN(F,...)
+    to execute the original built-in function.  Note that when using
+    BUILTIN, F must be a function name and not a function handle.
+ 
+    See also <a href="matlab:help assignin">assignin</a>, <a href="matlab:help function_handle">function_handle</a>, <a href="matlab:help functions">functions</a>, <a href="matlab:help builtin">builtin</a>, <a href="matlab:help eval">eval</a>, <a href="matlab:help evalin">evalin</a>.
+
+    Overloaded methods:
+       <a href="matlab:help inline/feval">inline/feval</a>
+       <a href="matlab:help sfit/feval">sfit/feval</a>
+       <a href="matlab:help fittype/feval">fittype/feval</a>
+       <a href="matlab:help cfit/feval">cfit/feval</a>
+       <a href="matlab:help symfun/feval">symfun/feval</a>
+
+    Reference page in Help browser
+       <a href="matlab:doc feval">doc feval</a>
+
+a = [1 2 3;3 4 5]
+a =
+     1     2     3
+     3     4     5
+a{:}
+{Cell contents reference from a non-cell array object.} 
+b = [1 2 5]
+b =
+     1     2     5
+c = {a,b}
+c = 
+    [2x3 double]    [1x3 double]
+c{:}
+ans =
+     1     2     3
+     3     4     5
+ans =
+     1     2     5
+help csminit
+  [fhat,xhat,fcount,retcode] = csminit(fcn,x0,f0,g0,badg,H0,...
+                                        P1,P2,P3,P4,P5,P6,P7,P8)
+  retcodes: 0, normal step.  5, largest step still improves too fast.
+  4,2 back and forth adjustment of stepsize didn't finish.  3, smallest
+  stepsize still improves too slow.  6, no improvement found.  1, zero
+  gradient.
+ ---------------------
+  Modified 7/22/96 to omit variable-length P list, for efficiency and compilation.
+  Places where the number of P's need to be altered or the code could be returned to
+  its old form are marked with ARGLIST comments.
+ 
+  Fixed 7/17/93 to use inverse-hessian instead of hessian itself in bfgs
+  update.
+ 
+  Fixed 7/19/93 to flip eigenvalues of H to get better performance when
+  it's not psd.
+ 
+  Fixed 02/19/05 to correct for low angle problems.
+ 
+ tailstr = ')';
+ for i=nargin-6:-1:1
+    tailstr=[ ',P' num2str(i)  tailstr];
+ end
+ 
+  Copyright (C) 1997-2012 Christopher A. Sims
+ 
+  This free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+ 
+  It is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+ 
+  If you did not received a copy of the GNU General Public License
+  with this software, see <<a href="matlab:web http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>>.
+ 
+
+uiopen('C:\Users\0510203\Documents\KalmanFilter_example\time-varying coefficient estimation by KalmanFilter\sims_Optimization\csminwel.m',1)

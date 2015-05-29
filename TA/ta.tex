@@ -1,0 +1,546 @@
+\documentclass[11pt,titlepage]{article}
+\renewcommand{\rmdefault}{ppl}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{sfmath}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[section]{placeins}
+\usepackage[singlespacing]{setspace}
+\usepackage{color}
+
+\setcounter{MaxMatrixCols}{10}
+
+\oddsidemargin 0in
+\textwidth 6.5in
+\topmargin 0in
+\textheight 8.4in
+\DeclareGraphicsExtensions{.jpg, .png, .pdf}
+
+\begin{document}
+
+\onehalfspacing
+
+\section*{\textcolor{blue}{A Revision of NBD}}
+
+\bigskip
+
+\FloatBarrier \subsection*{Notation}
+The BOK-DSGE2014 includes a stochastic trend growth in the form of a labor augmented technology shock which has permanent effects on the level of productivity in the model economy. Due to this, all relevant endogenous variables permanently affected by trend growth need to be scaled by the trend growth shock process $Z_t$, as follows, when characterizing the model equilibrium.
+\[c_t =\frac{C_t}{Z_t},~c_t^H =\frac{C_t^H}{Z_t},~c_t^F =\frac{C_t^F}{Z_t}, ~y_t =\frac{Y_t}{Z_t}, ~k_t =\frac{K_t}{Z_t},~i_t =\frac{I_t}{Z_t},\] 
+\[i_t^H =\frac{I_t^H}{Z_t},~i_t^F =\frac{I_t^F}{Z_t},  {w}_t =\frac{W_t}{Z_t}, \]
+\bigskip
+
+We normalize nominal variables by the price of consumption composite good, $P_t$. Nominal and normalized variables are named with upper- and lower-case letters like $P$ and $p$, respectively. And, nominal variables in units of foreign currency are marked with an asterisk.\\
+\[ p^H_t=\frac{P^H_t}{P_t}, ~p_t^F=~\frac{P_t^{C,F}}{P_t},~p_t^I=\frac{P_t^I}{P_t},~p_t^{I,F}=\frac{P_t^{I,F}}{P_t},~p_t^{X}=\frac{P_t^{X}}{P_t} ,~p_t^{X,F}=\frac{P_t^{X,F}}{P_t} \]
+
+\[q_t =\frac{P_t^{*}S_t}{P_t}, {f}_t =\frac{F_t}{Z_t P_t^{*}} \]
+\\
+
+\section{Household}
+
+Individual household $i \in [0, 1]$ determines consumption and wage (jointly with labor supply) to maximize his/her lifetime utility under the following constraints of budget and labor demand. \\
+ \begin{displaymath}  U_0 = E_0 \sum_{t=0}^{\infty} \beta^t \left[ Z_t^c \text{log} (C_t - \chi_c C_{t-1})- \frac{N_t^{1+\eta}}{1+\eta} + \text{log} \left( \frac{M_t}{P_t} \right) \right]  \end{displaymath}
+ 
+ \begin{displaymath}  \text{s.t. }C_t  + \frac{B_t}{P_t} + \frac{S_t F_t}{P_t}= \frac{W_t N_t}{P_t} + \frac{R_{t-1}B_{t-1}} {P_t} + \frac{S_t R_{t-1}^F F_{t-1}} {P_t} + \Pi_t^F + T_t - \frac{M_t - M_{t-1}}{P_t} \end{displaymath}
+where $R_t^F = R_t^W \Phi_t $ is the return of foreign bond that is determined by world risk-free interest rate, $R_t^W$, and country-specific risk premium, $\Phi_t$. \\
+
+Consumption bundle $C_t$ is a  composite of the domestic and imported goods. Households solve two sub maximization problems: (1) Given prices of the demestic and imported goods, $P_t^H$ and $P_t^{C,F}$, and a target level of $C_t$, they minimize total cost of consuming $C_t$ and (2) Given a labor demand, they determine wage, $W$, to maximize lifetime utility. We consider the second problem in the next subsection.
+
+
+Given
+\[C_t = \left[\alpha_c^{\frac{1}{\xi_c}} (C_t^H)^{\frac{\xi_c-1}{\xi_c}} +(1-\alpha_c)^{\frac{1}{\xi_c}} (C_t^F)^{\frac{\xi_c-1}{\xi_c}}  \right]^{\frac{\xi_c}{\xi_c-1}} \] \\
+Households' cost minimization problem requires households to satisfy the following optimization conditions:\\
+\begin{equation}
+C_t^H = \alpha_c\left(P_t^H/P_t\right)^{-\xi_c}C_t,
+\end{equation}
+\begin{equation}C_t^F = (1-\alpha_c)\left(P_t^{C,F}/P_t\right)^{-\xi_c}C_t \end{equation}
+\begin{equation}P_t^{1-\xi_c} = \alpha_c {P_t^{H}}^{{1-\xi_c}}+(1-\alpha_c) {P_t^{C,F}}^{{1-\xi_c}} \end{equation} \\
+
+FOC with respect to $C_t, B_t, \text{ and } F_t$ are given as below.
+
+\begin{equation}
+\lambda_t = \frac{Z_t^c}{(C_t-\chi_c C_{t-1})}
+\label{eq_euler}\end{equation}
+\begin{equation}
+\lambda_t = \beta E_t \left[ \lambda_{t+1} \frac{R_t}{\pi_{t+1}} \right]
+\label{eq_bond}\end{equation}
+\begin{equation}
+\lambda_t = \beta E_t \left[ \lambda_{t+1} \frac{R_t^w \Phi_t}{\pi_{t+1}} \frac{S_{t+1}}{S_t} \right]
+\label{eq_fbond}\end{equation}\\
+where $\Phi_t = \text{exp}(-\zeta_1 (f_t-\phi y^*)-\zeta_2(R_t^F-R^{*F} - (R_t - R^*))  + Z_t^{cp})$ and $\lambda_t$ represents the marginal utility of consumption bundle. Eq. (\ref{eq_euler}) also can be represented as $\bar{\lambda}_t \equiv {\lambda}_t Z_t = Z_t^c/(c_t-\chi_c c_{t-1}/\gamma_{t-1}^{tr})$ with $\gamma_{t}^{tr} = Z_t/Z_{t-1}$. Note that plugging (\ref{eq_bond}) into (\ref{eq_fbond}) induces uncovered interest-rate parity condition with risk premium. \\
+
+
+\section{Labor Market}
+
+Each household $i \in [0,1]$ supplies a differentiated labor, $N_{i,t}$, to a "labor packer" at $W_{i,t}$, then the labor packer aggregates all households' labor supplies and sell the labor composite, $N_t$, to domestic producers at $W_t$.
+\begin{equation}N_t = \left(\int_0^1 N_{i,t}^{\frac{\psi_w-1}{\psi_w}} di\right)^{\frac{\psi_w}{\psi_w -1}}\label{eq_labor}\end{equation} 
+ 
+The demand for an individual household's labor supply is determined by the labor packer's profit maximization problem. \\
+\begin{equation}N_{i,t} = \left( \frac{W_{i,t}} {W_t}\right)^{-\psi_w} N_t  \label{eq_l_demand}\end{equation}
+And simply the aggregate wage is obtained by plugging (\ref{eq_labor}) into (\ref{eq_l_demand}) as  
+\[W_t = \left( \int_0^1 W_{i,t}^{1-\psi_w} \right)^{\frac{1}{1-\psi_w}},\]which is applied to intermediate goods producers.
+
+A household $i$ solves the following utility maximization problem with respect to wage $W_{i,t}$ under wage rigidity\footnote{Each household can optimally set his/her wage with probability $1-\theta_w$. Those who cannot optimally set their wage index their wage to last period inflation and and inflation target.}:
+\[\max_{{W_{i,t}}}~E_t \sum_{s=t}^{\infty} (\beta \theta_w)^{s-t}\left[\lambda_{s} \frac{W_{i,t}}{P_s}N_{i,s} - \frac{n_{i,s}^{1+\eta}}{1+\eta} \right] \]
+\[s.t~ N_{i,s} = \left( \frac{W_{i,t}} {W_s}\right)^{-\psi_w} N_s \] 
+
+\begin{equation} \Rightarrow E_t \sum_{s=t}^{\infty} (\beta \theta_w)^{s-t}
+\left[(1-\psi_w) \frac{\lambda_{s}}{P_s} \left(\frac{W_{i,t}}{W_{s}} \right)^{-\psi_w} N_s + \frac{\psi_w}{W_{i,t}} \left( \frac{W_{i,t}}{W_s} \right)^{-\psi_w (1+\eta)}N_s^{1+\eta}\right]=0 \label{foc_labor1}\end{equation}
+\begin{equation} \Rightarrow E_t \sum_{s=t}^{\infty} (\beta \theta_w)^{s-t}
+\left[\frac{(1-\psi_w)}{\psi_w} \frac{\bar{\lambda}_{s}Z_t w_{i,t}}{P_s Z_s} \left(\frac{Z_t w_{i,t}}{Z_s w_{s}} \right)^{-\psi_w} N_s + \left(\frac{Z_t w_{i,t}}{Z_s w_s} \right)^{-\psi_w (1+\eta)}N_s^{1+\eta}\right]=0 \label{foc_labor11}\end{equation}
+\begin{equation} \Rightarrow E_t \sum_{s=t}^{\infty} (\beta \theta_w)^{s-t}
+\left[\frac{w_{i,t}\frac{(1-\psi_w)}{\psi_w} \frac{\bar{\lambda}_{s}}{P_s} \left(\frac{w_{i,t}}{w_{s}} \right)^{-\psi_w}}{\left(\prod_{\tau=1}^{s-t}\gamma^{tr}_{t+\tau}\right)^{1-\psi_w}}N_s + \left(\frac{w_{i,t}}{w_s\prod_{\tau=1}^{s-t}\gamma^{tr}_{t+\tau}} \right)^{-\psi_w (1+\eta)}N_s^{1+\eta}\right]=0 \label{foc_labor11}\end{equation}
+
+Let $w_t^*$ denote the optimal wage (normalized by $Z_t$) and 
+ \[X_{t}^{2w} \equiv E_t \sum_{s=t}^{\infty} (\beta \theta_w)^{s-t}
+ \left[{\frac{\bar{\lambda}_{s}}{P_s}\frac{(\psi_w-1)}{\psi_w}\left(\frac{w_t^*}{w_{s}}\right)^{-\psi_w}N_s}{\left({\prod_{\tau=1}^{s-t} \gamma_{t+\tau}^{tr}}\right)^{\psi_w-1}} \right]\]
+\[X_{t}^{1w} \equiv E_t \sum_{s=t}^{\infty} (\beta \theta_w)^{s-t}
+\left[\left(\frac{w_t^*}{w_s{\prod_{\tau=1}^{s-t} \gamma_{t+\tau}^{tr}}} \right)^{-\psi_w (1+\eta)} N_s^{1+\eta}\right]\]
+Then, the optimal wage is given as $X_t^{1w}/X_t^{2w}$.
+
+We can represent the above equations in a recursive way:
+\begin{equation} X_{t}^{1w} = {w_t^*}^{-\psi_w(1+\eta)}X_{t}^{1w'} \end{equation}
+\[ X_{t}^{1w'} = E_t\sum_{s=t}^{\infty}(\beta\theta_w)^{s-t}
+\left[\left({w_s{\prod_{\tau=1}^{s-t}\gamma_{t+\tau}^{tr}}} \right)^{\psi_w(1+\eta)} N_s^{1+\eta}\right]\]
+\begin{equation} \Rightarrow X_{t}^{1w'} = w_t^{\psi_w(1+\eta)}N_t^{1+\eta} + \beta\theta_w (\gamma_{t+1}^{tr})^{\psi_w(1+\eta)} X_{t+1}^{1w'}\end{equation}
+
+\begin{equation} X_{t}^{2w} =\frac{(\psi_w-1)}{\psi_w}{w_t^*}^{-\psi_w} X_{t}^{2w'} \end{equation}
+\[X_{t}^{2w'} = E_t\sum_{s=t}^{\infty} (\beta \theta_w)^{s-t}
+\left[{\frac{{\bar{\lambda}_{t}}}{P_t} {w_{s}}^{\psi_w} N_s} { \left({\prod_{\tau=1}^{s-t} \gamma_{t+\tau}^{tr}}\right)^{\psi_w-1}} \right ]\]
+ \begin{equation} \Rightarrow X_{t}^{2w'} = {\frac{{\bar{\lambda}_{t}}}{P_t}\left({w_{t}} \right)^{\psi_w} N_t} 
++ \beta\theta_w {\left({\gamma_{t+1}^{tr}}\right)^{\psi_w-1}} X_{t+1}^{2w'}. \end{equation}\\
+
+
+The evolution of aggregate wage is given as follows.
+\[(Z_t w_t)^{1-\psi_w} = \theta_w (Z_{t-1}w_{t-1})^{1-\psi_w} + (1-\theta_w)(Z_t w_{t}^*)^{1-\psi_w} \]
+\[\Rightarrow w_t^{1-\psi_w} = \theta_w(w_{t-1}/\gamma_{t}^{tr})^{1-\psi_w} + (1-\theta_w)({w_{t}^*})^{1-\psi_w}.\]\\
+
+
+\section{Domestic Production}
+
+\subsection{Final Good Production}
+
+A final good producer purchases and aggregates differentiated intermediate goods $y_{h,t}$ at $P_{h,t}$ for $h\in [0,1]$, and sell the aggregate in a competitive market at $P_t^H$.
+ \begin{displaymath}  Y_t = \left(\int_{0}^{1} Y_{h,t}^{\frac{\psi}{\psi-1}} dh\right)^{\frac{\psi-1}{\psi}} \end{displaymath}
+
+ 
+ The demand for an intermediate good is obtained by solving the final producer's cost minimization problem: 
+  \begin{displaymath}
+  \min_{Y_{h,t}} P_{h,t} Y_{h,t} ~~\text{ s.t. }~~ Y_t = \left(\int_{0}^{1}Y_{h,t}^{\frac{\psi_h}{\psi_h-1}} dh\right)^{\frac{\psi_h-1}{\psi_h}}  \end{displaymath}
+  \begin{displaymath}
+\Rightarrow  Y_{h,t} = \left(\frac{P_{h,t}^H}{P_t^H}\right)^{-\psi_h} Y_t 
+ \end{displaymath}
+And, the price of the aggregate is given as
+  \begin{displaymath}
+  P_{t}^H =  \left(\int_0^1(P_{h,t})^{1-\psi_h} dh \right)^{\frac{1}{1-\psi_h}} 
+ \end{displaymath}
+
+ 
+ \subsection{Intermediate Goods Production}
+
+An intermediate good producer $h \in [0,1]$ has Cobb-Douglas production technology and sells its product in a monopolistic competitive market. They solves two problems: (1) finding optimal allocation between labor and capital and (2) setting optimal price under price rigidity.
+
+\begin{equation}
+Y_{h,t} = e^{Z_t^a} K_{h,t}^\alpha \left(N_{h,t} e^{Z_t} \right)^{1-\alpha}
+\end{equation}
+where $Z_t^a = \rho_a Z_{t-1}^a + \epsilon_t^a$ and  $\gamma_t^{tr} = \rho_{tr} \gamma_{t-1}^{tr} + (1-\rho_{tr})\bar{\gamma} + \epsilon_t$. Individual intermediate good producer $h$ solves the following cost minimization problem: 
+ \begin{displaymath}
+\min_{N_{h,t}, K_{h,t}} ~~W_t N_{h,t} + r_t^k K_{h,t} ~+
+ \mu_t\left[ Y_{h,t} - e^{Z_t^a} K_{h,t}^\alpha \left(N_{h,t} e^{Z_t} \right)^{1-\alpha} \right],
+\end{displaymath}
+where $\mu_t$ is nominal marginal cost and optimizing intermediate goods producers follow two conditions:
+ \begin{eqnarray} r_t^k &=& \mu_t e^{Z_t^a} \alpha K_{h,t-1}^{\alpha-1} (e^{Z_{t}} N_{h,t})^{1-\alpha} 
+\end{eqnarray}    
+ \begin{eqnarray}
+  W_t &=& \mu_t e^{Z_t^a} (1-\alpha) K_{h,t-1}^{\alpha}N_{h,t}^{-\alpha}(e^{Z_{t}})^{1-\alpha}
+\end{eqnarray}    
+ 
+Intermediate goods producers can optimize their prices ($P_{t}^*$) with a fixed probability $(1-\theta_h)$, and otherwise update their prices according to last period inflation and a target inflation in the economy.
+ \begin{displaymath}
+\left\lbrace \begin{array}{ll}
+ \pi_{t-1}^\iota \hat{\pi}^{1-\iota} P_{h,t-1} &\textrm{w/}  ~~\theta_h\\
+ P_{t}^* &\textrm{w/} ~~ 1-\theta_h,
+\end{array} \right.
+ \end{displaymath}\\
+ where $\pi^*$ is a target inflation
+ 
+
+With probability $1-\theta$ intermediate good producer $h$ reset its price $P_{h,t}$ to maximize his/her lifetime expected utility:
+\begin{eqnarray*}
+\max_{P_{h,t}}& E_t \left[\sum_{s=t}^{\infty}  (\beta\theta_h)^{s-t}
+\dfrac{\lambda_s}{P_s}\left(P_{h,t}\prod_{\tau=t}^s \pi_{\tau-1}^\iota \hat{\pi}^{1-\iota}Y_{h,s}-\mu_s Y_{h,s}\right) \right] \\
+&s.t ~~ Y_{h,s}  = \left(\frac{P_{h,t}\prod_{\tau=t}^s \pi_{\tau-1}^\iota \hat{\pi}^{1-\iota}}{P_s} \right)^{-\psi_h} Y_s \end{eqnarray*}
+or
+\begin{eqnarray*}
+\max_{P_{h,t}}& E_t \left[\sum_{s=t}^{\infty}  (\beta\theta_h)^{s-t}
+\dfrac{\lambda_s}{P_s}\left(P_{h,t}^{1-\psi_h} \left(\prod_{\tau=t}^s\pi_{\tau-1}^\iota \hat{\pi}^{1-\iota}\right)^{1-\psi_h}P_s^{\psi_h}-\mu_s P_{h,t}^{-\psi_h}
+\left(\prod_{\tau=t}^s\pi_{\tau-1}^\iota \hat{\pi}^{1-\iota}\right)^{-\psi_h}P_s^{\psi_h}\right)Y_{s} \right] \end{eqnarray*}
+
+First order condition is as follows.
+
+\begin{eqnarray*}
+  0&=& E_t \left[\sum_{s=t}^{\infty} (\beta\theta_h)^{s-t}  (\bar{\lambda}_s/P_s) \left( \frac{1-\psi_h}{\psi_h}P_{h,t}  \left(\prod_{\tau=t}^s\pi_{\tau-1}^\iota \hat{\pi}^{1-\iota} \right)^{1-\psi} {P_s}^{\psi_h}  + {P_s}^{1+\psi_h} mc_s \left(\prod_{\tau=t}^s\pi_{\tau-1}^\iota \hat{\pi}^{1-\iota}\right)^{-\psi_h}\right)y_s\right]  
+\end{eqnarray*}
+where $mc_s = \dfrac{\mu_s}{P_s}$ is the real marginal cost.
+
+\begin{eqnarray*}
+\frac{P_{h,t}^*}{P_t} &=& \frac{\psi}{\psi-1}\frac{E_t\left[\sum_{s=t}^{\infty} (\beta\theta_h)^{s-t}\dfrac{\bar{\lambda}_s P_t}{\bar{\lambda}_t P_s} (P_s/P_t)^{\psi_h+1}mc_s \left(\prod_{\tau=t}^s\pi_{\tau-1}^\iota \hat{\pi}^{1-\iota}\right)^{-\psi_h} y_s\right]}
+{E_t \left[  \sum_{s=t}^{\infty}  (\beta\theta_h)^{s-t} \dfrac{\bar{\lambda}_s P_t}{\bar{\lambda}_t P_s}(P_s/P_t)^{\psi_h} \left(\prod_{\tau=t}^s\pi_{\tau-1}^\iota \hat{\pi}^{1-\iota} \right)^{1-\psi}y_s \right]}\end{eqnarray*}
+or $\dfrac{P_{h,t}^*}{P_t}=\dfrac{\psi}{\psi-1}\dfrac{X_t^1}{X_t^2},$ where
+\begin{eqnarray*}
+X_t^1 &=& mc_t y_t + E_t\left[\beta\theta_h(\bar{\lambda}_{t+1}/\bar{\lambda}_t) (\pi_{t+1})^{\psi_h} (\pi_{t}^\iota \hat{\pi}^{1-\iota})^{-\psi_h}X_{t+1}^1\right]\\
+X_t^2 &=& y_t + E_t\left[\beta\theta_h(\bar{\lambda}_{t+1}/\bar{\lambda}_t) (\pi_{t+1})^{\psi_h-1} (\pi_{t}^\iota \hat{\pi}^{1-\iota})^{1-\psi_h}X_{t+1}^2\right]
+\end{eqnarray*}
+
+
+The law of motion for the intermidate goods' price is given as follows.
+\begin{eqnarray*}
+(P^H_{t})^{1-\psi_h} &=&  \int_0^1 (P_{h,t}^H)^{1-\psi_h} dh  \\
+\Rightarrow (P^H_{t})^{1-\psi_h} &=&  \int_0^{\theta} \left( \pi_{t-1}^\iota \hat{\pi}^{1-\iota} P_{h,t-1} \right)^{1-\psi_h} dh + \int_{\theta}^1 {P_{h,t}^{*}}^{1-\psi} dh \\  
+\Rightarrow (P^H_{t})^{1-\psi_h} &=&  {\theta} {(\pi_{t-1}^\iota \hat{\pi}^{1-\iota})}^{1-\psi_h}\int_0^1 {P_{t-1}}^{1-\psi_h}dh  + (1-\theta){P_{h,t}^{*}}^{1-\psi_h} \\
+\Rightarrow~~~~~ ({p^H_{t}})^{1-\psi_h} &=&  {\theta} {(\pi_{t-1}^\iota \hat{\pi}^{1-\iota})}^{1-\psi} (\pi^H_t)^{\psi-1}({p^H_{t}})^{1-\psi_h} + (1-\theta){p_{h,t}^{*}}^{1-\psi_h}
+\end{eqnarray*} 
+
+
+\subsection{Price Distortion}
+\normalsize
+
+Aggregate capital and labor supply are described as
+$N_t = \int_0^1 n_{h,t} dh,   \quad K_t = \int_0^1 k_{h,t} dh$
+and according to symmetric equilibrium, $\frac{k_{h,t}}{n_{h,t}} = \frac{K_t}{N_t}$ holds. Since firm $h$'s product is defined as $y_{h,t} = \left(\frac{P_{h,t}}{P^H_t} \right)^{-\psi_h} Y_t$, aggregate product across all firms is 
+\begin{displaymath}
+\int_0^1 y_{h,t} dh = \int_0^1 \left(\frac{P_{h,t}}{P^H_t} \right)^{-\psi_h} Y_t dh 
+\end{displaymath}
+
+if all firm can optimize the price(or flexible price), aggregate demand is equal to aggregate output\\
+\begin{displaymath} 
+\int_0^1 y_{j,t} dj = \int_0^1 \left(\frac{P_{j,t}}{P_t} \right)^{-\psi} Y_t dj = Y_t \int_0^1 \left(\frac{P_{t}}{P_t} \right)^{-\psi} dj = Y_t \end{displaymath}
+
+
+ However, due to price dispersion, aggregate product from all firms $j \in [0,1]$ is greater than total amount of final consumption goods $Y_t$
+
+\begin{displaymath} Y_t = \frac{1}{
+\int_0^1 \left(\frac{P_{j,t}}{P_t} \right)^{-\psi} dj } f(K_{t-1}, N_t)
+\end{displaymath}
+
+derivation
+
+ \begin{displaymath}
+\int_0^1 y_{j,t} dj = \int_0^1 \left(\frac{P_{j,t}}{P_t} \right)^{-\psi} Y_t dj = \int_0^1 f(k_{j,t-1}, n_{j,t}) dj 
+\end{displaymath}
+\begin{displaymath}
+= \int_0^1 n_{j,t} f \left(\frac{k_{j,t-1}}{n_{j,t}, 1} \right) dj = f \left(\frac{K_{t-1}}{N_{t}}, 1 \right) \underbrace{\int_0^1 n_{j,t}  dj}  = f(K_{t-1}, N_t) 
+\end{displaymath}
+where \[
+s_t = \int_0^1 \left(\frac{P_{j,t}}{P_t} \right)^{-\psi} dj = \int_0^\theta \left(\frac{P_{j,t}}{P_t} \right)^{-\psi} dj + \int_\theta^1 \left(\frac{P_{j,t}}{P_t} \right)^{-\psi} dj 
+\]
+
+\[
+= \int_0^\theta \left(\frac{P_{j,t-1}}{P_t} \right)^{-\psi} dj + \int_\theta^1 \left(\frac{P_{j,t}}{P_t} \right)^{-\psi} dj = \int_0^\theta \left(\frac{P_{j,t-1}}{P_{t-1}} \right)^{-\psi} \left(\frac{P_{t-1}}{P_{t}} \right)^{-\psi} dj + \int_\theta^1 \left(\frac{P_{j,t}}{P_t} \right)^{-\psi} dj 
+\]
+\[
+= \int_0^\theta \left(\frac{P_{j,t-1}}{P_{t-1}} \right)^{-\psi} \left(\frac{1}{\pi_{t}} \right)^{-\psi} dj + \int_\theta^1 \left(\frac{P_{j,t}}{P_t} \right)^{-\psi} dj 
+= \theta s_{t-1} {\pi_{t}}^{\psi}  + (1-\theta) {p_{t}^*} ^{-\psi} \]
+
+~\\
+
+\subsection {Investment goods producer} 
+\normalsize
+ Composite investment goods consists of the composition of domestic produced investement good and foreign imported goods as below.
+\[I_t = \left[\gamma_i ^{\frac{1}{\xi_i}} (I_t^H )^{\frac{xi_i -1}{\xi_i}} +(1-\gamma_i) ^{\frac{1}{\xi_i}} (I_t^F )^{\frac{\xi_i -1}{\xi_i}}  \right] \]
+
+Cost minimization problem provides following three first order conditions \\
+\begin{equation}
+I_t^H = \gamma_c \left({p_t^{I}}  \right) ^{\xi_i} I_t
+\end{equation}
+
+\begin{equation} I_t^F = (1-\gamma_i ) \left(\frac{p_t^{I,F}}{p_t^I}  \right) ^{-\xi_i} I_t \end{equation}
+
+\begin{equation}p_t^I = \left[ \gamma_i  +(1-\gamma_i) {(p_t^{I,F})}^{{1-\xi_i}}  \right]  ^{\frac{1}{1-\xi_i}} \end{equation}
+
+
+\small
+%\subsection{Household sector}
+\begin{itemize}
+\item Optimal saving with domestic bonds
+\begin{equation*}
+\Delta Z\frac{Z^c}{(c - \chi_c c/{\Delta Z})} = \beta \left[ \frac{Z^c}{(c - \chi_c c/{\Delta Z})} \frac{R}{\pi} \right]
+\end{equation*}
+
+then we have
+\begin{equation*}
+1 = \beta \frac{1}{\Delta Z} \frac{R}{\pi}
+\end{equation*}
+
+imposing $\pi=1$ then
+\begin{equation}
+1 = \beta \frac{R}{\Delta Z}
+\end{equation}
+
+Now, from optimal saving with foreign bonds, since
+\begin{equation*}
+\Delta Z\frac{Z^c}{(c - \chi_c c/{\Delta Z})} = \beta \left[ \frac{Z^c}{(c - \chi_c c/{\Delta Z})} \frac{R^{w}\Phi}{\pi} \frac{S}{S} \right]
+\end{equation*}
+
+then we have
+\begin{equation*}
+1 = \beta \frac{1}{\Delta Z} \frac{R^{w}\Phi}{\pi}
+\end{equation*}
+
+imposing $\pi=1$ then
+\begin{equation}
+1 = \beta \frac{R^{w}\Phi}{\Delta Z}
+\end{equation}
+
+Together with (1), (2) gives
+\begin{equation}
+R = R^{w}\Phi = R^{F}
+\end{equation}
+where \textcolor{red}{$\Phi=1$?} at the steady state.
+
+Now, from the financial accelerator feature, since
+\begin{equation*}
+R^e = \left(\frac{N^w}{QK}\right)^{-\kappa} \frac{R}{\pi}
+\end{equation*}
+
+then imposing $\pi=1$ we have
+\begin{equation*}
+R = \left(\frac{N^w}{QK}\right)^{\kappa} R^e
+\end{equation*}
+
+Thus, with (3) we have
+\begin{equation}
+R = R^{w}\Phi = R^{F} = \left(\frac{N^w}{QK}\right)^{\kappa} R^e
+\end{equation}
+where steady state values for $N^{w}$, $Q$, and $K$ need to be defined.
+
+~\\~
+
+\item From the intermediate goods producer, the production technology is given as
+\begin{equation}
+y_{j,t} = e^{Z_t^a} k_{j,t}^\alpha \left(n_{j,t} e^{Z_t} \right)^{1-\alpha}
+\end{equation}
+
+At the steady state, ignoring heterogeneity across firms and getting rid of the productivity terms we get
+\begin{equation*}
+y = k^\alpha \left(\Delta Z n\right)^{1-\alpha}
+\end{equation*}
+
+Producer optimization gives \textcolor{red}{(with no depreciation of capital?)}
+\begin{equation}
+r^{k} = \mu\alpha k^{\alpha-1} \left(\Delta Z n\right)^{1-\alpha} = \mu\alpha \frac{y}{k}
+\end{equation}
+and
+\begin{equation}
+w = \mu(1-\alpha) k^{\alpha} \left(\Delta Z n\right)^{-\alpha} = \mu(1-\alpha) \frac{y}{n}
+\end{equation}
+where \textcolor{red}{$\mu$ is the real marginal cost which is the inverse of the mark-up} for which the steady state value is determined from the price stickiness friction setting.
+
+Then, by arbitrage,
+\begin{equation*}
+R = r^{k} = \mu\alpha \frac{y}{k}
+\end{equation*}
+
+And also, at the steady state we have $y=Y$ and $k=K$ thus
+\begin{equation*}
+R = r^{K} = \mu\alpha \frac{y}{k}
+\end{equation*}
+and so
+\begin{equation}
+\frac{y}{k} = \frac{R}{\mu\alpha}
+\end{equation}
+
+~\\~
+
+\item Now, from the households' budget constraint
+
+\begin{equation*}
+C_t  + \frac{B_t}{P_t} + \frac{S_t F_t}{P_t}= \frac{W_t N_t} {\textcolor{red}{X_{wt}}P_t} + \frac{R_{t-1}B_{t-1}} {P_t} + \frac{S_t R_{t-1}^f F_{t-1}} {P_t} + \Pi_t^F + T_t - \frac{M_t - M_{t-1}}{P_t}
+\end{equation*}
+and de-trending gives
+\begin{equation*}
+c_t  + \frac{\bar{B}_t}{P_t} + \frac{S_t \tilde{f}_t}{P_t}= \frac{\tilde{w}_t N_t} {X_{wt}P_t} + \frac{R_{t-1}\bar{B}_{t-1}} {P_t \Delta Z_{t}} + \frac{S_t R_{t-1}^f \tilde{f}_{t-1}} {P_t \Delta Z_{t}} + \bar{\Pi}_t^F + \bar{T}_t - \frac{\bar{M}_t}{P_t} + \frac{\bar{M}_{t-1}}{P_t \Delta Z_{t}}
+\end{equation*}
+
+Now, using (7), since at the steady state $w=W$ and assuming $P=1$ we get
+\begin{equation*}
+c + \bar{B} + S \tilde{f} = \mu(1-\alpha) \frac{y}{X_{w}} + \frac{R \bar{B}}{\Delta Z} + \frac{SR^{f} \tilde{f}}{\Delta Z} + \bar{\Pi}^{F} + \bar{T} - \bar{M} + \frac{\bar{M}}{\Delta Z}
+\end{equation*}
+
+Applying \textcolor{red}{$\mu=\frac{1}{X_{w}}$}, dividing all sides by $y$, and rearranging gives
+\begin{equation}
+\frac{c}{y} = (1-\alpha) + \left(\frac{R}{\Delta Z}-1\right)\frac{\bar{B}}{y} + \left(\frac{R^{f}}{\Delta Z}-1\right)\frac{S\bar{F}}{y} + \frac{\bar{\Pi}^{F}}{y} + \frac{\bar{T}}{y} - \left(1-\frac{1}{\Delta Z}\right)\frac{\bar{M}}{y}
+\end{equation}
+which should give the steady state value for $\frac{c}{y}$.
+
+~\\~
+
+\item Now, from the labor market equilibrium
+\begin{equation*}
+Z_{t}^{n}\phi N_{t}^{\eta} = \lambda_{t} \frac{W_{t}}{X_{wt} P_{t}}
+\end{equation*}
+
+Again, using (7) and replacing the Lagrangian multiplier
+\begin{equation*}
+Z_{t}^{n}\phi N_{t}^{\eta} = \frac{Z_{t}^{c}}{C_{t}-\chi_{c}C_{t-1}} \mu(1-\alpha)\frac{Y_{t}}{N_{t}} \frac{1}{X_{wt} P_{t}}
+\end{equation*}
+
+Then, at the steady state with de-trending and applying \textcolor{red}{$\mu=\frac{1}{X_{w}}$}
+\begin{equation*}
+\phi N^{\eta} = \frac{1}{c\left(1-\chi_{c}\right)} (1-\alpha)\frac{y}{N}
+\end{equation*}
+where rearranging gives
+\begin{equation}
+N = \left(\frac{1-\alpha}{\phi\left(1-\chi_{c}\right)}\frac{y}{c}\right)^{\frac{1}{1+\eta}}
+\end{equation}
+and using (9) gives the steady state value for $N$.
+
+~\\~
+
+\item Again, from the intermediate goods production technology at the steady state
+\begin{equation*}
+y = k^\alpha \left(\Delta Z N\right)^{1-\alpha}
+\end{equation*}
+
+Rearranging gives
+\begin{equation}
+k = \left(\frac{k}{y}\right)^{\frac{1}{1-\alpha}} \Delta Z N
+\end{equation}
+where using (8) and (10) gives the steady state value for $k$.
+
+~\\~
+
+\item Then it follows that
+\begin{equation}
+y = \frac{y}{k}k
+\end{equation}
+
+\begin{equation}
+c = \frac{c}{y}y
+\end{equation}
+
+\textcolor{red}{with no depreciation of capital?}
+\begin{equation}
+i = \left(\Delta Z -1\right)k
+\end{equation}
+
+\begin{equation}
+\bar{G} = g y \left(\frac{y}{y}\right)^{-\psi_g}
+\end{equation}
+
+~\\~
+
+\item From composite consumption goods with price rigidity, we have
+\begin{equation*}
+c^{H} = \alpha_c (p)^{\xi_c} c
+\end{equation*}
+
+\begin{equation*}
+c^{F} = (1-\alpha_c) \left(\frac{p}{p^F}\right)^{\xi_c} c
+\end{equation*}
+
+\textcolor{red}{Assuming all prices are equalized at the steady state} and using (13), we get
+\begin{equation}
+c^{H} = \alpha_c c
+\end{equation}
+
+\begin{equation}
+c^{F} = (1-\alpha_c) c
+\end{equation}
+
+\item Also, from composite investment goods with price rigidity, we have
+\begin{equation*}
+i^{H} = \gamma_i {\left(p^I \right)}^\xi_i i
+\end{equation*}
+
+\begin{equation*}
+i^{F} = (1-\gamma_i) \left(\frac{p^I}{p^{I,F}}\right)^{\xi_{i}} i
+\end{equation*}
+
+Assuming all prices are equalized at the steady state and using (14), we get
+\begin{equation}
+i^{H} = \gamma_i i
+\end{equation}
+
+\begin{equation}
+i^{F} = (1-\gamma_i) i
+\end{equation}
+
+\item Then, this should give
+\begin{equation}
+\bar{nx} = \frac{y-c^{H}-i^{H}-\bar{G}}{y}
+\end{equation}
+
+\begin{equation}
+\bar{IM} = c^{F} + i^{F}
+\end{equation}
+and together with (19)
+
+\begin{equation}
+\bar{EX} = \bar{nx}y + \bar{IM}
+\end{equation}
+
+\item Then, from composite export goods with price rigidity, we have
+\begin{equation*}
+\bar{EX}^{H} = \gamma_x (p^x)^{\eta_x} \bar{EX}
+\end{equation*}
+
+\begin{equation*}
+\bar{EX}^{F} = (1-\gamma_x) \left(\frac{p^{x}}{q p}\right)^{\eta_x}\bar{EX}
+\end{equation*}
+
+Assuming all prices are equalized at the steady state and using (14), we get
+\begin{equation}
+\bar{EX}^{H} = \gamma_x \bar{EX}
+\end{equation}
+
+\begin{equation}
+\bar{EX}^{F} = (1-\gamma_x) \bar{EX}
+\end{equation}
+
+~\\~
+
+\item Law of motion for price and wages (this should also apply to law of motion for other prices)
+
+Since aggregate prices evolve according to
+\begin{equation*}
+P_{t}^{1-\psi} = \theta \left(\pi_{t-1}^{\iota}\pi_{*}^{1-\iota}\right)^{1-\psi}P_{t-1}^{1-\psi} + \left(1-\theta\right)P_{t}^{*1-\psi}
+\end{equation*}
+then at the steady state
+
+\begin{equation*}
+1 = {\theta} {({(\pi^H)}^\iota \pi_{*}^{1-\iota})}^{1-\psi} {(\pi^H)}^{\psi-1}  + (1-\theta)  {p^{*}}^{1-\psi}
+\end{equation*}
+
+Rearranging we get
+\begin{equation}
+p^{*} = \left[\frac{1-{\theta} {({(\pi^H)}^\iota \pi_{*}^{1-\iota})}^{1-\psi} {(\pi^H)}^{\psi-1}}{1-\theta}\right]^{\frac{1}{1-\psi}}
+\end{equation}
+\textcolor{blue}{where if we impose $\pi^H=\pi_{*}=1$(zero inflation and target), then $p^{*}=1$, and also, if we impose $\iota=1$(full price indexation), then $p^{*}=1$}.
+
+~\\~
+
+Since aggregate wages evolve according to
+\begin{equation*}
+W_{t}^{1-\psi_{w}} = \theta_{w} W_{t-1}^{1-\psi_{w}} + \left(1-\theta_{w}\right)W_{t}^{*1-\psi_{w}}
+\end{equation*}
+where de-trending gives
+
+\begin{equation*}
+\tilde{w}_{t}^{1-\psi_{w}} = \theta_{w} \left(\tilde{w}_{t-1}/\Delta Z_{t}\right)^{1-\psi_{w}} + \left(1-\theta_{w}\right) \tilde{w}_{t}^{*1-\psi_{w}}
+\end{equation*}
+then at the steady state
+
+\begin{equation*}
+1 = \theta_{w} \bar{\pi}_{w}^{\psi_{w}-1} \left(\Delta Z_{t}\right)^{\psi_{w}-1} + \left(1-\theta_{w}\right) \bar{w}^{*1-\psi_{w}}
+\end{equation*}
+
+Rearranging we get
+\begin{equation}
+\bar{w}^{*} = \left[\frac{1-\theta_{w} \bar{\pi}_{w}^{\psi_{w}-1} \left(\Delta Z_{t}\right)^{\psi_{w}-1}}{1-\theta_{w}}\right]^{\frac{1}{1-\psi_{w}}}
+\end{equation}
+\textcolor{blue}{where if we impose $\bar{\pi}_{w}=\Delta Z=1$(zero inflation and growth), then $\bar{w}^{*}=1$}.
+
+\end{itemize}
+
+\end{document}
